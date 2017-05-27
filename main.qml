@@ -18,26 +18,27 @@ ApplicationWindow {
             id: sidebar_model
 
             ListElement {
-                name: "General";
+                name: "General"
                 value: "general.qml"
             }
             ListElement {
-                name: "Page Setup";
+                name: "Page Setup"
                 value: "page_setup.qml"
             }
             ListElement {
-                name: "Options";
+                name: "Options"
                 value: "options.qml"
             }
             ListElement {
-                name: "Jobs";
+                name: "Jobs"
                 value: "jobs.qml"
             }
             ListElement {
-                name: "Image Quality";
-                value: "image_quality.qml"}
+                name: "Image Quality"
+                value: "image_quality.qml"
+            }
             ListElement {
-                name: "Preview";
+                name: "Preview"
                 value: "preview.qml"
             }
         }
@@ -46,15 +47,24 @@ ApplicationWindow {
             width: parent.width
             height: parent.height
             model: sidebar_model
-            delegate: Button {
-                text: name
+            delegate: Rectangle {
                 width: parent.width
-                onClicked: {
-                    page_loader.source = value
+                height: 40
+                color: "#EEEEEE"
+
+                Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    text: name
+                    font.family: "Open Sans"
+                    x: 10
                 }
 
-                background: Rectangle {
-                    color: "#EEEEEE"
+                MouseArea{
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    onClicked: { page_loader.source = value }
+                    onEntered: { parent.color = "#BDBDBD" }
+                    onExited:  { parent.color = "#EEEEEE" }
                 }
             }
         }
