@@ -55,7 +55,7 @@ ApplicationWindow {
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
                     text: name
-                    font.family: "Open Sans"
+                    font.family: "Sans"
                     x: 10
                 }
 
