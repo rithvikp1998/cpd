@@ -71,12 +71,14 @@ Rectangle {
 
     Rectangle{
         id:main_view
-        x: 150; width: parent.width
+        x: 150; width: parent.width - 150
         height: parent.height
 
         Loader{
             id: page_loader
             source: "general.qml"
+            width: parent.width
+            height: parent.height
         }
     }
 }
