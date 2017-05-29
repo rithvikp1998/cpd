@@ -3,11 +3,10 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls.Styles 1.4
 
-ApplicationWindow {
+Rectangle {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Print Dialog")
 
     Rectangle {
         height: parent.height
