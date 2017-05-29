@@ -23,7 +23,7 @@ QImage pdf_preview::requestImage(const QString &id, QSize *size, const QSize &re
         cout << "ERROR" << endl;
     }
 
-    return image;
     delete page;
     delete document;
+    return image;
 }
