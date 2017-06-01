@@ -35,8 +35,8 @@ Rectangle {
                 value: "jobs.qml"
             }
             ListElement {
-                name: "Image Quality"
-                value: "image_quality.qml"
+                name: "Advanced"
+                value: "advanced.qml"
             }
             ListElement {
                 name: "Preview"

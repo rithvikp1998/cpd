@@ -6,6 +6,6 @@ import QtQuick.Controls.Styles 1.4
 Rectangle{
     Text {
         id: text_area
-        text: qsTr("Image Quality Tab")
+        text: qsTr("Advanced Tab")
     }
 }
