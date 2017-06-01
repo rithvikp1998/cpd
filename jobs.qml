@@ -72,6 +72,16 @@ Rectangle{
             width: parent.width
             height: 20
 
+            MouseArea {
+                anchors.fill: parent
+                acceptedButtons: Qt.RightButton
+                hoverEnabled: true
+
+                onEntered: { parent.color = "#EEEEEE"}
+                onExited:  { parent.color = "white"}
+                onClicked: { menu.open() }    //Add a right click menu to 'Pause', 'Stop' and 'Cancel' jobs
+            }
+
             Text {
                 x: 20
                 text: printer
