@@ -4,6 +4,8 @@
 
 using namespace std;
 
+/* The preview works by using poppler to convert a page of pdf to QImage */
+
 QImage pdf_preview::requestImage(const QString &id, QSize *size, const QSize &requested_size){
     Poppler::Document* document = Poppler::Document::load("/tmp/test.pdf");
     if (!document || document->isLocked() || document == 0 )
@@ -23,7 +25,7 @@ QImage pdf_preview::requestImage(const QString &id, QSize *size, const QSize &re
         cout << "ERROR" << endl;
     }
 
-    delete page;
+    delete page;  // Should change this to use RAII
     delete document;
     return image;
 }

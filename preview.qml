@@ -25,7 +25,7 @@ Rectangle{
         }
     }
 
-    Button {
+    Button { // Displays the previous page in the doument
         id: preview_previous_page_button
         x: 40
         y: parent.height - 40
@@ -34,7 +34,7 @@ Rectangle{
         text: '<'
     }
 
-    Slider{
+    Slider{ // To set the zoom level of the preview image. I should add pan functionality.
         id: preview_zoom_slider
         x: 80
         y: parent.height - 40
@@ -42,7 +42,7 @@ Rectangle{
         height: 20
     }
 
-    Button {
+    Button {  // Displays the next page in the doument
         id: preview_next_page_button
         x: parent.width - 60
         y: parent.height - 40

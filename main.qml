@@ -8,6 +8,8 @@ Rectangle {
     width: 640
     height: 480
 
+    /* This Rectangle is for the sidebar */
+
     Rectangle {
         height: parent.height
         width: 150
@@ -18,7 +20,7 @@ Rectangle {
 
             ListElement {
                 name: "General"
-                value: "general.qml"
+                value: "general.qml"    // value points to the page it loads when clicked
             }
             ListElement {
                 name: "Page Setup"
@@ -46,7 +48,7 @@ Rectangle {
             width: parent.width
             height: parent.height
             model: sidebar_model
-            delegate: Rectangle {
+            delegate: Rectangle { // Every button in the sidebar is made using a Rectangle with a MouseArea
                 width: parent.width
                 height: 40
                 color: "#EEEEEE"
@@ -68,6 +70,8 @@ Rectangle {
             }
         }
     }
+
+    /* This Rectangle is for the main view */
 
     Rectangle{
         id:main_view
