@@ -64,7 +64,7 @@ Rectangle{
 
     ListView {
         width: parent.width
-        height: parent.height/2
+        height: parent.height - 200
         model: jobs_model
         y: 40
 
@@ -113,4 +113,33 @@ Rectangle{
             }
         }
     }
+
+    Text {
+        x: 20
+        y: parent.height - 147
+        text: "Start Job : "
+        font.family: "Sans"
+    }
+
+    ComboBox {
+        x: 120
+        y: parent.height - 150
+        width: parent.width - 180
+        height: 24
+        font.family: "Sans"
+        font.pixelSize: 12
+        model: ["Immediately", "After a delay of", "Never"]
+    }
+// Add textfield for delay option in above ComboBox
+    Text {
+        x: 20
+        y: parent.height - 107
+        text: "Save Job : "
+        font.family: "Sans"
+    }
+
+    Switch {
+        x: 105
+        y: parent.height - 120
+    } // Add textfield or browse button for save location
 }
