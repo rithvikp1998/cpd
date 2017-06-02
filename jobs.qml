@@ -72,6 +72,14 @@ Rectangle{
             width: parent.width
             height: 20
 
+            Menu { //Should this menu be for every job or is there some other way?
+                id: menu
+
+                MenuItem{ text: "Pause" }
+                MenuItem{ text: "Stop" }
+                MenuItem{ text: "Cancel" }
+            }
+
             MouseArea {
                 anchors.fill: parent
                 acceptedButtons: Qt.RightButton
@@ -79,7 +87,11 @@ Rectangle{
 
                 onEntered: { parent.color = "#EEEEEE"}
                 onExited:  { parent.color = "white"}
-                onClicked: { menu.open() }    //Add a right click menu to 'Pause', 'Stop' and 'Cancel' jobs
+                onClicked: { //Add color to indicate right-clicked job
+                    menu.x = mouseX
+                    menu.y = mouseY
+                    menu.open()
+                }
             }
 
             Text {
