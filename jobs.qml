@@ -78,6 +78,7 @@ Rectangle{
                 MenuItem{ text: "Pause" }
                 MenuItem{ text: "Stop" }
                 MenuItem{ text: "Cancel" }
+                MenuItem{ text: "Repeat" }
             }
 
             MouseArea {
