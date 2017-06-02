@@ -69,6 +69,36 @@ Rectangle {
                 }
             }
         }
+
+        Rectangle {
+            x: 10
+            y: parent.height - 120
+            width: parent.width - 20
+            height: 40
+            color: "#4DB6AC"
+
+            Text {
+                anchors.centerIn: parent
+                text: "Print"
+                font.family: "Sans"
+                color: "white"
+            }
+        }
+
+        Rectangle {
+            x: 10
+            y: parent.height - 60
+            width: parent.width - 20
+            height: 40
+            color: "#CFD8DC"
+
+            Text {
+                anchors.centerIn: parent
+                text: "Cancel"
+                font.family: "Sans"
+                color: "black"
+            }
+        }
     }
 
     /* This Rectangle is for the main view */
