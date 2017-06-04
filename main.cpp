@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQuickView view;
-    view.engine()->addImageProvider(QLatin1String("preview"), new pdf_preview);
+    view.engine()->addImageProvider(QLatin1String("preview"), new QPdfPreview);
     view.setSource(QUrl("qrc:/main.qml"));
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     view.show();
