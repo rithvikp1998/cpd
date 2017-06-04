@@ -14,7 +14,7 @@ QImage pdf_preview::requestImage(const QString &id, QSize *size, const QSize &re
     }
 
     Poppler::Page* page = document->page(0);
-    if (page == 0)
+    if (page == nullptr)
     {
         cout << "ERROR" << endl;
     }
