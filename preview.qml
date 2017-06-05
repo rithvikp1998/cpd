@@ -16,12 +16,24 @@ Rectangle{
         x: 40
         y: 20
 
-        Image {
-            id: preview
-            anchors.centerIn: parent
-            width: parent.width - 10
-            height: parent.height - 10
-            source: "image://preview/pdf"
+        Flickable{
+            id: flickable
+            x: 20
+            y: 10
+            boundsBehavior: Flickable.StopAtBounds
+            flickableDirection: Flickable.HorizontalAndVerticalFlick
+            width: parent.width - 40
+            height: parent.height - 20
+            interactive: true
+            clip: true
+
+            Image {
+                id: image
+                anchors.centerIn: parent
+                width: parent.width
+                height: parent.height
+                source: "image://preview/pdf"
+            }
         }
     }
 
@@ -34,12 +46,21 @@ Rectangle{
         text: '<'
     }
 
-    Slider{ // To set the zoom level of the preview image. I should add pan functionality.
+    Slider { // To set the zoom level of the preview image. I should add pan functionality.
         id: preview_zoom_slider
         x: 80
         y: parent.height - 40
         width: parent.width - 160
-        height: 20
+        to: 3
+        from: 1
+        value: 1
+        stepSize: 0.5
+        property real previousScaleValue: 1
+
+        onValueChanged: {
+            flickable.resizeContent((image.width / previousScaleValue) * value , (image.height / previousScaleValue) * value, 0)
+            previousScaleValue = scale
+        }
     }
 
     Button {  // Displays the next page in the doument
