@@ -123,24 +123,42 @@ Rectangle{
     }
 
     ComboBox {
+        id: start_job_combobox
         x: 120
         y: parent.height - 150
-        width: parent.width - 180
-        height: 24
+        width: (start_job_combobox.currentIndex==1) ? parent.width - 280 : parent.width - 180
+        height: 30
         font.family: "Sans"
         font.pixelSize: 12
         model: ["Immediately", "After a delay of", "Never"]
     }
-// Add textfield for delay option in above ComboBox
+
+    TextField {
+        x: parent.width - 150
+        y: parent.height - 150
+        width: 60
+        height: 30
+        font.pointSize: 10
+        visible: (start_job_combobox.currentIndex==1) ? true :  false
+    }
+
+    Text {
+        text: "Minutes"
+        x: parent.width - 80
+        y: parent.height - 145
+        font.family: "Sans"
+        visible: (start_job_combobox.currentIndex==1) ? true :  false
+    }
+
     Text {
         x: 20
-        y: parent.height - 107
+        y: parent.height - 97
         text: "Save Job : "
         font.family: "Sans"
     }
 
     Switch {
         x: 105
-        y: parent.height - 120
+        y: parent.height - 110
     } // Add textfield or browse button for save location
 }
