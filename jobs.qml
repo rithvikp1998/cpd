@@ -19,11 +19,11 @@ Rectangle{
             text: "Printer"
             font.bold: true
             font.family: "Sans"
-            wrapMode: Text.Wrap     // Visual separator between rows is much needed now
+            wrapMode: Text.Wrap
         }
 
-        /* Better to create a visual separator like
-          a straight line for more comprehensive look */
+        /* Better to create a visual separator like a vertical
+           straight line between columns for more comprehensive look */
 
         Text {
             id: location_heading
@@ -73,6 +73,7 @@ Rectangle{
     }
 
     ListView {
+        id: jobs_view
         width: parent.width
         height: parent.height - 200
         model: jobs_model
@@ -80,7 +81,8 @@ Rectangle{
 
         delegate: Rectangle {
             width: parent.width
-            height: Math.max(printer_text.contentHeight, location_text.contentHeight, status_text.contentHeight)
+            height: Math.max(printer_text.contentHeight, location_text.contentHeight, status_text.contentHeight) + 10
+            color: (model.index % 2 == 0) ? "#EEEEEE" : "white"
 
             Menu { //Should this menu be for every job or is there some other way?
                 id: menu
@@ -96,8 +98,8 @@ Rectangle{
                 acceptedButtons: Qt.RightButton
                 hoverEnabled: true
 
-                onEntered: { parent.color = "#EEEEEE"}
-                onExited:  { parent.color = "white"}
+                onEntered: { parent.color = "#BDBDBD"}
+                onExited:  { parent.color = (model.index % 2 == 0) ? "#EEEEEE" : "white"}
                 onClicked: { //Add color to indicate right-clicked job
                     menu.x = mouseX
                     menu.y = mouseY
@@ -108,6 +110,7 @@ Rectangle{
             Text {
                 id: printer_text
                 x: 20
+                anchors.verticalCenter: parent.verticalCenter
                 width: parent.width/3 - 20
                 text: printer
                 font.family: "Sans"
@@ -117,6 +120,7 @@ Rectangle{
             Text {
                 id: location_text
                 x: parent.width/3 + 20
+                anchors.verticalCenter: parent.verticalCenter
                 width: parent.width/3 - 20
                 text: location
                 font.family: "Sans"
@@ -126,6 +130,7 @@ Rectangle{
             Text {
                 id: status_text
                 x: 2*parent.width/3 + 20
+                anchors.verticalCenter: parent.verticalCenter
                 width: parent.width/3 - 20
                 text: status
                 font.family: "Sans"
