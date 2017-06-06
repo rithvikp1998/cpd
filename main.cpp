@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
     view.engine()->addImageProvider(QLatin1String("preview"), new QPdfPreview);
     view.setSource(QUrl("qrc:/main.qml"));
     view.setResizeMode(QQuickView::SizeRootObjectToView);
+    QObject::connect((QObject*)view.engine(), SIGNAL(quit()), &app, SLOT(quit()));
     view.show();
 
     return app.exec();

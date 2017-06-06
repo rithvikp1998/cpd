@@ -83,6 +83,13 @@ Rectangle {
                 font.family: "Sans"
                 color: "white"
             }
+
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                onEntered: { parent.color = "#26A69A" }
+                onExited:  { parent.color = "#4DB6AC" }
+            }
         }
 
         Rectangle {
@@ -97,6 +104,14 @@ Rectangle {
                 text: "Cancel"
                 font.family: "Sans"
                 color: "black"
+            }
+
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                onEntered: { parent.color = "#B0BEC5" }
+                onExited:  { parent.color = "#CFD8DC" }
+                onClicked: { Qt.quit() }
             }
         }
     }
