@@ -2,6 +2,7 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls.Styles 1.4
+import QtQuick.Dialogs 1.2
 
 Rectangle{
     width: parent.width
@@ -158,7 +159,48 @@ Rectangle{
     }
 
     Switch {
+        id: save_job_switch
         x: 105
         y: parent.height - 110
-    } // Add textfield or browse button for save location
+    }
+
+    Text {
+        text: "Location : "
+        font.family: "Sans"
+        x: 20
+        y: parent.height - 60
+        visible: (save_job_switch.checked) ? true : false
+    }
+
+    Text {
+        id: save_job_location
+        text: "None"
+        font.family: "Sans"
+        x: 120
+        y: parent.height - 60
+        visible: (save_job_switch.checked) ? true : false
+    }
+
+    Button {
+        x: 200
+        y: parent.height - 105
+        height: 30
+        text: "Browse"
+        visible: (save_job_switch.checked) ? true : false
+        onClicked: { file_dialog.open() }
+    }
+
+    FileDialog {
+        id: file_dialog
+        title: "Please choose a folder"
+        folder: shortcuts.home
+        selectFolder: true
+        onAccepted: {
+            save_job_location.text = file_dialog.fileUrl.toString().substring(7)
+            file_dialog.close()
+        }
+        onRejected: {
+            file_dialog.close()
+        }
+    }
 }
