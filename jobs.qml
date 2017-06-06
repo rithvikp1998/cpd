@@ -8,34 +8,43 @@ Rectangle{
     width: parent.width
     height: parent.height
 
-    Text {
-        x: 20
-        y: 10
-        text: "Printer"
-        font.bold: true
-        height: 20
-        font.family: "Sans"
-    }
+    Rectangle {
+        width: parent.width
+        height: location_heading.contentHeight // Since "Location" is the biggest word in this row,
+                                               // it will be the first to get wrapped
+        Text {
+            x: 20
+            y: 10
+            width: parent.width/3 - 20
+            text: "Printer"
+            font.bold: true
+            font.family: "Sans"
+            wrapMode: Text.Wrap     // Visual separator between rows is much needed now
+        }
 
-    /* Better to create a visual separator like
-      a straight line for more comprehensive look */
+        /* Better to create a visual separator like
+          a straight line for more comprehensive look */
 
-    Text {
-        x: parent.width/3 + 20
-        y: 10
-        text: "Location"
-        font.bold: true
-        height: 20
-        font.family: "Sans"
-    }
+        Text {
+            id: location_heading
+            x: parent.width/3 + 20
+            y: 10
+            width: parent.width/3 - 20
+            text: "Location"
+            font.bold: true
+            font.family: "Sans"
+            wrapMode: Text.Wrap
+        }
 
-    Text {
-        x: 2*parent.width/3 + 20
-        y: 10
-        text: "Status"
-        font.bold: true
-        height: 20
-        font.family: "Sans"
+        Text {
+            x: 2*parent.width/3 + 20
+            y: 10
+            width: parent.width/3 - 20
+            text: "Status"
+            font.bold: true
+            font.family: "Sans"
+            wrapMode: Text.Wrap
+        }
     }
 
     /* Move from listmodel to a context property
@@ -67,11 +76,11 @@ Rectangle{
         width: parent.width
         height: parent.height - 200
         model: jobs_model
-        y: 40
+        y: location_heading.contentHeight + 20
 
         delegate: Rectangle {
             width: parent.width
-            height: 20
+            height: Math.max(printer_text.contentHeight, location_text.contentHeight, status_text.contentHeight)
 
             Menu { //Should this menu be for every job or is there some other way?
                 id: menu
@@ -97,21 +106,30 @@ Rectangle{
             }
 
             Text {
+                id: printer_text
                 x: 20
+                width: parent.width/3 - 20
                 text: printer
                 font.family: "Sans"
+                wrapMode: Text.Wrap
             }
 
             Text {
+                id: location_text
                 x: parent.width/3 + 20
+                width: parent.width/3 - 20
                 text: location
                 font.family: "Sans"
+                wrapMode: Text.Wrap
             }
 
             Text {
+                id: status_text
                 x: 2*parent.width/3 + 20
+                width: parent.width/3 - 20
                 text: status
                 font.family: "Sans"
+                wrapMode: Text.Wrap
             }
         }
     }

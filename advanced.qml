@@ -106,7 +106,7 @@ Rectangle{
     Text {
         x: parent.width/2
         y: 212
-        text: "Right : "
+        text: "Top : "
         font.family: "Sans"
     }
 
