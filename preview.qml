@@ -32,7 +32,7 @@ Rectangle{
                 anchors.centerIn: parent
                 width: parent.width
                 height: parent.height
-                source: "image://preview/pdf"
+                source: "image://preview/tmp/test.pdf/0"
             }
         }
     }
@@ -44,6 +44,16 @@ Rectangle{
         height: 20
         width: 20
         text: "\u25C0"
+
+        onClicked: {
+            var source = String(image.source)
+            var filenameLength = source.lastIndexOf("/")
+            var filename = source.substring(0, filenameLength)
+            var pageNumber = source.substring(filenameLength + 1, source.length)
+            var previousPageNumber = parseInt(pageNumber) - 1
+            if (previousPageNumber >= 0)
+                image.source = filename + "/" + String(previousPageNumber)
+        }
     }
 
     Slider { // To set the zoom level of the preview image.
@@ -70,5 +80,15 @@ Rectangle{
         height: 20
         width: 20
         text: "\u25B6"
+
+        onClicked: {
+            var source = String(image.source)
+            var filenameLength = source.lastIndexOf("/")
+            var filename = source.substring(0, filenameLength)
+            var pageNumber = source.substring(filenameLength + 1, source.length)
+            var nextPageNumber = parseInt(pageNumber) + 1
+            if (nextPageNumber >= 0) // Change this to: <= number of pages in the document
+                image.source = filename + "/" + String(nextPageNumber)
+        }
     }
 }
