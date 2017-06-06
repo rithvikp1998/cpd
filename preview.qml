@@ -59,7 +59,7 @@ Rectangle{
 
         onValueChanged: {
             flickable.resizeContent((image.width / previousScaleValue) * value , (image.height / previousScaleValue) * value, 0)
-            previousScaleValue = scale
+            previousScaleValue = value
         }
     }
 
