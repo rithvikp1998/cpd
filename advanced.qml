@@ -40,7 +40,7 @@ Rectangle{
         height: 24
         font.family: "Sans"
         font.pixelSize: 12
-        model: ["None", "Red", "Blue"] //Change this to real options for color corrections
+        model: ["Off", "Auto", "Display", "CMYK", "Black and White", "2-Color Draft", "Vivid"]
     }
 
     Text {
