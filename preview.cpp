@@ -28,3 +28,13 @@ QImage QPdfPreview::requestImage(const QString &id, QSize *size, const QSize &re
 
     return image;
 }
+
+int QPreviewData::get_number_of_pages(QString fileName){
+    Poppler::Document *document = Poppler::Document::load(fileName);
+    if (!document || document->isLocked()){
+        qCritical("File '%s' does not exist or is locked!", qUtf8Printable(fileName));
+        return 0;
+    }
+
+    return document->numPages();
+}

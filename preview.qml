@@ -47,12 +47,11 @@ Rectangle{
 
         onClicked: {
             var source = String(image.source)
-            var filenameLength = source.lastIndexOf("/")
-            var filename = source.substring(0, filenameLength)
-            var pageNumber = source.substring(filenameLength + 1, source.length)
-            var previousPageNumber = parseInt(pageNumber) - 1
-            if (previousPageNumber >= 0)
-                image.source = filename + "/" + String(previousPageNumber)
+            var fileNameLength = source.lastIndexOf("/")
+            var fileName = source.substring(0, fileNameLength)
+            var pageNumber = parseInt(source.substring(fileNameLength + 1, source.length))
+            if (pageNumber - 1 >= 0)
+                image.source = fileName + "/" + String(pageNumber - 1)
         }
     }
 
@@ -83,12 +82,11 @@ Rectangle{
 
         onClicked: {
             var source = String(image.source)
-            var filenameLength = source.lastIndexOf("/")
-            var filename = source.substring(0, filenameLength)
-            var pageNumber = source.substring(filenameLength + 1, source.length)
-            var nextPageNumber = parseInt(pageNumber) + 1
-            if (nextPageNumber >= 0) // Change this to: <= number of pages in the document
-                image.source = filename + "/" + String(nextPageNumber)
+            var fileNameLength = source.lastIndexOf("/")
+            var fileName = source.substring(0, fileNameLength)
+            var pageNumber = parseInt(source.substring(fileNameLength + 1, source.length))
+            if (pageNumber + 1 < preview_data.get_number_of_pages(source.substring(15,fileNameLength)))
+                image.source = fileName + "/" + String(pageNumber + 1)
         }
     }
 }

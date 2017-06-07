@@ -10,6 +10,8 @@ int main(int argc, char *argv[])
 
     QQuickView view;
     view.engine()->addImageProvider(QLatin1String("preview"), new QPdfPreview);
+    QPreviewData data;
+    view.rootContext()->setContextProperty("preview_data", &data);
     view.setSource(QUrl("qrc:/main.qml"));
     view.setResizeMode(QQuickView::SizeRootObjectToView);
     QObject::connect((QObject*)view.engine(), SIGNAL(quit()), &app, SLOT(quit()));

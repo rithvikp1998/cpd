@@ -10,4 +10,11 @@ public:
     QImage requestImage(const QString &id, QSize *size, const QSize &requested_size);
 };
 
+class QPreviewData : public QObject
+{
+    Q_OBJECT
+public:
+    Q_INVOKABLE int get_number_of_pages(QString fileName);
+};
+
 #endif // PREVIEW_H
