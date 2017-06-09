@@ -7,7 +7,7 @@ class QPdfPreview : public QQuickImageProvider
 {
 public:
     QPdfPreview() : QQuickImageProvider(QQuickImageProvider::Image) {}
-    QImage requestImage(const QString &id, QSize *size, const QSize &requested_size);
+    QImage requestImage(const QString &id, QSize *size, const QSize &requested_size) override;
 };
 
 class QPreviewData : public QObject
