@@ -13,15 +13,15 @@ Rectangle{
         x: 20
         y: 15
         text: "Print Quality :"
-        font.family: "Sans"
+        //font.family: "Sans"
     }
 
     ComboBox {
         x: 160
         y: 10
         width: parent.width - 180
-        height: 24
-        font.family: "Sans"
+        height: 30
+        //font.family: "Sans"
         font.pixelSize: 12
         model: ["Normal", "Low", "High"]
     }
@@ -30,15 +30,15 @@ Rectangle{
         x: 20
         y: 55
         text: "Color Correction :"
-        font.family: "Sans"
+        //font.family: "Sans"
     }
 
     ComboBox {
         x: 160
         y: 50
         width: parent.width - 180
-        height: 24
-        font.family: "Sans"
+        height: 30
+        //font.family: "Sans"
         font.pixelSize: 12
         model: ["Off", "Auto", "Display", "CMYK", "Black and White", "2-Color Draft", "Vivid"]
     }
@@ -47,15 +47,15 @@ Rectangle{
         x: 20
         y: 95
         text: "Brightness : "
-        font.family: "Sans"
+        //font.family: "Sans"
     }
 
     TextField {
         x: 160
-        y: 90
+        y: 95
         width: parent.width - 180
         height: 24
-        font.family: "Sans"
+        //font.family: "Sans"
         font.pixelSize: 12
     }
 
@@ -63,15 +63,15 @@ Rectangle{
         x: 20
         y: 135
         text: "Contrast : "
-        font.family: "Sans"
+        //font.family: "Sans"
     }
 
     TextField {
         x: 160
-        y: 130
+        y: 135
         width: parent.width - 180
         height: 24
-        font.family: "Sans"
+        //font.family: "Sans"
         font.pixelSize: 12
     }
 
@@ -83,7 +83,7 @@ Rectangle{
         font.bold: true
         x: 20
         y: 180
-        font.family: "Sans"
+        //font.family: "Sans"
         font.pixelSize: 14
     }
 
@@ -91,15 +91,15 @@ Rectangle{
         x: 20
         y: 212
         text: "Left : "
-        font.family: "Sans"
+        //font.family: "Sans"
     }
 
     TextField {
         x: 70
-        y: 210
+        y: 215
         width: parent.width/3
         height: 24
-        font.family: "Sans"
+        //font.family: "Sans"
         font.pixelSize: 12
     }
 
@@ -107,15 +107,15 @@ Rectangle{
         x: parent.width/2
         y: 212
         text: "Top : "
-        font.family: "Sans"
+        //font.family: "Sans"
     }
 
     TextField {
         x: parent.width/2 + 60
-        y: 210
+        y: 215
         width: parent.width/3
         height: 24
-        font.family: "Sans"
+        //font.family: "Sans"
         font.pixelSize: 12
     }
 
@@ -123,15 +123,15 @@ Rectangle{
         x: 20
         y: 252
         text: "Center :"
-        font.family: "Sans"
+        //font.family: "Sans"
     }
 
     ComboBox {
         x: 90
         y: 250
         width: parent.width - 110
-        height: 24
-        font.family: "Sans"
+        height: 30
+        //font.family: "Sans"
         font.pixelSize: 12
         model: ["None", "Horizontal", "Vertical", "Both"]
     }
@@ -143,7 +143,7 @@ Rectangle{
         font.bold: true
         x: 20
         y: 300
-        font.family: "Sans"
+        //font.family: "Sans"
         font.pixelSize: 14
     }
 
@@ -151,15 +151,15 @@ Rectangle{
         x: 20
         y: 332
         text: "Width : "
-        font.family: "Sans"
+        //font.family: "Sans"
     }
 
     TextField {
         x: 80
-        y: 330
+        y: 335
         width: parent.width/3 - 10
         height: 24
-        font.family: "Sans"
+        //font.family: "Sans"
         font.pixelSize: 12
     }
 
@@ -167,15 +167,15 @@ Rectangle{
         x: parent.width/2
         y: 332
         text: "Height : "
-        font.family: "Sans"
+        //font.family: "Sans"
     }
 
     TextField {
         x: parent.width/2 + 70
-        y: 330
+        y: 335
         width: parent.width/3 - 10
         height: 24
-        font.family: "Sans"
+        //font.family: "Sans"
         font.pixelSize: 12
     }
 
@@ -183,15 +183,15 @@ Rectangle{
         x: 20
         y: 372
         text: "Units :"
-        font.family: "Sans"
+        //font.family: "Sans"
     }
 
     ComboBox {
         x: 80
         y: 370
         width: parent.width - 100
-        height: 24
-        font.family: "Sans"
+        height: 30
+        //font.family: "Sans"
         font.pixelSize: 12
         model: ["Millimeter", "Centimeter", "Inches"]
     }
@@ -200,7 +200,7 @@ Rectangle{
         x: 20
         y: 410
         text: "Scale : "
-        font.family: "Sans"
+        //font.family: "Sans"
     }
 
     Slider{
@@ -215,6 +215,6 @@ Rectangle{
         x: parent.width - 80
         y: 410
         text: "100%"
-        font.family: "Sans"
+        //font.family: "Sans"
     }
 }

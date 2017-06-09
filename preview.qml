@@ -40,9 +40,9 @@ Rectangle{
     Button { // Displays the previous page in the doument
         id: preview_previous_page_button
         x: 40
-        y: parent.height - 40
-        height: 20
-        width: 20
+        y: parent.height - 50
+        height: 40
+        width: 40
         text: "\u25C0"
 
         onClicked: {
@@ -57,9 +57,9 @@ Rectangle{
 
     Slider { // To set the zoom level of the preview image.
         id: preview_zoom_slider
-        x: 80
-        y: parent.height - 50
-        width: parent.width - 160
+        x: 100
+        y: parent.height - 55
+        width: parent.width - 200
         to: 3
         from: 1
         value: 1
@@ -74,10 +74,10 @@ Rectangle{
 
     Button {  // Displays the next page in the doument
         id: preview_next_page_button
-        x: parent.width - 60
-        y: parent.height - 40
-        height: 20
-        width: 20
+        x: parent.width - 80
+        y: parent.height - 50
+        height: 40
+        width: 40
         text: "\u25B6"
 
         onClicked: {

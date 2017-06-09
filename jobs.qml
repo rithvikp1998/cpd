@@ -18,7 +18,7 @@ Rectangle{
             width: parent.width/3 - 20
             text: "Printer"
             font.bold: true
-            font.family: "Sans"
+            //font.family: "Sans"
             wrapMode: Text.Wrap
         }
 
@@ -32,7 +32,7 @@ Rectangle{
             width: parent.width/3 - 20
             text: "Location"
             font.bold: true
-            font.family: "Sans"
+            //font.family: "Sans"
             wrapMode: Text.Wrap
         }
 
@@ -42,7 +42,7 @@ Rectangle{
             width: parent.width/3 - 20
             text: "Status"
             font.bold: true
-            font.family: "Sans"
+            //font.family: "Sans"
             wrapMode: Text.Wrap
         }
     }
@@ -113,7 +113,7 @@ Rectangle{
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width/3 - 20
                 text: printer
-                font.family: "Sans"
+                //font.family: "Sans"
                 wrapMode: Text.Wrap
             }
 
@@ -123,7 +123,7 @@ Rectangle{
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width/3 - 20
                 text: location
-                font.family: "Sans"
+                //font.family: "Sans"
                 wrapMode: Text.Wrap
             }
 
@@ -133,7 +133,7 @@ Rectangle{
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width/3 - 20
                 text: status
-                font.family: "Sans"
+                //font.family: "Sans"
                 wrapMode: Text.Wrap
             }
         }
@@ -143,23 +143,23 @@ Rectangle{
         x: 20
         y: parent.height - 147
         text: "Start Job : "
-        font.family: "Sans"
+        //font.family: "Sans"
     }
 
     ComboBox {
         id: start_job_combobox
         x: 120
-        y: parent.height - 150
+        y: parent.height - 155
         width: (start_job_combobox.currentIndex==1) ? parent.width - 280 : parent.width - 180
-        height: 30
-        font.family: "Sans"
+        height: 40
+        //font.family: "Sans"
         font.pixelSize: 12
         model: ["Immediately", "After a delay of", "Never"]
     }
 
     TextField {
         x: parent.width - 150
-        y: parent.height - 150
+        y: parent.height - 145
         width: 60
         height: 30
         font.pointSize: 10
@@ -170,7 +170,7 @@ Rectangle{
         text: "Minutes"
         x: parent.width - 80
         y: parent.height - 145
-        font.family: "Sans"
+        //font.family: "Sans"
         visible: (start_job_combobox.currentIndex==1) ? true :  false
     }
 
@@ -178,7 +178,7 @@ Rectangle{
         x: 20
         y: parent.height - 97
         text: "Save Job : "
-        font.family: "Sans"
+        //font.family: "Sans"
     }
 
     Switch {
@@ -189,25 +189,25 @@ Rectangle{
 
     Text {
         text: "Location : "
-        font.family: "Sans"
+        //font.family: "Sans"
         x: 20
-        y: parent.height - 60
+        y: parent.height - 50
         visible: (save_job_switch.checked) ? true : false
     }
 
     Text {
         id: save_job_location
         text: "None"
-        font.family: "Sans"
+        //font.family: "Sans"
         x: 120
-        y: parent.height - 60
+        y: parent.height - 50
         visible: (save_job_switch.checked) ? true : false
     }
 
     Button {
         x: 200
-        y: parent.height - 105
-        height: 30
+        y: parent.height - 110
+        height: 40
         text: "Browse"
         visible: (save_job_switch.checked) ? true : false
         onClicked: { file_dialog.open() }

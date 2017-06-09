@@ -56,7 +56,7 @@ Rectangle {
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
                     text: name
-                    font.family: "Sans"
+                    //font.family: "Sans"
                     x: 10
                 }
 
@@ -75,20 +75,20 @@ Rectangle {
             y: parent.height - 120
             width: parent.width - 20
             height: 40
-            color: "#4DB6AC"
+            color: "#E91E63"
 
             Text {
                 anchors.centerIn: parent
                 text: "Print"
-                font.family: "Sans"
+                //font.family: "Sans"
                 color: "white"
             }
 
             MouseArea {
                 anchors.fill: parent
                 hoverEnabled: true
-                onEntered: { parent.color = "#26A69A" }
-                onExited:  { parent.color = "#4DB6AC" }
+                onEntered: { parent.color = "#D81B60" }
+                onExited:  { parent.color = "#E91E63" }
             }
         }
 
@@ -102,7 +102,7 @@ Rectangle {
             Text {
                 anchors.centerIn: parent
                 text: "Cancel"
-                font.family: "Sans"
+                //font.family: "Sans"
                 color: "black"
             }
 
