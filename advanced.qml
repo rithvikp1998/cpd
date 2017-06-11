@@ -3,218 +3,333 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 import QtQuick.Controls.Styles 1.4
 
+/* Make this scrollable */
+
 Rectangle{
-    width: parent.width
-    height: parent.height
+    x: 20
+    y: 10
+    width: parent.width - 40
+    height: parent.height - 20
 
-    /* Options taken from GNOME 2 print dialog advanced tab */
+    GridLayout {
+        width: parent.width
+        rowSpacing: 0
+        columns: 2
 
-    Text {
-        x: 20
-        y: 15
-        text: "Print Quality :"
-        //font.family: "Sans"
-    }
+        Label {
+            text: "Quality"
+            Layout.columnSpan: 2
+            Layout.preferredHeight: 30
+            font.bold: true
+            font.pointSize: 12
+        }
 
-    ComboBox {
-        x: 160
-        y: 10
-        width: parent.width - 180
-        height: 30
-        //font.family: "Sans"
-        font.pixelSize: 12
-        model: ["Normal", "Low", "High"]
-    }
+        Label {
+            text: "Resolution (dpi)"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
 
-    Text {
-        x: 20
-        y: 55
-        text: "Color Correction :"
-        //font.family: "Sans"
-    }
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 35
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "150", "300", "600"]
+        }
 
-    ComboBox {
-        x: 160
-        y: 50
-        width: parent.width - 180
-        height: 30
-        //font.family: "Sans"
-        font.pixelSize: 12
-        model: ["Off", "Auto", "Display", "CMYK", "Black and White", "2-Color Draft", "Vivid"]
-    }
+        Label {
+            text: "Toner Darkness"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
 
-    Text {
-        x: 20
-        y: 95
-        text: "Brightness : "
-        //font.family: "Sans"
-    }
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "1", "2", "3"]
+        }
 
-    TextField {
-        x: 160
-        y: 95
-        width: parent.width - 180
-        height: 24
-        //font.family: "Sans"
-        font.pixelSize: 12
-    }
+        Label {
+            text: "Brightness"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
 
-    Text {
-        x: 20
-        y: 135
-        text: "Contrast : "
-        //font.family: "Sans"
-    }
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "-3", "-2", "-1", "0", "1", "2", "3"]
+        }
 
-    TextField {
-        x: 160
-        y: 135
-        width: parent.width - 180
-        height: 24
-        //font.family: "Sans"
-        font.pixelSize: 12
-    }
+        Label {
+            text: "Contrast"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
 
-    /* Options taken from Image Viewer's print dialog on GNOME 3 */
-    /* Handles the position of image with respect to the paper */
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "0", "1", "2", "3"]
+        }
 
-    Text {
-        text: "Image Position"
-        font.bold: true
-        x: 20
-        y: 180
-        //font.family: "Sans"
-        font.pixelSize: 14
-    }
+        Label {
+            text: "Saturation"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
 
-    Text {
-        x: 20
-        y: 212
-        text: "Left : "
-        //font.family: "Sans"
-    }
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "-3", "-2", "-1", "0", "1", "2", "3"]
+        }
 
-    TextField {
-        x: 70
-        y: 215
-        width: parent.width/3
-        height: 24
-        //font.family: "Sans"
-        font.pixelSize: 12
-    }
+        Label {
+            text: "Enhance Fine Lines"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
 
-    Text {
-        x: parent.width/2
-        y: 212
-        text: "Top : "
-        //font.family: "Sans"
-    }
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "Off", "On"]
+        }
 
-    TextField {
-        x: parent.width/2 + 60
-        y: 215
-        width: parent.width/3
-        height: 24
-        //font.family: "Sans"
-        font.pixelSize: 12
-    }
+        Label {
+            text: "Color"
+            Layout.columnSpan: 2
+            Layout.preferredHeight: 30
+            font.bold: true
+            font.pointSize: 12
+        }
 
-    Text {
-        x: 20
-        y: 252
-        text: "Center :"
-        //font.family: "Sans"
-    }
+        Label {
+            text: "Color Correction"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
 
-    ComboBox {
-        x: 90
-        y: 250
-        width: parent.width - 110
-        height: 30
-        //font.family: "Sans"
-        font.pixelSize: 12
-        model: ["None", "Horizontal", "Vertical", "Both"]
-    }
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "Off", "Auto", "Manual"]
+        }
 
-    /* Handles the size of image */
+        Label {
+            text: "Color Saver"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
 
-    Text {
-        text: "Image Size"
-        font.bold: true
-        x: 20
-        y: 300
-        //font.family: "Sans"
-        font.pixelSize: 14
-    }
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "Off", "On"]
+        }
 
-    Text {
-        x: 20
-        y: 332
-        text: "Width : "
-        //font.family: "Sans"
-    }
+        Label {
+            text: "Monochrome"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
 
-    TextField {
-        x: 80
-        y: 335
-        width: parent.width/3 - 10
-        height: 24
-        //font.family: "Sans"
-        font.pixelSize: 12
-    }
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "Off", "On"]
+        }
 
-    Text {
-        x: parent.width/2
-        y: 332
-        text: "Height : "
-        //font.family: "Sans"
-    }
+        Label {
+            text: "Color Balance"
+            Layout.columnSpan: 2
+            Layout.preferredHeight: 30
+            font.bold: true
+            font.pointSize: 12
+        }
 
-    TextField {
-        x: parent.width/2 + 70
-        y: 335
-        width: parent.width/3 - 10
-        height: 24
-        //font.family: "Sans"
-        font.pixelSize: 12
-    }
+        Label {
+            text: "Cyan Balance"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
 
-    Text {
-        x: 20
-        y: 372
-        text: "Units :"
-        //font.family: "Sans"
-    }
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "-3", "-2", "-1", "0", "1", "2", "3"]
+        }
 
-    ComboBox {
-        x: 80
-        y: 370
-        width: parent.width - 100
-        height: 30
-        //font.family: "Sans"
-        font.pixelSize: 12
-        model: ["Millimeter", "Centimeter", "Inches"]
-    }
+        Label {
+            text: "Magenta Balance"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
 
-    Text {
-        x: 20
-        y: 410
-        text: "Scale : "
-        //font.family: "Sans"
-    }
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "-3", "-2", "-1", "0", "1", "2", "3"]
+        }
 
-    Slider{
-        id: image_scaling_slider
-        x: 80
-        y: 410
-        width: parent.width - 160
-        height: 20
-    }
+        Label {
+            text: "Yellow Balance"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
 
-    Text {
-        x: parent.width - 80
-        y: 410
-        text: "100%"
-        //font.family: "Sans"
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "-3", "-2", "-1", "0", "1", "2", "3"]
+        }
+
+        Label {
+            text: "Black Balance"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
+
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "-3", "-2", "-1", "0", "1", "2", "3"]
+        }
+
+        Label {
+            text: "Manual Color"
+            Layout.columnSpan: 2
+            Layout.preferredHeight: 30
+            font.bold: true
+            font.pointSize: 12
+        }
+
+        Label {
+            text: "RGB Image"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
+
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "Off", "Vivid", "sRGB Display", "sRGB Vivid", "Display-true Black"]
+        }
+
+        Label {
+            text: "RGB Text"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
+
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "Off", "Vivid", "sRGB Display", "sRGB Vivid", "Display-true Black"]
+        }
+
+        Label {
+            text: "RGB Graphics"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
+
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "Off", "Vivid", "sRGB Display", "sRGB Vivid", "Display-true Black"]
+        }
+
+        Label {
+            text: "CMYK"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
+
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "Off", "US CMYK", "Euro CMYK"]
+        }
+
+        Label {
+            text: "Finishing"
+            Layout.columnSpan: 2
+            Layout.preferredHeight: 30
+            font.bold: true
+            font.pointSize: 12
+        }
+
+        Label {
+            text: "Print Blank Pages"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
+
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "Off", "On"]
+        }
+
+        Label {
+            text: "Separator Pages"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
+
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "None", "Between Jobs", "Between Copies", "Between Pages"]
+        }
+
+        Label {
+            text: "Offset Pages"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
+
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "None", "Between Jobs", "Between Copies"]
+        }
+
+        Label {
+            text: "Staple Job"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
+
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "Off", "On"]
+        }
+
+        Label {
+            text: "Punch Hole"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
+
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "Off", "On"]
+        }
+
+        Label {
+            text: "Fold"
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+        }
+
+        ComboBox {
+            Layout.preferredWidth: parent.width - 180
+            Layout.preferredHeight: 40
+            Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
+            model: ["Printer Setting", "Off", "On"]
+        }
     }
 }
