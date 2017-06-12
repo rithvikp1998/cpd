@@ -6,7 +6,7 @@ import QtQuick.Controls.Styles 1.4
 Rectangle {
     anchors.fill: parent
 
-    ScrollBar { //Needs some fixing
+    ScrollBar {
         id: scroll_bar
         hoverEnabled: true
         active: hovered || pressed
@@ -18,7 +18,7 @@ Rectangle {
 
     MouseArea {
         height: parent.height
-        width: parent.width - scroll_bar.width
+        width: parent.width - scroll_bar.width //Subtracting scroll_bar.width retains the scrollbar's drag function
         onWheel: {
             scroll_bar.position -= (wheel.angleDelta.y/500)
             if (scroll_bar.position < 0)
@@ -30,14 +30,14 @@ Rectangle {
 
     Rectangle{
         x: 20
-        y: -scroll_bar.position * height
+        y: 10
         width: parent.width - 40
         height: parent.height - 20
 
         GridLayout {
             id: grid_layout
+            y: -scroll_bar.position * (height - parent.height)
             width: parent.width
-            height: parent.height
             rowSpacing: 0
             columns: 2
 
