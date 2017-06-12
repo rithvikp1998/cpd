@@ -1,3 +1,17 @@
+/* TODO:
+
+  1. Better to create a visual separator like a vertical
+     straight line between columns for more comprehensive look
+
+  2. Move from listmodel to a context property
+     obtained from backend
+
+  3. Add color to indicate right-clicked job
+
+  4. Check if one right click menu can be used for all jobs
+
+*/
+
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
@@ -18,12 +32,8 @@ Rectangle{
             width: parent.width/3 - 20
             text: "Printer"
             font.bold: true
-            //font.family: "Sans"
             wrapMode: Text.Wrap
         }
-
-        /* Better to create a visual separator like a vertical
-           straight line between columns for more comprehensive look */
 
         Text {
             id: location_heading
@@ -32,7 +42,6 @@ Rectangle{
             width: parent.width/3 - 20
             text: "Location"
             font.bold: true
-            //font.family: "Sans"
             wrapMode: Text.Wrap
         }
 
@@ -42,13 +51,9 @@ Rectangle{
             width: parent.width/3 - 20
             text: "Status"
             font.bold: true
-            //font.family: "Sans"
             wrapMode: Text.Wrap
         }
     }
-
-    /* Move from listmodel to a context property
-    obtained from backend */
 
     ListModel{
         id: jobs_model
@@ -84,7 +89,7 @@ Rectangle{
             height: Math.max(printer_text.contentHeight, location_text.contentHeight, status_text.contentHeight) + 10
             color: (model.index % 2 == 0) ? "#EEEEEE" : "white"
 
-            Menu { //Should this menu be for every job or is there some other way?
+            Menu {
                 id: menu
 
                 MenuItem{ text: "Pause" }
@@ -100,7 +105,7 @@ Rectangle{
 
                 onEntered: { parent.color = "#BDBDBD"}
                 onExited:  { parent.color = (model.index % 2 == 0) ? "#EEEEEE" : "white"}
-                onClicked: { //Add color to indicate right-clicked job
+                onClicked: {
                     menu.x = mouseX
                     menu.y = mouseY
                     menu.open()
@@ -113,7 +118,6 @@ Rectangle{
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width/3 - 20
                 text: printer
-                //font.family: "Sans"
                 wrapMode: Text.Wrap
             }
 
@@ -123,7 +127,6 @@ Rectangle{
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width/3 - 20
                 text: location
-                //font.family: "Sans"
                 wrapMode: Text.Wrap
             }
 
@@ -133,7 +136,6 @@ Rectangle{
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width/3 - 20
                 text: status
-                //font.family: "Sans"
                 wrapMode: Text.Wrap
             }
         }
@@ -143,7 +145,6 @@ Rectangle{
         x: 20
         y: parent.height - 147
         text: "Start Job : "
-        //font.family: "Sans"
     }
 
     ComboBox {
@@ -152,7 +153,6 @@ Rectangle{
         y: parent.height - 155
         width: (start_job_combobox.currentIndex==1) ? parent.width - 280 : parent.width - 180
         height: 40
-        //font.family: "Sans"
         font.pixelSize: 12
         model: ["Immediately", "After a delay of", "Never"]
     }
@@ -170,7 +170,6 @@ Rectangle{
         text: "Minutes"
         x: parent.width - 80
         y: parent.height - 145
-        //font.family: "Sans"
         visible: (start_job_combobox.currentIndex==1) ? true :  false
     }
 
@@ -178,30 +177,12 @@ Rectangle{
         x: 20
         y: parent.height - 97
         text: "Save Job : "
-        //font.family: "Sans"
     }
 
     Switch {
         id: save_job_switch
         x: 105
         y: parent.height - 110
-    }
-
-    Text {
-        text: "Location : "
-        //font.family: "Sans"
-        x: 20
-        y: parent.height - 50
-        visible: (save_job_switch.checked) ? true : false
-    }
-
-    Text {
-        id: save_job_location
-        text: "None"
-        //font.family: "Sans"
-        x: 120
-        y: parent.height - 50
-        visible: (save_job_switch.checked) ? true : false
     }
 
     Button {
@@ -211,6 +192,21 @@ Rectangle{
         text: "Browse"
         visible: (save_job_switch.checked) ? true : false
         onClicked: { file_dialog.open() }
+    }
+
+    Text {
+        text: "Location : "
+        x: 20
+        y: parent.height - 50
+        visible: (save_job_switch.checked) ? true : false
+    }
+
+    Text {
+        id: save_job_location
+        text: "None"
+        x: 120
+        y: parent.height - 50
+        visible: (save_job_switch.checked) ? true : false
     }
 
     FileDialog {

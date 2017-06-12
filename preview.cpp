@@ -11,9 +11,13 @@ QImage QPdfPreview::requestImage(const QString &id, QSize *size, const QSize &re
     QImage image;
 
     Poppler::Document *document = Poppler::Document::load(fileName);
-    if (!document || document->isLocked()){
-        qCritical("File '%s' does not exist or is locked!", qUtf8Printable(fileName));
+    if (!document){
+        qCritical("File '%s' does not exist!", qUtf8Printable(fileName));
         return image;
+    }
+
+    if (document->isLocked()) {
+        qCritical("File %s is locked!", qUtf8Printable(fileName));
     }
 
     Poppler::Page *page = document->page(pageNumber);

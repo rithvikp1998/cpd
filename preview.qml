@@ -1,3 +1,9 @@
+/* TODO:
+
+  1. Create a visual difference between page and container dimensions to reflect paper size
+
+*/
+
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
