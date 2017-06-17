@@ -38,7 +38,7 @@ Rectangle{
                 anchors.centerIn: parent
                 width: parent.width
                 height: parent.height
-                source: "image://preview/tmp/test.pdf/0"
+                source: "image://preview/test.pdf/0"
             }
         }
     }

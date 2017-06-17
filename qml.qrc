@@ -8,5 +8,6 @@
 	<file>advanced.qml</file>
 	<file>preview.qml</file>
 	<file>qtquickcontrols2.conf</file>
+	<file>test.pdf</file>
     </qresource>
 </RCC>
