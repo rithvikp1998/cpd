@@ -1,21 +1,26 @@
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
-#include "preview.h"
-#include <QQuickView>
-#include <QQmlContext>
+/* TODO:
+ * 1. Add image provider for preview (or replace it with existing QPrintPreviewDialog?)
+ * 2. Make the window responsive
+ */
 
-int main(int argc, char *argv[])
+#include <QtWidgets>
+#include <QtQuickWidgets/QQuickWidget>
+
+class Widget : public QWidget
 {
-    QGuiApplication app(argc, argv);
+public:
+    Widget() {
+        mQQuickWidget = new QQuickWidget(QUrl("qrc:/main.qml"), this);
+        mQQuickWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
+    }
+private:
+    QQuickWidget *mQQuickWidget;
+};
 
-    QQuickView view;
-    view.engine()->addImageProvider(QLatin1String("preview"), new QPdfPreview);
-    QPreviewData data;
-    view.rootContext()->setContextProperty("preview_data", &data);
-    view.setSource(QUrl("qrc:/main.qml"));
-    view.setResizeMode(QQuickView::SizeRootObjectToView);
-    QObject::connect((QObject*)view.engine(), SIGNAL(quit()), &app, SLOT(quit()));
-    view.show();
-
+int main(int argc, char** argv)
+{
+    QApplication app(argc, argv);
+    Widget widget;
+    widget.show();
     return app.exec();
 }
