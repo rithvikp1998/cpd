@@ -1,5 +1,5 @@
 /* TODO:
- * 1. Make the preview_widget use poppler
+ * 1. Make the preview_widget use poppler -- Done
  * 2. Integrate preview_widget into the qml_widget
  * 3. Make the window responsive
  */
