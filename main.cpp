@@ -1,10 +1,12 @@
 /* TODO:
- * 1. Add image provider for preview (or replace it with existing QPrintPreviewDialog?)
- * 2. Make the window responsive
+ * 1. Make the preview_widget use poppler
+ * 2. Integrate preview_widget into the qml_widget
+ * 3. Make the window responsive
  */
 
 #include <QtWidgets>
 #include <QtQuickWidgets/QQuickWidget>
+#include "preview.h"
 
 class Widget : public QWidget
 {
@@ -20,7 +22,8 @@ private:
 int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
-    Widget widget;
-    widget.show();
+    Widget qml_widget;
+    qml_widget.show();
+    PrintPreviewWidget preview_widget;
     return app.exec();
 }

@@ -2,6 +2,7 @@
 #define PREVIEW_H
 
 #include <QQuickImageProvider>
+#include <QtPrintSupport/QPrinter>
 
 class QPdfPreview : public QQuickImageProvider
 {
@@ -15,6 +16,15 @@ class QPreviewData : public QObject
     Q_OBJECT
 public:
     Q_INVOKABLE int get_number_of_pages(QString fileName);
+};
+
+class PrintPreviewWidget : public QObject
+{
+    Q_OBJECT
+public slots:
+    void print(QPrinter* printer);
+public:
+    PrintPreviewWidget();
 };
 
 #endif // PREVIEW_H

@@ -1,6 +1,7 @@
 QT += qml quick \
     widgets \
-    quickwidgets
+    quickwidgets \
+    printsupport
 
 CONFIG += c++11
 

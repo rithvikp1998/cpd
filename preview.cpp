@@ -1,4 +1,7 @@
 #include "preview.h"
+#include <QPainter>
+#include <QPrinter>
+#include <QPrintPreviewWidget>
 #include <poppler/qt5/poppler-qt5.h>
 #include <QMessageLogger>
 #include <QFile>
@@ -56,4 +59,26 @@ int QPreviewData::get_number_of_pages(QString fileName){
     }
 
     return document->numPages();
+}
+
+/* This method implements the existing QPrintPreviewWidget class from Qt */
+
+PrintPreviewWidget::PrintPreviewWidget(){
+    QPrinter *printer = new QPrinter();
+    printer->setPaperSize(QPrinter::A4);
+    printer->setOrientation(QPrinter::Portrait);
+    printer->setFullPage(true);
+
+    QPrintPreviewWidget *printPreview = new QPrintPreviewWidget(printer);
+    connect(printPreview, SIGNAL(paintRequested(QPrinter*)), this, SLOT(print(QPrinter*)));
+    printPreview->show();
+}
+
+void PrintPreviewWidget::print(QPrinter *printer){
+    QPainter painter(printer);
+    painter.setRenderHints(QPainter::Antialiasing |
+                           QPainter::TextAntialiasing |
+                           QPainter::SmoothPixmapTransform, true);
+    painter.drawText(100, 100, "Hello World! 123");
+    painter.end();
 }
