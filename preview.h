@@ -1,6 +1,7 @@
 #ifndef PREVIEW_H
 #define PREVIEW_H
 
+#include <QWidget>
 #include <QQuickImageProvider>
 #include <QtPrintSupport/QPrinter>
 
@@ -18,7 +19,7 @@ public:
     Q_INVOKABLE int get_number_of_pages(QString fileName);
 };
 
-class PrintPreviewWidget : public QObject
+class PrintPreviewWidget : public QWidget
 {
     Q_OBJECT
 public slots:

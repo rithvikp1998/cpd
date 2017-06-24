@@ -69,9 +69,9 @@ PrintPreviewWidget::PrintPreviewWidget(){
     printer->setOrientation(QPrinter::Portrait);
     printer->setFullPage(true);
 
-    QPrintPreviewWidget *printPreview = new QPrintPreviewWidget(printer);
+    QPrintPreviewWidget *printPreview = new QPrintPreviewWidget(printer, this);
     connect(printPreview, SIGNAL(paintRequested(QPrinter*)), this, SLOT(print(QPrinter*)));
-    printPreview->show();
+    //this->show();
 }
 
 void PrintPreviewWidget::print(QPrinter *printer){
