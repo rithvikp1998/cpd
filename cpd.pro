@@ -1,12 +1,8 @@
-QT += qml quick \
-    widgets \
-    quickwidgets \
-    printsupport
+QT += qml quick widgets quickwidgets printsupport
 
 CONFIG += c++11
 
-SOURCES += main.cpp \
-    preview.cpp
+SOURCES += main.cpp preview.cpp
 
 RESOURCES += qml.qrc
 
@@ -34,5 +30,4 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += \
-    preview.h
+HEADERS += preview.h

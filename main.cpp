@@ -1,23 +1,23 @@
 /* TODO:
  * 1. Make the preview_widget use poppler -- Done
- * 2. Integrate preview_widget into the qml_widget -- in progress
+ * 2. Integrate preview_widget into the qml_widget -- Done, for now
  * 3. Make the window responsive
+ * 4. Make the preview_widget interactive
  */
 
 #include <QtWidgets>
 #include <QtQuickWidgets/QQuickWidget>
 #include "preview.h"
 
-class Widget : public QWidget
+class QmlWidget : public QWidget
 {
 public:
-    Widget() {
-        mQQuickWidget = new QQuickWidget(QUrl("qrc:/main.qml"), this);
-        mQQuickWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
-        //this->show();
+    QmlWidget() {
+        qml_widget = new QQuickWidget(QUrl("qrc:/main.qml"), this);
+        qml_widget->setResizeMode(QQuickWidget::SizeRootObjectToView);
     }
 private:
-    QQuickWidget *mQQuickWidget;
+    QQuickWidget *qml_widget;
 };
 
 class MainWindow : public QMainWindow
@@ -26,7 +26,7 @@ public:
     MainWindow() {
         QHBoxLayout *layout = new QHBoxLayout();
 
-        Widget *qml_widget =  new Widget();
+        QmlWidget *qml_widget =  new QmlWidget();
         qml_widget->setFixedSize(640,480);
 
         PrintPreviewWidget *preview_widget =  new PrintPreviewWidget();

@@ -44,10 +44,10 @@ Rectangle {
                 name: "Advanced"
                 value: "advanced.qml"
             }
-            ListElement {
+            /*ListElement {
                 name: "Preview"
                 value: "preview.qml"
-            }
+            }*/
         }
 
         ListView {
