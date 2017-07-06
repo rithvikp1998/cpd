@@ -2,11 +2,21 @@ QT += qml quick widgets quickwidgets printsupport
 
 CONFIG += c++11
 
-SOURCES += main.cpp preview.cpp
+unix {
+    CONFIG += link_pkgconfig
+    PKGCONFIG += gio-unix-2.0 glib-2.0 gobject-2.0 poppler-qt5
+}
+
+SOURCES += main.cpp preview.cpp \
+    PrintDialog_Backend/print_frontend.c \
+    PrintDialog_Backend/frontend_interface.c \
+    PrintDialog_Backend/frontend_helper.c \
+    PrintDialog_Backend/common_helper.c \
+    PrintDialog_Backend/backend_interface.c
 
 RESOURCES += qml.qrc
 
-LIBS += -lpoppler-qt5 -lcups
+LIBS += -lcups
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -30,4 +40,10 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += preview.h
+HEADERS += preview.h \
+    PrintDialog_Backend/print_frontend.h \
+    PrintDialog_Backend/frontend_interface.h \
+    PrintDialog_Backend/frontend_helper.h \
+    PrintDialog_Backend/common_helper.h \
+    PrintDialog_Backend/backend_interface.h \
+    PrintDialog_Backend/backend_helper.h

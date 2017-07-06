@@ -9,6 +9,10 @@
 #include <QtQuickWidgets/QQuickWidget>
 #include "preview.h"
 
+extern "C" {
+    #include "PrintDialog_Backend/print_frontend.h"
+}
+
 class QmlWidget : public QWidget
 {
 public:
