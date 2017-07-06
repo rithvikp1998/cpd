@@ -12,10 +12,22 @@
 class QmlWidget : public QWidget
 {
 public:
-    QmlWidget() {
-        qml_widget = new QQuickWidget(QUrl("qrc:/main.qml"), this);
+    QmlWidget(QWidget* parent = Q_NULLPTR):
+        QWidget(parent)
+      , qml_widget(new QQuickWidget(QUrl("qrc:/main.qml"), this))
+    {
         qml_widget->setResizeMode(QQuickWidget::SizeRootObjectToView);
+        qml_widget->setMinimumSize(480, 480);
+        setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        qml_widget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     }
+
+    void resize(const QRect& rect)
+    {
+        QWidget::resize(rect.width(), rect.height());
+        qml_widget->resize(rect.width(), rect.height());
+    }
+
 private:
     QQuickWidget *qml_widget;
 };
@@ -23,21 +35,35 @@ private:
 class MainWindow : public QMainWindow
 {
 public:
-    MainWindow() {
-        QHBoxLayout *layout = new QHBoxLayout();
+    MainWindow():
+        qml_widget(new QmlWidget(this))
+      , layout(new QHBoxLayout())
+    {
+        setCentralWidget(new QWidget(this));
+        //qml_widget->setFixedSize(640,480);
 
-        QmlWidget *qml_widget =  new QmlWidget();
-        qml_widget->setFixedSize(640,480);
+        PrintPreviewWidget *preview_widget =  new PrintPreviewWidget(centralWidget());
+        //preview_widget->setFixedSize(360,480);
 
-        PrintPreviewWidget *preview_widget =  new PrintPreviewWidget();
-        preview_widget->setFixedSize(360,480);
+        layout->addWidget(qml_widget, 2);
+        layout->addWidget(preview_widget, 1);
 
-        layout->addWidget(qml_widget);
-        layout->addWidget(preview_widget);
-
-        setCentralWidget(new QWidget());
         centralWidget()->setLayout(layout);
+        setMinimumSize(640, 480);
+        adjustSize();
     }
+
+protected:
+    void resizeEvent(QResizeEvent* event) override
+    {
+        QMainWindow::resizeEvent(event);
+        const auto itemRect = layout->itemAt(0)->geometry();
+        qml_widget->resize(itemRect);
+    }
+
+private:
+    QmlWidget* qml_widget;
+    QHBoxLayout *layout;
 };
 
 int main(int argc, char** argv)

@@ -11,8 +11,8 @@ import QtQuick.Controls.Styles 1.4
 
 Rectangle {
     visible: true
-    width: 640
-    height: 480
+    width: parent.height
+    height: parent.width
 
     /* This Rectangle is for the sidebar */
 
