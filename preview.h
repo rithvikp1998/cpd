@@ -2,18 +2,22 @@
 #define PREVIEW_H
 
 #include <QWidget>
-#include <QPrinter>
-#include <QPrintPreviewWidget>
+#include <memory>
+
+class QPrinter;
+class QPrintPreviewWidget;
 
 class PrintPreviewWidget : public QWidget
 {
     Q_OBJECT
 public:
-    PrintPreviewWidget();
+    PrintPreviewWidget(QWidget* parent = Q_NULLPTR);
+    ~PrintPreviewWidget();
+
 public slots:
     void print(QPrinter *printer);
 private:
-    QPrinter *printer;
+    std::unique_ptr<QPrinter> printer;
     QPrintPreviewWidget *preview_widget;
 };
 
