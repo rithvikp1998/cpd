@@ -49,5 +49,6 @@ int main(int argc, char** argv)
     QApplication app(argc, argv);
     MainWindow window;
     window.show();
+    print_frontend_init(0, nullptr);
     return app.exec();
 }
