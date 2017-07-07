@@ -1,23 +1,25 @@
-#include "preview.h"
 #include <QPainter>
 #include <QPrintPreviewWidget>
-#include <poppler/qt5/poppler-qt5.h>
 #include <QMessageLogger>
 #include <QFile>
 #include <QToolBar>
 
+#include <poppler/qt5/poppler-qt5.h>
+
+#include "preview.h"
+
 /* This method implements the existing QPrintPreviewWidget class from Qt */
 
 PrintPreviewWidget::PrintPreviewWidget(QWidget* parent):
-    QWidget(parent)
-  , printer(new QPrinter{})
-  , preview_widget(new QPrintPreviewWidget(printer.get(), this))
+    QWidget(parent),
+    printer(new QPrinter{}),
+    previewWidget(new QPrintPreviewWidget(printer.get(), this))
 {
     printer->setPaperSize(QPrinter::A4);
     printer->setOrientation(QPrinter::Portrait);
     printer->setFullPage(true);
 
-    connect(preview_widget, SIGNAL(paintRequested(QPrinter*)), this, SLOT(print(QPrinter*)));
+    connect(previewWidget, SIGNAL(paintRequested(QPrinter*)), this, SLOT(print(QPrinter*)));
 }
 
 PrintPreviewWidget::~PrintPreviewWidget()
@@ -57,5 +59,5 @@ void PrintPreviewWidget::print(QPrinter *printer){
 void PrintPreviewWidget::resize(const QRect& rect)
 {
     QWidget::resize(rect.width(), rect.height());
-    preview_widget->resize(rect.width(), rect.height());
+    previewWidget->resize(rect.width(), rect.height());
 }

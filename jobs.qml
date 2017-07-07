@@ -19,9 +19,6 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Dialogs 1.2
 
 Rectangle{
-    width: parent.width
-    height: parent.height
-
     Rectangle {
         width: parent.width
         height: location_heading.contentHeight // Since "Location" is the biggest word in this row,

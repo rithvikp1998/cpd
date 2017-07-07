@@ -10,10 +10,6 @@ import QtQuick.Layouts 1.0
 import QtQuick.Controls.Styles 1.4
 
 Rectangle{
-
-    width: parent.width
-    height: parent.height
-
     Rectangle{
         width: parent.width-80
         height: parent.height-80

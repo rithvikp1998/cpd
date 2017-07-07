@@ -2,6 +2,7 @@
 #define PREVIEW_H
 
 #include <QWidget>
+
 #include <memory>
 
 class QPrinter;
@@ -18,7 +19,7 @@ public slots:
     void print(QPrinter *printer);
 private:
     std::unique_ptr<QPrinter> printer;
-    QPrintPreviewWidget *preview_widget;
+    QPrintPreviewWidget *previewWidget;
 };
 
 #endif // PREVIEW_H
