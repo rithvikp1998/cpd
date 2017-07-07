@@ -22,9 +22,7 @@ PrintPreviewWidget::PrintPreviewWidget(QWidget* parent):
     connect(previewWidget, SIGNAL(paintRequested(QPrinter*)), this, SLOT(print(QPrinter*)));
 }
 
-PrintPreviewWidget::~PrintPreviewWidget()
-{
-}
+PrintPreviewWidget::~PrintPreviewWidget() = default;
 
 void PrintPreviewWidget::print(QPrinter *printer){
     QPainter painter(printer);
