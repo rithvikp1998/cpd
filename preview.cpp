@@ -19,7 +19,9 @@ PrintPreviewWidget::PrintPreviewWidget(QWidget* parent):
     connect(preview_widget, SIGNAL(paintRequested(QPrinter*)), this, SLOT(print(QPrinter*)));
 }
 
-PrintPreviewWidget::~PrintPreviewWidget() = default;
+PrintPreviewWidget::~PrintPreviewWidget()
+{
+}
 
 void PrintPreviewWidget::print(QPrinter *printer){
     QPainter painter(printer);
@@ -48,4 +50,11 @@ void PrintPreviewWidget::print(QPrinter *printer){
 
     painter.drawImage(0,0,image,0,0,0,0,0);
     painter.end();
+}
+
+
+void PrintPreviewWidget::resize(const QRect& rect)
+{
+    QWidget::resize(rect.width(), rect.height());
+    preview_widget->resize(rect.width(), rect.height());
 }

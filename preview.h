@@ -12,8 +12,8 @@ class PrintPreviewWidget : public QWidget
     Q_OBJECT
 public:
     PrintPreviewWidget(QWidget* parent = Q_NULLPTR);
+    void resize(const QRect& rect);
     ~PrintPreviewWidget();
-
 public slots:
     void print(QPrinter *printer);
 private:

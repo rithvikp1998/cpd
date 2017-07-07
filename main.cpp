@@ -1,7 +1,7 @@
 /* TODO:
  * 1. Make the preview_widget use poppler -- Done
  * 2. Integrate preview_widget into the qml_widget -- Done, for now
- * 3. Make the window responsive
+ * 3. Make the window responsive -- Done
  * 4. Make the preview_widget interactive
  */
 
@@ -21,8 +21,6 @@ public:
       , qml_widget(new QQuickWidget(QUrl("qrc:/main.qml"), this))
     {
         qml_widget->setResizeMode(QQuickWidget::SizeRootObjectToView);
-        qml_widget->setMinimumSize(480, 480);
-        setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         qml_widget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     }
 
@@ -44,16 +42,16 @@ public:
       , layout(new QHBoxLayout())
     {
         setCentralWidget(new QWidget(this));
-        //qml_widget->setFixedSize(640,480);
 
-        PrintPreviewWidget *preview_widget =  new PrintPreviewWidget(centralWidget());
-        //preview_widget->setFixedSize(360,480);
+        preview_widget =  new PrintPreviewWidget(centralWidget());
 
-        layout->addWidget(qml_widget, 2);
-        layout->addWidget(preview_widget, 1);
+        qml_widget->setMinimumSize(640, 480);
+        preview_widget->setMinimumSize(360,480);
+
+        layout->addWidget(qml_widget, 64);
+        layout->addWidget(preview_widget, 36);
 
         centralWidget()->setLayout(layout);
-        setMinimumSize(640, 480);
         adjustSize();
     }
 
@@ -61,12 +59,13 @@ protected:
     void resizeEvent(QResizeEvent* event) override
     {
         QMainWindow::resizeEvent(event);
-        const auto itemRect = layout->itemAt(0)->geometry();
-        qml_widget->resize(itemRect);
+        qml_widget->resize(layout->itemAt(0)->geometry());
+        preview_widget->resize(layout->itemAt(1)->geometry());
     }
 
 private:
     QmlWidget* qml_widget;
+    PrintPreviewWidget *preview_widget;
     QHBoxLayout *layout;
 };
 
@@ -75,6 +74,6 @@ int main(int argc, char** argv)
     QApplication app(argc, argv);
     MainWindow window;
     window.show();
-    print_frontend_init(0, nullptr);
+    print_frontend_init(0, nullptr); // To do: Dialog crashes when closed due to this
     return app.exec();
 }
