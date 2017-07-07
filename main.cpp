@@ -1,10 +1,3 @@
-/* TODO:
- * 1. Make the preview_widget use poppler -- Done
- * 2. Integrate preview_widget into the qml_widget -- Done, for now
- * 3. Make the window responsive -- Done
- * 4. Make the preview_widget interactive
- */
-
 #include <QtWidgets>
 #include <QtQuickWidgets/QQuickWidget>
 #include "preview.h"
@@ -34,24 +27,53 @@ private:
     QQuickWidget *qml_widget;
 };
 
+class PreviewToolbarWidget : public QWidget
+{
+public:
+    PreviewToolbarWidget(QWidget* parent = Q_NULLPTR):
+        QWidget(parent)
+      , preview_toolbar_widget(new QQuickWidget(QUrl("qrc:/preview_toolbar.qml"), this))
+    {
+        preview_toolbar_widget->setResizeMode(QQuickWidget::SizeRootObjectToView);
+        preview_toolbar_widget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    }
+
+    void resize(const QRect& rect)
+    {
+        QWidget::resize(rect.width(), rect.height());
+        preview_toolbar_widget->resize(rect.width(), rect.height());
+    }
+
+private:
+    QQuickWidget *preview_toolbar_widget;
+};
+
 class MainWindow : public QMainWindow
 {
 public:
     MainWindow():
         qml_widget(new QmlWidget(this))
-      , layout(new QHBoxLayout())
+      , preview_toolbar_widget(new PreviewToolbarWidget(this))
+      , main_layout(new QHBoxLayout())
+      , preview_layout(new QVBoxLayout())
     {
         setCentralWidget(new QWidget(this));
 
         preview_widget =  new PrintPreviewWidget(centralWidget());
 
         qml_widget->setMinimumSize(640, 480);
-        preview_widget->setMinimumSize(360,480);
+        preview_widget->setMinimumSize(360,440);
+        preview_toolbar_widget->setMinimumSize(360,40);
 
-        layout->addWidget(qml_widget, 64);
-        layout->addWidget(preview_widget, 36);
+        preview_layout->addWidget(preview_widget, 11);
+        preview_layout->addWidget(preview_toolbar_widget, 1);
+        preview_layout->setSpacing(0);
 
-        centralWidget()->setLayout(layout);
+        main_layout->addWidget(qml_widget, 64);
+        main_layout->addLayout(preview_layout, 36);
+        main_layout->setSpacing(0);
+
+        centralWidget()->setLayout(main_layout);
         adjustSize();
     }
 
@@ -59,14 +81,17 @@ protected:
     void resizeEvent(QResizeEvent* event) override
     {
         QMainWindow::resizeEvent(event);
-        qml_widget->resize(layout->itemAt(0)->geometry());
-        preview_widget->resize(layout->itemAt(1)->geometry());
+        qml_widget->resize(main_layout->itemAt(0)->geometry());
+        preview_widget->resize(preview_layout->itemAt(0)->geometry());
+        preview_toolbar_widget->resize(preview_layout->itemAt(1)->geometry());
     }
 
 private:
     QmlWidget* qml_widget;
     PrintPreviewWidget *preview_widget;
-    QHBoxLayout *layout;
+    PreviewToolbarWidget *preview_toolbar_widget;
+    QHBoxLayout *main_layout;
+    QVBoxLayout *preview_layout;
 };
 
 int main(int argc, char** argv)
@@ -74,6 +99,6 @@ int main(int argc, char** argv)
     QApplication app(argc, argv);
     MainWindow window;
     window.show();
-    print_frontend_init(0, nullptr); // To do: Dialog crashes when closed due to this
+    //print_frontend_init(0, nullptr); // To do: Dialog crashes when closed due to this
     return app.exec();
 }

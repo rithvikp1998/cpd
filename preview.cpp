@@ -4,6 +4,7 @@
 #include <poppler/qt5/poppler-qt5.h>
 #include <QMessageLogger>
 #include <QFile>
+#include <QToolBar>
 
 /* This method implements the existing QPrintPreviewWidget class from Qt */
 

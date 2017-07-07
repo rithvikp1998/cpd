@@ -2,12 +2,13 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>general.qml</file>
-	<file>page_setup.qml</file>
-	<file>options.qml</file>
-	<file>jobs.qml</file>
-	<file>advanced.qml</file>
-	<file>preview.qml</file>
-	<file>qtquickcontrols2.conf</file>
-	<file>test.pdf</file>
+        <file>page_setup.qml</file>
+        <file>options.qml</file>
+        <file>jobs.qml</file>
+        <file>advanced.qml</file>
+        <file>preview.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>test.pdf</file>
+        <file>preview_toolbar.qml</file>
     </qresource>
 </RCC>

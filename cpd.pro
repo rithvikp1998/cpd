@@ -47,3 +47,5 @@ HEADERS += preview.h \
     PrintDialog_Backend/common_helper.h \
     PrintDialog_Backend/backend_interface.h \
     PrintDialog_Backend/backend_helper.h
+
+DISTFILES +=
