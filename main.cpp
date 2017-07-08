@@ -57,6 +57,13 @@ public:
 
         centralWidget()->setLayout(mainLayout);
         adjustSize();
+
+        connect(previewToolbarWidget->toolbarRootObject, SIGNAL(nextPageButtonClicked()),
+                previewWidget, SLOT(showNextPage()));
+        connect(previewToolbarWidget->toolbarRootObject, SIGNAL(prevPageButtonClicked()),
+                previewWidget, SLOT(showPrevPage()));
+        connect(previewToolbarWidget->toolbarRootObject, SIGNAL(zoomSliderValueChanged()),
+                previewWidget, SLOT(setZoom()));
     }
 
 protected:

@@ -43,7 +43,9 @@ void PrintPreviewWidget::print(QPrinter *printer){
     if (document->isLocked())
         qCritical("File %s is locked!", qUtf8Printable(":/test.pdf"));
 
-    Poppler::Page *page = document->page(0);
+    pageCount = document->numPages();
+
+    Poppler::Page *page = document->page(pageNumber);
     if (page == nullptr)
         qCritical("File '%s' is empty?", qUtf8Printable(":/test.pdf"));
 
@@ -70,9 +72,7 @@ PreviewToolbarWidget::PreviewToolbarWidget(QWidget* parent):
     previewToolbarWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
     previewToolbarWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-    connect(previewToolbarWidget->rootObject(), SIGNAL(nextPageButtonClicked()), this, SLOT(showNextPage()));
-    connect(previewToolbarWidget->rootObject(), SIGNAL(prevPageButtonClicked()), this, SLOT(showPrevPage()));
-    connect(previewToolbarWidget->rootObject(), SIGNAL(zoomSliderValueChanged()), this, SLOT(setZoom()));
+    toolbarRootObject = previewToolbarWidget->rootObject();
 }
 
 void PreviewToolbarWidget::resize(const QRect& rect)
@@ -83,17 +83,19 @@ void PreviewToolbarWidget::resize(const QRect& rect)
 
 PreviewToolbarWidget::~PreviewToolbarWidget() = default;
 
-void PreviewToolbarWidget::showNextPage()
+void PrintPreviewWidget::showNextPage()
 {
-    qCritical("Showing next page");
+    pageNumber = pageNumber < (pageCount-1) ? pageNumber+1 : pageNumber;
+    previewWidget->updatePreview();
 }
 
-void PreviewToolbarWidget::showPrevPage()
+void PrintPreviewWidget::showPrevPage()
 {
-    qCritical("Showing previous page");
+    pageNumber = pageNumber > 0 ? pageNumber-1 : pageNumber;
+    previewWidget->updatePreview();
 }
 
-void PreviewToolbarWidget::setZoom()
+void PrintPreviewWidget::setZoom()
 {
     qCritical("Setting zoom");
 }

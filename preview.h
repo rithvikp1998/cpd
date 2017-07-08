@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QQuickWidget>
+#include <QQuickItem>
 
 #include <memory>
 
@@ -18,9 +19,14 @@ public:
     ~PrintPreviewWidget();
 public slots:
     void print(QPrinter *printer);
+    void showNextPage();
+    void showPrevPage();
+    void setZoom();
 private:
     std::unique_ptr<QPrinter> printer;
     QPrintPreviewWidget *previewWidget;
+    int pageNumber = 0;
+    int pageCount = 0;
 };
 
 class PreviewToolbarWidget : public QWidget
@@ -30,10 +36,7 @@ public:
     PreviewToolbarWidget(QWidget* parent = Q_NULLPTR);
     void resize(const QRect& rect);
     ~PreviewToolbarWidget();
-public slots:
-    void showNextPage();
-    void showPrevPage();
-    void setZoom();
+    QQuickItem *toolbarRootObject;
 private:
     QQuickWidget *previewToolbarWidget;
 };
