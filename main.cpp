@@ -1,5 +1,7 @@
 #include <QtWidgets>
 #include <QtQuickWidgets/QQuickWidget>
+#include <qlogging.h>
+#include <QQuickItem>
 
 #include "preview.h"
 
@@ -26,27 +28,6 @@ public:
 
 private:
     QQuickWidget *qmlWidget;
-};
-
-class PreviewToolbarWidget : public QWidget
-{
-public:
-    PreviewToolbarWidget(QWidget* parent = Q_NULLPTR):
-        QWidget(parent),
-        previewToolbarWidget(new QQuickWidget(QUrl("qrc:/preview_toolbar.qml"), this))
-    {
-        previewToolbarWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
-        previewToolbarWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    }
-
-    void resize(const QRect& rect)
-    {
-        QWidget::resize(rect.width(), rect.height());
-        previewToolbarWidget->resize(rect.width(), rect.height());
-    }
-
-private:
-    QQuickWidget *previewToolbarWidget;
 };
 
 class MainWindow : public QMainWindow

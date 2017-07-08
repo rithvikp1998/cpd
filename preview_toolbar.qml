@@ -8,6 +8,11 @@ import QtQuick.Layouts 1.0
 import QtQuick.Controls.Styles 1.4
 
 Rectangle {
+
+    signal nextPageButtonClicked()
+    signal prevPageButtonClicked()
+    signal zoomSliderValueChanged()
+
     Button { // Displays the previous page in the doument
         id: preview_previous_page_button
         x: 20
@@ -16,7 +21,7 @@ Rectangle {
         width: 40
         text: "\u25C0"
 
-        onClicked: {}
+        onClicked: prevPageButtonClicked()
     }
 
     Slider { // To set the zoom level of the preview image.
@@ -31,10 +36,7 @@ Rectangle {
         stepSize: 0.5
         property real previousScaleValue: 1
 
-        onValueChanged: {
-            //flickable.resizeContent((image.width / previousScaleValue) * value , (image.height / previousScaleValue) * value, 0)
-            //previousScaleValue = value
-        }
+        onValueChanged: zoomSliderValueChanged()
     }
 
     Button {  // Displays the next page in the doument
@@ -45,6 +47,6 @@ Rectangle {
         width: 40
         text: "\u25B6"
 
-        onClicked: {}
+        onClicked: nextPageButtonClicked()
     }
 }

@@ -3,6 +3,8 @@
 #include <QMessageLogger>
 #include <QFile>
 #include <QToolBar>
+#include <QQuickWidget>
+#include <QQuickItem>
 
 #include <poppler/qt5/poppler-qt5.h>
 
@@ -58,4 +60,40 @@ void PrintPreviewWidget::resize(const QRect& rect)
 {
     QWidget::resize(rect.width(), rect.height());
     previewWidget->resize(rect.width(), rect.height());
+}
+
+
+PreviewToolbarWidget::PreviewToolbarWidget(QWidget* parent):
+        QWidget(parent),
+        previewToolbarWidget(new QQuickWidget(QUrl("qrc:/preview_toolbar.qml"), this))
+{
+    previewToolbarWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
+    previewToolbarWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+    connect(previewToolbarWidget->rootObject(), SIGNAL(nextPageButtonClicked()), this, SLOT(showNextPage()));
+    connect(previewToolbarWidget->rootObject(), SIGNAL(prevPageButtonClicked()), this, SLOT(showPrevPage()));
+    connect(previewToolbarWidget->rootObject(), SIGNAL(zoomSliderValueChanged()), this, SLOT(setZoom()));
+}
+
+void PreviewToolbarWidget::resize(const QRect& rect)
+{
+    QWidget::resize(rect.width(), rect.height());
+    previewToolbarWidget->resize(rect.width(), rect.height());
+}
+
+PreviewToolbarWidget::~PreviewToolbarWidget() = default;
+
+void PreviewToolbarWidget::showNextPage()
+{
+    qCritical("Showing next page");
+}
+
+void PreviewToolbarWidget::showPrevPage()
+{
+    qCritical("Showing previous page");
+}
+
+void PreviewToolbarWidget::setZoom()
+{
+    qCritical("Setting zoom");
 }

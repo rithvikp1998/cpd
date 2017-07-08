@@ -2,6 +2,7 @@
 #define PREVIEW_H
 
 #include <QWidget>
+#include <QQuickWidget>
 
 #include <memory>
 
@@ -20,6 +21,21 @@ public slots:
 private:
     std::unique_ptr<QPrinter> printer;
     QPrintPreviewWidget *previewWidget;
+};
+
+class PreviewToolbarWidget : public QWidget
+{
+    Q_OBJECT
+public:
+    PreviewToolbarWidget(QWidget* parent = Q_NULLPTR);
+    void resize(const QRect& rect);
+    ~PreviewToolbarWidget();
+public slots:
+    void showNextPage();
+    void showPrevPage();
+    void setZoom();
+private:
+    QQuickWidget *previewToolbarWidget;
 };
 
 #endif // PREVIEW_H
