@@ -76,6 +76,8 @@ public:
                 previewWidget, SLOT(setZoom()));
     }
 
+    ~MainWindow();
+
 protected:
     void resizeEvent(QResizeEvent* event) override
     {
@@ -92,6 +94,8 @@ private:
     QHBoxLayout *mainLayout;
     QVBoxLayout *previewLayout;
 };
+
+MainWindow::~MainWindow() = default;
 
 int main(int argc, char** argv)
 {
