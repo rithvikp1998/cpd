@@ -12,6 +12,8 @@ import QtQuick.Controls.Styles 1.4
 Rectangle {
     visible: true
 
+    signal printButtonClicked()
+
     /* This Rectangle is for the sidebar */
 
     Rectangle {
@@ -91,6 +93,7 @@ Rectangle {
                 hoverEnabled: true
                 onEntered: { parent.color = "#D81B60" }
                 onExited:  { parent.color = "#E91E63" }
+                onClicked: printButtonClicked()
             }
         }
 

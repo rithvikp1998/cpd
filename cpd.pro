@@ -1,6 +1,6 @@
 QT += qml quick widgets quickwidgets printsupport
 
-CONFIG += c++11
+CONFIG += c++11 no_keywords
 
 unix {
     CONFIG += link_pkgconfig

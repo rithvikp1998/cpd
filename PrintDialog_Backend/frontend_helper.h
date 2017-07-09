@@ -1,5 +1,5 @@
-#ifndef _FRONTEND_HELPER_H_
-#define _FRONTEND_HELPER_H_
+#ifndef CPD_FRONTEND_HELPER_H_
+#define CPD_FRONTEND_HELPER_H_
 
 #include <stdio.h>
 #include <string.h>
@@ -153,4 +153,4 @@ struct _FrontendObj
     GHashTable *printer;
 };
 
-#endif
+#endif  // CPD_FRONTEND_HELPER_H_

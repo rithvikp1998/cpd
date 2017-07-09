@@ -7,10 +7,12 @@
 
 extern "C" {
     #include "PrintDialog_Backend/print_frontend.h"
+    #include "PrintDialog_Backend/frontend_helper.h"
 }
 
 class QmlWidget : public QWidget
 {
+    Q_OBJECT
 public:
     QmlWidget(QWidget* parent = Q_NULLPTR):
         QWidget(parent),
@@ -18,12 +20,20 @@ public:
     {
         qmlWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
         qmlWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+        connect(qmlWidget->rootObject(), SIGNAL(printButtonClicked()), this, SLOT(printDocument()));
     }
 
     void resize(const QRect& rect)
     {
         QWidget::resize(rect.width(), rect.height());
         qmlWidget->resize(rect.width(), rect.height());
+    }
+
+public Q_SLOTS:
+    void printDocument(){
+        qCritical("Print button clicked");
+        //print_job(nullptr, nullptr); //There is no defintion of print_job in the backend yet
     }
 
 private:
@@ -91,3 +101,5 @@ int main(int argc, char** argv)
     print_frontend_init(0, nullptr); // To do: Dialog crashes when closed due to this
     return app.exec();
 }
+
+#include "main.moc"

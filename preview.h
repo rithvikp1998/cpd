@@ -17,7 +17,7 @@ public:
     PrintPreviewWidget(QWidget* parent = Q_NULLPTR);
     void resize(const QRect& rect);
     ~PrintPreviewWidget();
-public slots:
+public Q_SLOTS:
     void print(QPrinter *printer);
     void showNextPage();
     void showPrevPage();
