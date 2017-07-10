@@ -53,6 +53,8 @@ void PrintPreviewWidget::print(QPrinter *printer){
     if (image.isNull())
         qCritical("Error!");
 
+    paperHeight = page->pageSize().height();
+
     painter.drawImage(0,0,image,0,0,0,0,0);
     painter.end();
 }
@@ -95,7 +97,10 @@ void PrintPreviewWidget::showPrevPage()
     previewWidget->updatePreview();
 }
 
-void PrintPreviewWidget::setZoom()
+void PrintPreviewWidget::setZoom(qreal zoomFactor) // To do: Simplify?
 {
-    qCritical("Setting zoom");
+    if(paperHeight!=0.0)
+        previewWidget->setZoomFactor(zoomFactor * 0.6 * (widgetHeight/paperHeight));
+    previewWidget->updatePreview();
+    currentZoomFactor = zoomFactor;
 }

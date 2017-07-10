@@ -17,16 +17,19 @@ public:
     PrintPreviewWidget(QWidget* parent = Q_NULLPTR);
     void resize(const QRect& rect);
     ~PrintPreviewWidget();
+    qreal widgetHeight = 0;
+    qreal currentZoomFactor = 1;
 public Q_SLOTS:
     void print(QPrinter *printer);
     void showNextPage();
     void showPrevPage();
-    void setZoom();
+    void setZoom(qreal zoomFactor);
 private:
     std::unique_ptr<QPrinter> printer;
     QPrintPreviewWidget *previewWidget;
     int pageNumber = 0;
     int pageCount = 0;
+    qreal paperHeight = 0;
 };
 
 class PreviewToolbarWidget : public QWidget

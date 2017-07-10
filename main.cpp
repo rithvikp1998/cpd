@@ -67,13 +67,14 @@ public:
 
         centralWidget()->setLayout(mainLayout);
         adjustSize();
+        previewWidget->widgetHeight = previewLayout->itemAt(0)->geometry().height();
 
         connect(previewToolbarWidget->toolbarRootObject, SIGNAL(nextPageButtonClicked()),
                 previewWidget, SLOT(showNextPage()));
         connect(previewToolbarWidget->toolbarRootObject, SIGNAL(prevPageButtonClicked()),
                 previewWidget, SLOT(showPrevPage()));
-        connect(previewToolbarWidget->toolbarRootObject, SIGNAL(zoomSliderValueChanged()),
-                previewWidget, SLOT(setZoom()));
+        connect(previewToolbarWidget->toolbarRootObject, SIGNAL(zoomSliderValueChanged(qreal)),
+                previewWidget, SLOT(setZoom(qreal)));
     }
 
     ~MainWindow();
@@ -85,6 +86,9 @@ protected:
         qmlWidget->resize(mainLayout->itemAt(0)->geometry());
         previewWidget->resize(previewLayout->itemAt(0)->geometry());
         previewToolbarWidget->resize(previewLayout->itemAt(1)->geometry());
+
+        previewWidget->widgetHeight = previewLayout->itemAt(0)->geometry().height();
+        previewWidget->setZoom(previewWidget->currentZoomFactor);
     }
 
 private:

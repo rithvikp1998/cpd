@@ -11,7 +11,7 @@ Rectangle {
 
     signal nextPageButtonClicked()
     signal prevPageButtonClicked()
-    signal zoomSliderValueChanged()
+    signal zoomSliderValueChanged(real value)
 
     Button { // Displays the previous page in the doument
         id: preview_previous_page_button
@@ -36,7 +36,7 @@ Rectangle {
         stepSize: 0.5
         property real previousScaleValue: 1
 
-        onValueChanged: zoomSliderValueChanged()
+        onValueChanged: zoomSliderValueChanged(preview_zoom_slider.value)
     }
 
     Button {  // Displays the next page in the doument
