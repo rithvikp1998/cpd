@@ -6,8 +6,8 @@
 #include "preview.h"
 
 extern "C" {
-    #include "PrintDialog_Backend/print_frontend.h"
-    #include "PrintDialog_Backend/frontend_helper.h"
+    #include "PrintDialog_Backend/src/print_frontend.h"
+    #include "PrintDialog_Backend/src/frontend_helper.h"
 }
 
 class QmlWidget : public QWidget

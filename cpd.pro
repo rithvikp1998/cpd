@@ -8,11 +8,11 @@ unix {
 }
 
 SOURCES += main.cpp preview.cpp \
-    PrintDialog_Backend/print_frontend.c \
-    PrintDialog_Backend/frontend_interface.c \
-    PrintDialog_Backend/frontend_helper.c \
-    PrintDialog_Backend/common_helper.c \
-    PrintDialog_Backend/backend_interface.c
+    PrintDialog_Backend/src/print_frontend.c \
+    PrintDialog_Backend/src/frontend_interface.c \
+    PrintDialog_Backend/src/frontend_helper.c \
+    PrintDialog_Backend/src/common_helper.c \
+    PrintDialog_Backend/src/backend_interface.c
 
 RESOURCES += qml.qrc
 
@@ -41,11 +41,11 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += preview.h \
-    PrintDialog_Backend/print_frontend.h \
-    PrintDialog_Backend/frontend_interface.h \
-    PrintDialog_Backend/frontend_helper.h \
-    PrintDialog_Backend/common_helper.h \
-    PrintDialog_Backend/backend_interface.h \
-    PrintDialog_Backend/backend_helper.h
+    PrintDialog_Backend/src/print_frontend.h \
+    PrintDialog_Backend/src/frontend_interface.h \
+    PrintDialog_Backend/src/frontend_helper.h \
+    PrintDialog_Backend/src/common_helper.h \
+    PrintDialog_Backend/src/backend_interface.h \
+    PrintDialog_Backend/src/backend_helper.h
 
 DISTFILES +=
