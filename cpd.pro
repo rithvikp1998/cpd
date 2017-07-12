@@ -8,7 +8,7 @@ unix {
 }
 
 SOURCES += main.cpp preview.cpp \
-    PrintDialog_Backend/src/print_frontend.c \
+    PrintDialog_Backend/SampleFrontend/print_frontend.c \
     PrintDialog_Backend/src/frontend_interface.c \
     PrintDialog_Backend/src/frontend_helper.c \
     PrintDialog_Backend/src/common_helper.c \
@@ -46,6 +46,6 @@ HEADERS += preview.h \
     PrintDialog_Backend/src/frontend_helper.h \
     PrintDialog_Backend/src/common_helper.h \
     PrintDialog_Backend/src/backend_interface.h \
-    PrintDialog_Backend/src/backend_helper.h
+    PrintDialog_Backend/CUPS_src/backend_helper.h
 
 DISTFILES +=
