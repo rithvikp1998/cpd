@@ -30,6 +30,7 @@ private:
     int pageNumber = 0;
     int pageCount = 0;
     qreal paperHeight = 0;
+    bool previewPainted = 0;
 };
 
 class PreviewToolbarWidget : public QWidget

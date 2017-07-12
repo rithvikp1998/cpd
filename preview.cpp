@@ -54,6 +54,7 @@ void PrintPreviewWidget::print(QPrinter *printer){
         qCritical("Error!");
 
     paperHeight = page->pageSize().height();
+    previewPainted = 1;
 
     painter.drawImage(0,0,image,0,0,0,0,0);
     painter.end();
@@ -99,7 +100,7 @@ void PrintPreviewWidget::showPrevPage()
 
 void PrintPreviewWidget::setZoom(qreal zoomFactor) // To do: Simplify?
 {
-    if(paperHeight!=0.0)
+    if(previewPainted)
         previewWidget->setZoomFactor(zoomFactor * 0.6 * (widgetHeight/paperHeight));
     previewWidget->updatePreview();
     currentZoomFactor = zoomFactor;
