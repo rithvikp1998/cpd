@@ -2,6 +2,7 @@
 #include <QtQuickWidgets/QQuickWidget>
 #include <qlogging.h>
 #include <QQuickItem>
+#include <QQmlContext>
 
 #include "preview.h"
 
@@ -22,6 +23,8 @@ public:
         qmlWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
         connect(qmlWidget->rootObject(), SIGNAL(printButtonClicked()), this, SLOT(printDocument()));
+
+        qmlWidget->rootContext()->setContextProperty("jobsList", jobsList);
     }
 
     void resize(const QRect& rect)
@@ -30,9 +33,13 @@ public:
         qmlWidget->resize(rect.width(), rect.height());
     }
 
+    QStringList jobsList;
+
 public Q_SLOTS:
     void printDocument(){
         qCritical("Print button clicked");
+        jobsList.append("PrinterName%PrinterLocation%PrinterStatus");
+        qmlWidget->rootContext()->setContextProperty("jobsList", jobsList); //To do: better way?
         //print_job(nullptr, nullptr); //There is no defintion of print_job in the backend yet
     }
 

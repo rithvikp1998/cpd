@@ -78,13 +78,14 @@ Rectangle{
         id: jobs_view
         width: parent.width
         height: parent.height - 200
-        model: jobs_model
+        model: jobsList
         y: location_heading.contentHeight + 20
 
         delegate: Rectangle {
             width: parent.width
             height: Math.max(printer_text.contentHeight, location_text.contentHeight, status_text.contentHeight) + 10
             color: (model.index % 2 == 0) ? "#EEEEEE" : "white"
+            property variant stringList: jobsList[index].split('%')
 
             Menu {
                 id: menu
@@ -114,7 +115,7 @@ Rectangle{
                 x: 20
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width/3 - 20
-                text: printer
+                text: stringList[0]
                 wrapMode: Text.Wrap
             }
 
@@ -123,7 +124,7 @@ Rectangle{
                 x: parent.width/3 + 20
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width/3 - 20
-                text: location
+                text: stringList[1]
                 wrapMode: Text.Wrap
             }
 
@@ -132,7 +133,7 @@ Rectangle{
                 x: 2*parent.width/3 + 20
                 anchors.verticalCenter: parent.verticalCenter
                 width: parent.width/3 - 20
-                text: status
+                text: stringList[2]
                 wrapMode: Text.Wrap
             }
         }
