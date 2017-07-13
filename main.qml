@@ -12,7 +12,7 @@ import QtQuick.Controls.Styles 1.4
 Rectangle {
     visible: true
 
-    signal printButtonClicked()
+    signal printButtonClicked(string printerName)
 
     /* This Rectangle is for the sidebar */
 
@@ -93,7 +93,7 @@ Rectangle {
                 hoverEnabled: true
                 onEntered: { parent.color = "#D81B60" }
                 onExited:  { parent.color = "#E91E63" }
-                onClicked: printButtonClicked()
+                onClicked: printButtonClicked("Xerox")
             }
         }
 

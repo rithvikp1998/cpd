@@ -22,7 +22,7 @@ public:
         qmlWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
         qmlWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
-        connect(qmlWidget->rootObject(), SIGNAL(printButtonClicked()), this, SLOT(printDocument()));
+        connect(qmlWidget->rootObject(), SIGNAL(printButtonClicked(QString)), this, SLOT(printDocument(QString)));
 
         qmlWidget->rootContext()->setContextProperty("jobsList", jobsList);
     }
@@ -36,10 +36,22 @@ public:
     QStringList jobsList;
 
 public Q_SLOTS:
-    void printDocument(){
-        qCritical("Print button clicked");
-        jobsList.append("PrinterName%PrinterLocation%PrinterStatus");
-        qmlWidget->rootContext()->setContextProperty("jobsList", jobsList); //To do: better way?
+    void printDocument(QString printerName){
+        const char *printer_name = printerName.toLatin1().data();
+        PrinterObj *p = static_cast<PrinterObj*>(g_hash_table_lookup(f->printer, printer_name));
+        if(!p){
+            qCritical("Printer %s not found", printer_name);
+            return;
+        }
+
+        QString printerLocation = p->location;
+        QString jobStatus = "Running";
+        QString jobsListEntry = printerName + "%" + printerLocation + "%" + jobStatus;
+        jobsList.append(jobsListEntry);
+
+        qmlWidget->rootContext()->setContextProperty("jobsList", jobsList);
+        //To do: better way to update context property?
+
         //print_job(nullptr, nullptr); //There is no defintion of print_job in the backend yet
     }
 
