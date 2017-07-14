@@ -13,6 +13,7 @@ Rectangle {
     visible: true
 
     signal printButtonClicked(string printerName)
+    signal cancelButtonClicked()
 
     /* This Rectangle is for the sidebar */
 
@@ -115,7 +116,7 @@ Rectangle {
                 hoverEnabled: true
                 onEntered: { parent.color = "#B0BEC5" }
                 onExited:  { parent.color = "#CFD8DC" }
-                onClicked: { Qt.quit() }
+                onClicked: { cancelButtonClicked() }
             }
         }
     }

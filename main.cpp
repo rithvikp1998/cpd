@@ -23,6 +23,7 @@ public:
         qmlWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
         connect(qmlWidget->rootObject(), SIGNAL(printButtonClicked(QString)), this, SLOT(printDocument(QString)));
+        connect(qmlWidget->rootObject(), SIGNAL(cancelButtonClicked()), this, SLOT(qmlQuit()));
 
         qmlWidget->rootContext()->setContextProperty("jobsList", jobsList);
     }
@@ -53,6 +54,11 @@ public Q_SLOTS:
         //To do: better way to update context property?
 
         //print_job(nullptr, nullptr); //There is no defintion of print_job in the backend yet
+    }
+
+    void qmlQuit(){
+        disconnect_from_dbus(f);
+        exit(0);
     }
 
 private:
@@ -98,6 +104,9 @@ public:
 
     ~MainWindow();
 
+public Q_SLOT:
+    void closeEvent(QCloseEvent *event) override;
+
 protected:
     void resizeEvent(QResizeEvent* event) override
     {
@@ -120,12 +129,18 @@ private:
 
 MainWindow::~MainWindow() = default;
 
+void MainWindow::closeEvent(QCloseEvent *event){
+    disconnect_from_dbus(f);
+    event->accept();
+    exit(0);
+}
+
 int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
     MainWindow window;
     window.show();
-    print_frontend_init(0, nullptr); // To do: Dialog crashes when closed due to this
+    print_frontend_init(0, nullptr);
     return app.exec();
 }
 
