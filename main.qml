@@ -1,9 +1,3 @@
-/* TODO
-
-  1. Move buttons from sidebar to main view for a cleaner look
-
-*/
-
 import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0

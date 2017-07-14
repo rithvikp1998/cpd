@@ -4,7 +4,7 @@
      straight line between columns for more comprehensive look
 
   2. Move from listmodel to a context property
-     obtained from backend
+     obtained from backend -- done
 
   3. Add color to indicate right-clicked job
 

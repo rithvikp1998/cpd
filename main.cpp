@@ -38,7 +38,8 @@ public:
 
 public Q_SLOTS:
     void printDocument(QString printerName){
-        const char *printer_name = printerName.toLatin1().data();
+        QByteArray printer_name_ba = printerName.toLocal8Bit();
+        char *printer_name = printer_name_ba.data();
         PrinterObj *p = static_cast<PrinterObj*>(g_hash_table_lookup(f->printer, printer_name));
         if(!p){
             qCritical("Printer %s not found", printer_name);
@@ -53,7 +54,10 @@ public Q_SLOTS:
         qmlWidget->rootContext()->setContextProperty("jobsList", jobsList);
         //To do: better way to update context property?
 
-        //print_job(nullptr, nullptr); //There is no defintion of print_job in the backend yet
+        QString filePath = ":/test.pdf";
+        QByteArray file_path_ba = filePath.toLocal8Bit();
+        char *file_path = file_path_ba.data();
+        print_file(f, printer_name, file_path);
     }
 
     void qmlQuit(){
