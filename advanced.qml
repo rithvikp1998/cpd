@@ -64,7 +64,7 @@ Rectangle {
                 Layout.preferredWidth: parent.width - 180
                 Layout.preferredHeight: 35
                 Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
-                model: ["Printer Setting", "150", "300", "600"]
+                model: supportedResolutions
             }
 
             Label {

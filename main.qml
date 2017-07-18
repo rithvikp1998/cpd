@@ -8,6 +8,17 @@ Rectangle {
 
     signal printButtonClicked(string printerName)
     signal cancelButtonClicked()
+    signal setJobsList(bool activeOnly)
+    signal setAdvancedOptions(string printerName)
+
+    function emitSignal(pageRequested){
+        pageRequested = pageRequested.toString()
+        if(pageRequested === "Jobs")
+            setJobsList(0);
+        if(pageRequested === "Advanced")
+            setAdvancedOptions("Xerox");
+        return;
+    }
 
     /* This Rectangle is for the sidebar */
 
@@ -63,7 +74,10 @@ Rectangle {
                 MouseArea{
                     anchors.fill: parent
                     hoverEnabled: true
-                    onClicked: { page_loader.source = value }
+                    onClicked: {
+                        emitSignal(name)
+                        page_loader.source = value
+                    }
                     onEntered: { parent.color = "#BDBDBD" }
                     onExited:  { parent.color = "#EEEEEE" }
                 }

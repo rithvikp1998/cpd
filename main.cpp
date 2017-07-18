@@ -24,6 +24,8 @@ public:
 
         connect(qmlWidget->rootObject(), SIGNAL(printButtonClicked(QString)), this, SLOT(printDocument(QString)));
         connect(qmlWidget->rootObject(), SIGNAL(cancelButtonClicked()), this, SLOT(qmlQuit()));
+        connect(qmlWidget->rootObject(), SIGNAL(setJobsList(bool)), this, SLOT(setJobsList(bool)));
+        connect(qmlWidget->rootObject(), SIGNAL(setAdvancedOptions(QString)), this, SLOT(setAdvancedOptions(QString)));
 
         qmlWidget->rootContext()->setContextProperty("jobsList", jobsList);
     }
@@ -35,6 +37,7 @@ public:
     }
 
     QStringList jobsList;
+    QStringList supportedResolutions;
 
 public Q_SLOTS:
     void printDocument(QString printerName){
@@ -63,6 +66,34 @@ public Q_SLOTS:
     void qmlQuit(){
         disconnect_from_dbus(f);
         exit(0);
+    }
+
+    void setJobsList(bool activeOnly){
+        Job *j;
+        int x = get_all_jobs(f, &j, activeOnly); //There is some problem with this function on the backend side
+        for(int i=0; i<x; i++){
+            QString printerName = j[i].printer;
+            QString location = j[i].user;
+            QString status = j[i].state;
+            jobsList.append(printerName + "%" + location + "%" + status);
+        }
+
+        qmlWidget->rootContext()->setContextProperty("jobsList", jobsList);
+    }
+
+    void setAdvancedOptions(QString printerName){
+        QByteArray printer_name_ba = printerName.toLocal8Bit();
+        char *printer_name = printer_name_ba.data();
+        PrinterObj *p = static_cast<PrinterObj*>(g_hash_table_lookup(f->printer, printer_name));
+        if(!p){
+            qCritical("Printer %s not found", printer_name);
+            return;
+        }
+        get_supported_resolution(p);
+        for(int i=0; i<p->supported.num_res; i++)
+            supportedResolutions.append(p->supported.res[i]);
+
+        qmlWidget->rootContext()->setContextProperty("supportedResolutions", supportedResolutions);
     }
 
 private:
