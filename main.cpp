@@ -69,8 +69,9 @@ public Q_SLOTS:
     }
 
     void setJobsList(bool activeOnly){
+        jobsList.clear();
         Job *j;
-        int x = get_all_jobs(f, &j, activeOnly); //There is some problem with this function on the backend side
+        int x = get_all_jobs(f, &j, activeOnly);
         for(int i=0; i<x; i++){
             QString printerName = j[i].printer;
             QString location = j[i].user;
