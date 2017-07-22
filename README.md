@@ -1,16 +1,37 @@
-# cpd
-All the code related to Common Print Dialog project of GSoC '17
+# Common Print Dialog
+This repository was created as a part of my participation in the Google Summer of Code 2017 for the OpenPrinting division of The Linux Foundation.
 
-## Intro
-I am participating in the Google Summer of Code 2017 working for the OpenPrinting division of The Linux Foundation. The goal of the project is to build a Print Dialog in Qt in order to make the process of printing simple and uniform across multiple platforms and devices. The project idea can be found here: https://wiki.linuxfoundation.org/gsoc/google-summer-code-2017-openprinting-projects I am one of the two students working on the dialog itself while there are other students working on different backend APIs(CUPS, IPP, Google Cloud print etc.). 
+## Goal
+The goal of the project is to build a Print Dialog in Qt in order to make the process of printing simple and uniform across multiple platforms and devices. The project idea can be found here: https://wiki.linuxfoundation.org/gsoc/google-summer-code-2017-openprinting-projects
 
-Please note that the documentation (including License information) for this section of the project will be added during the last phase of GSoC i.e. around the first week of August, 2017 and this is NOT the official repository of the project. 
+## Project Structure
+The project consists of two major parts:
+1. Frontend : This team builds an UI using Qt and integrates the backend APIs with the frontend. The dialog started as a separate application, however, it is planned to replace the existing [QPrintDialog](http://doc.qt.io/qt-5/qprintdialog.html) with the Common Print Dialog being built.
 
-## Build From Source
+    Students :
+    * Anshul Gupta - [Git repo](https://github.com/anshulgupta0803/common-print-dialog)
+    * Me
+    
+    Mentor :
+    * Dongxu Li - dongxuli2011@gmail.com
 
-Please note that for the build to work, you need to have Qt 5.8 installed. You can download and install it from Qt's website here: https://www.qt.io/download-open-source/
 
-If you have Qt Creator installed, you can open the project from Qt Creator and run it. If you want to build the code manually, follow these instructions:
+2. Backend APIs (CUPS, IPP, Google Cloud Print) : This team builds APIs for the dialog using [CUPS](https://www.cups.org/doc/api-cups.html) and [Google Cloud Print](https://www.google.com/cloudprint/#printers). Their APIs can be found [here](https://github.com/NilanjanaLodh/PrintDialog_Backend) and [here](https://github.com/dracarys09/gcp-backend).
+
+## Dependencies
+* poppler-qt5
+    Ubuntu/Debian
+    ``` sudo apt-get install libpoppler-qt5-dev ```
+* CUPS
+    Ubuntu/Debian
+    ``` sudo apt-get install cups ```
+* Qt 5.8
+    https://www.qt.io/download-open-source/
+
+## Build
+
+1. Download and install the APIs mentioned above
+2. If you have Qt Creator installed, you can open the project from Qt Creator and run it. If you want to build the code manually, follow these instructions:
 
 ```
 git clone https://github.com/rithvikp1998/cpd.git
@@ -18,6 +39,5 @@ cd cpd
 mkdir build; cd build
 qmake ../cpd.pro
 make
-cp ../test.pdf /tmp/
 ./cpd
 ```
