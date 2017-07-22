@@ -8,7 +8,7 @@
 
 #include <poppler/qt5/poppler-qt5.h>
 
-#include "preview.h"
+#include "../headers/preview.h"
 
 /* This method implements the existing QPrintPreviewWidget class from Qt */
 
@@ -70,7 +70,7 @@ void PrintPreviewWidget::resize(const QRect& rect)
 
 PreviewToolbarWidget::PreviewToolbarWidget(QWidget* parent):
         QWidget(parent),
-        previewToolbarWidget(new QQuickWidget(QUrl("qrc:/preview_toolbar.qml"), this))
+        previewToolbarWidget(new QQuickWidget(QUrl("qrc:/pages/preview_toolbar.qml"), this))
 {
     previewToolbarWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
     previewToolbarWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);

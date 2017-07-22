@@ -7,12 +7,13 @@ unix {
     PKGCONFIG += gio-unix-2.0 glib-2.0 gobject-2.0 poppler-qt5
 }
 
-SOURCES += main.cpp preview.cpp \
-    PrintDialog_Backend/SampleFrontend/print_frontend.c \
-    PrintDialog_Backend/src/frontend_interface.c \
-    PrintDialog_Backend/src/frontend_helper.c \
-    PrintDialog_Backend/src/common_helper.c \
-    PrintDialog_Backend/src/backend_interface.c
+SOURCES += sources/main.cpp \
+    sources/preview.cpp \
+    backends/cups/SampleFrontend/print_frontend.c \
+    backends/cups/src/frontend_interface.c \
+    backends/cups/src/frontend_helper.c \
+    backends/cups/src/common_helper.c \
+    backends/cups/src/backend_interface.c
 
 RESOURCES += qml.qrc
 
@@ -40,12 +41,12 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += preview.h \
-    PrintDialog_Backend/src/print_frontend.h \
-    PrintDialog_Backend/src/frontend_interface.h \
-    PrintDialog_Backend/src/frontend_helper.h \
-    PrintDialog_Backend/src/common_helper.h \
-    PrintDialog_Backend/src/backend_interface.h \
-    PrintDialog_Backend/CUPS_src/backend_helper.h
+HEADERS += headers/preview.h \
+    backends/cups/src/print_frontend.h \
+    backends/cups/src/frontend_interface.h \
+    backends/cups/src/frontend_helper.h \
+    backends/cups/src/common_helper.h \
+    backends/cups/src/backend_interface.h \
+    backends/cups/CUPS_src/backend_helper.h
 
 DISTFILES +=

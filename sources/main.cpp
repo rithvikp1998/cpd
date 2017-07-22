@@ -4,11 +4,11 @@
 #include <QQuickItem>
 #include <QQmlContext>
 
-#include "preview.h"
+#include "../headers/preview.h"
 
 extern "C" {
-    #include "PrintDialog_Backend/src/print_frontend.h"
-    #include "PrintDialog_Backend/src/frontend_helper.h"
+    #include "../backends/cups/src/print_frontend.h"
+    #include "../backends/cups/src/frontend_helper.h"
 }
 
 class QmlWidget : public QWidget
@@ -17,7 +17,7 @@ class QmlWidget : public QWidget
 public:
     QmlWidget(QWidget* parent = Q_NULLPTR):
         QWidget(parent),
-        qmlWidget(new QQuickWidget(QUrl("qrc:/main.qml"), this))
+        qmlWidget(new QQuickWidget(QUrl("qrc:/pages/main.qml"), this))
     {
         qmlWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
         qmlWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
