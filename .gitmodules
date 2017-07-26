@@ -1,3 +1,3 @@
-[submodule "backends/PrintDialog_Backend"]
-	path = backends/PrintDialog_Backend
-	url = https://github.com/rithvikp1998/PrintDialog_Backend
+[submodule "backends/cups"]
+	path = backends/cups
+	url = https://www.github.com/rithvikp1998/PrintDialog_Backend
