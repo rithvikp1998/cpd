@@ -1,3 +1,6 @@
 [submodule "backends/cups"]
 	path = backends/cups
 	url = https://github.com/rithvikp1998/PrintDialog_Backend
+[submodule "backends/gcp"]
+	path = backends/gcp
+	url = https://github.com/rithvikp1998/gcp-backend
