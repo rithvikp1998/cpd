@@ -20,15 +20,19 @@ The project consists of two major parts:
 
 ## Dependencies
 * poppler-qt5
+    
     Ubuntu/Debian
     ``` sudo apt-get install libpoppler-qt5-dev ```
 * CUPS
+    
     Ubuntu/Debian
     ``` sudo apt-get install cups libcups2-dev```
 * libglib
+    
     Ubuntu/Debian
     ``` sudo apt-get install libglib2.0-dev ```
 * Qt 5.8
+    
     https://www.qt.io/download-open-source/
 
 ## Build
@@ -37,10 +41,24 @@ The project consists of two major parts:
 2. If you have Qt Creator installed, you can open the project from Qt Creator and run it. If you want to build the code manually, follow these instructions:
 
 ```
+# Get the code
 git clone https://github.com/rithvikp1998/cpd.git
 cd cpd
+git submodule init
+git submodule update
+
+# Build project
 mkdir build; cd build
 qmake ../cpd.pro
 make
+
+# Install CUPS Backend
+cd ../backends/cups/
+make gen
+make
+sudo ./install.sh
+
+# Run the dialog
 ./cpd
+
 ```
