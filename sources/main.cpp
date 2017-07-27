@@ -49,18 +49,22 @@ public Q_SLOTS:
             return;
         }
 
-        QString printerLocation = p->location;
-        QString jobStatus = "Running";
-        QString jobsListEntry = printerName + "%" + printerLocation + "%" + jobStatus;
-        jobsList.append(jobsListEntry);
-
-        qmlWidget->rootContext()->setContextProperty("jobsList", jobsList);
-        //To do: better way to update context property?
-
         QString filePath = ":/test.pdf";
         QByteArray file_path_ba = filePath.toLocal8Bit();
         char *file_path = file_path_ba.data();
-        print_file(f, printer_name, file_path);
+
+        QString resolutionSetting = "resolution";
+        QByteArray resolution_setting_ba = resolutionSetting.toLocal8Bit();
+        char *resolution_setting = resolution_setting_ba.data();
+
+        QString resolutionValue = "150dpi";
+        QByteArray resolution_value_ba = resolutionValue.toLocal8Bit();
+        char *resolution_value = resolution_value_ba.data();
+
+        add_setting(p->settings, resolution_setting, resolution_value);
+        GVariant *serializedSettings = serialize_Settings(p->settings);
+
+        print_file(f, file_path, printer_name, "CUPS");
     }
 
     void qmlQuit(){
@@ -90,9 +94,14 @@ public Q_SLOTS:
             qCritical("Printer %s not found", printer_name);
             return;
         }
-        get_supported_resolution(p);
+        /*get_supported_resolution(p);
         for(int i=0; i<p->supported.num_res; i++)
-            supportedResolutions.append(p->supported.res[i]);
+            supportedResolutions.append(p->supported.res[i]);*/
+
+        Option *get_Option(PrinterObj *p, char *name);
+        Option *resolutionOption = get_Option(p, "resolution");
+        for(int i=0; i<resolutionOption->num_supported; i++)
+            supportedResolutions.append(resolutionOption->supported_values[i]);
 
         qmlWidget->rootContext()->setContextProperty("supportedResolutions", supportedResolutions);
     }
