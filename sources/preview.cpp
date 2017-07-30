@@ -10,6 +10,8 @@
 
 #include "../headers/preview.h"
 
+#define PREVIEW_SHRINK_FACTOR 0.6
+
 /* This method implements the existing QPrintPreviewWidget class from Qt */
 
 QCpdPreviewWidget::QCpdPreviewWidget(QWidget* parent):
@@ -82,7 +84,7 @@ void QCpdPreviewWidget::showPrevPage()
 void QCpdPreviewWidget::setZoom(qreal zoomFactor)
 {
     if(previewPainted)
-        previewWidget->setZoomFactor(zoomFactor * 0.6 * (widgetHeight/paperHeight));
+        previewWidget->setZoomFactor(zoomFactor * PREVIEW_SHRINK_FACTOR * (widgetHeight/paperHeight));
     previewWidget->updatePreview();
     currentZoomFactor = zoomFactor;
 }

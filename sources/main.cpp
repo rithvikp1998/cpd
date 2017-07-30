@@ -26,7 +26,7 @@ public:
         connect(qmlWidget->rootObject(), SIGNAL(printButtonClicked(QString)),
                 this, SLOT(printDocument(QString)));
         connect(qmlWidget->rootObject(), SIGNAL(cancelButtonClicked()),
-                this, SLOT(qmlQuit()));
+                this, SLOT(cpdQuit()));
         connect(qmlWidget->rootObject(), SIGNAL(setJobsList(bool)),
                 this, SLOT(setJobsList(bool)));
         connect(qmlWidget->rootObject(), SIGNAL(setAdvancedOptions(QString)),
@@ -70,10 +70,10 @@ public Q_SLOTS:
         print_file(f, file_path, printer_name, "CUPS");
     }
 
-    void qmlQuit()
+    void cpdQuit()
     {
         disconnect_from_dbus(f);
-        exit(0);
+        close();
     }
 
     void setJobsList(bool activeOnly)
