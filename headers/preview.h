@@ -10,20 +10,23 @@
 class QPrinter;
 class QPrintPreviewWidget;
 
-class PrintPreviewWidget : public QWidget
+class QCpdPreviewWidget : public QWidget
 {
     Q_OBJECT
 public:
-    PrintPreviewWidget(QWidget* parent = Q_NULLPTR);
-    void resize(const QRect& rect);
-    ~PrintPreviewWidget();
     qreal widgetHeight = 0;
     qreal currentZoomFactor = 1;
+
+    QCpdPreviewWidget(QWidget* parent = Q_NULLPTR);
+    ~QCpdPreviewWidget();
+    void resize(const QRect& rect);
+
 public Q_SLOTS:
     void print(QPrinter *printer);
     void showNextPage();
     void showPrevPage();
     void setZoom(qreal zoomFactor);
+
 private:
     std::unique_ptr<QPrinter> printer;
     QPrintPreviewWidget *previewWidget;
@@ -33,14 +36,16 @@ private:
     bool previewPainted = 0;
 };
 
-class PreviewToolbarWidget : public QWidget
+class QPreviewToolbarWidget : public QWidget
 {
     Q_OBJECT
 public:
-    PreviewToolbarWidget(QWidget* parent = Q_NULLPTR);
-    void resize(const QRect& rect);
-    ~PreviewToolbarWidget();
     QQuickItem *toolbarRootObject;
+
+    QPreviewToolbarWidget(QWidget* parent = Q_NULLPTR);
+    ~QPreviewToolbarWidget();
+    void resize(const QRect& rect);
+
 private:
     QQuickWidget *previewToolbarWidget;
 };

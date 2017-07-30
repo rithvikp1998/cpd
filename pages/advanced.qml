@@ -1,13 +1,7 @@
-/* TODO:
-
-  1. Move from static models to one that is obtained from backend
-
-*/
-
 import QtQuick 2.7
 import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.0
 import QtQuick.Controls.Styles 1.4
+import QtQuick.Layouts 1.0
 
 Rectangle {
     anchors.fill: parent
@@ -26,7 +20,7 @@ Rectangle {
         height: parent.height
         width: parent.width - scroll_bar.width //Subtracting scroll_bar.width retains the scrollbar's drag function
         onWheel: {
-            scroll_bar.position -= (wheel.angleDelta.y/500)
+            scroll_bar.position -= (wheel.angleDelta.y / 500)
             if (scroll_bar.position < 0)
                 scroll_bar.position = 0
             if (scroll_bar.position > 1)
@@ -34,7 +28,7 @@ Rectangle {
         }
     }
 
-    Rectangle{
+    Rectangle {
         x: 20
         y: 10
         width: parent.width - 40

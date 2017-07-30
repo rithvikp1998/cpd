@@ -11,23 +11,26 @@ extern "C" {
     #include "../backends/cups/src/frontend_helper.h"
 }
 
-class QmlWidget : public QWidget
+class QQmlWidget : public QWidget
 {
     Q_OBJECT
 public:
-    QmlWidget(QWidget* parent = Q_NULLPTR):
+    QQmlWidget(QWidget* parent = Q_NULLPTR):
         QWidget(parent),
         qmlWidget(new QQuickWidget(QUrl("qrc:/pages/main.qml"), this))
     {
         qmlWidget->setResizeMode(QQuickWidget::SizeRootObjectToView);
         qmlWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-
-        connect(qmlWidget->rootObject(), SIGNAL(printButtonClicked(QString)), this, SLOT(printDocument(QString)));
-        connect(qmlWidget->rootObject(), SIGNAL(cancelButtonClicked()), this, SLOT(qmlQuit()));
-        connect(qmlWidget->rootObject(), SIGNAL(setJobsList(bool)), this, SLOT(setJobsList(bool)));
-        connect(qmlWidget->rootObject(), SIGNAL(setAdvancedOptions(QString)), this, SLOT(setAdvancedOptions(QString)));
-
         qmlWidget->rootContext()->setContextProperty("jobsList", jobsList);
+
+        connect(qmlWidget->rootObject(), SIGNAL(printButtonClicked(QString)),
+                this, SLOT(printDocument(QString)));
+        connect(qmlWidget->rootObject(), SIGNAL(cancelButtonClicked()),
+                this, SLOT(qmlQuit()));
+        connect(qmlWidget->rootObject(), SIGNAL(setJobsList(bool)),
+                this, SLOT(setJobsList(bool)));
+        connect(qmlWidget->rootObject(), SIGNAL(setAdvancedOptions(QString)),
+                this, SLOT(setAdvancedOptions(QString)));
     }
 
     void resize(const QRect& rect)
@@ -40,7 +43,8 @@ public:
     QStringList supportedResolutions;
 
 public Q_SLOTS:
-    void printDocument(QString printerName){
+    void printDocument(QString printerName)
+    {
         QByteArray printer_name_ba = printerName.toLocal8Bit();
         char *printer_name = printer_name_ba.data();
         PrinterObj *p = static_cast<PrinterObj*>(g_hash_table_lookup(f->printer, printer_name));
@@ -62,17 +66,18 @@ public Q_SLOTS:
         char *resolution_value = resolution_value_ba.data();
 
         add_setting(p->settings, resolution_setting, resolution_value);
-        GVariant *serializedSettings = serialize_Settings(p->settings);
 
         print_file(f, file_path, printer_name, "CUPS");
     }
 
-    void qmlQuit(){
+    void qmlQuit()
+    {
         disconnect_from_dbus(f);
         exit(0);
     }
 
-    void setJobsList(bool activeOnly){
+    void setJobsList(bool activeOnly)
+    {
         jobsList.clear();
         Job *j;
         int x = get_all_jobs(f, &j, activeOnly);
@@ -86,7 +91,8 @@ public Q_SLOTS:
         qmlWidget->rootContext()->setContextProperty("jobsList", jobsList);
     }
 
-    void setAdvancedOptions(QString printerName){
+    void setAdvancedOptions(QString printerName)
+    {
         QByteArray printer_name_ba = printerName.toLocal8Bit();
         char *printer_name = printer_name_ba.data();
         PrinterObj *p = static_cast<PrinterObj*>(g_hash_table_lookup(f->printer, printer_name));
@@ -94,11 +100,7 @@ public Q_SLOTS:
             qCritical("Printer %s not found", printer_name);
             return;
         }
-        /*get_supported_resolution(p);
-        for(int i=0; i<p->supported.num_res; i++)
-            supportedResolutions.append(p->supported.res[i]);*/
 
-        Option *get_Option(PrinterObj *p, char *name);
         Option *resolutionOption = get_Option(p, "resolution");
         for(int i=0; i<resolutionOption->num_supported; i++)
             supportedResolutions.append(resolutionOption->supported_values[i]);
@@ -110,18 +112,18 @@ private:
     QQuickWidget *qmlWidget;
 };
 
-class MainWindow : public QMainWindow
+class QCpdWindow : public QMainWindow
 {
 public:
-    MainWindow():
-        qmlWidget(new QmlWidget(this)),
-        previewToolbarWidget(new PreviewToolbarWidget(this)),
+    QCpdWindow():
+        qmlWidget(new QQmlWidget(this)),
+        previewToolbarWidget(new QPreviewToolbarWidget(this)),
         mainLayout(new QHBoxLayout()),
         previewLayout(new QVBoxLayout())
     {
         setCentralWidget(new QWidget(this));
 
-        previewWidget =  new PrintPreviewWidget(centralWidget());
+        previewWidget =  new QCpdPreviewWidget(centralWidget());
 
         qmlWidget->setMinimumSize(640, 480);
         previewWidget->setMinimumSize(360,440);
@@ -147,7 +149,7 @@ public:
                 previewWidget, SLOT(setZoom(qreal)));
     }
 
-    ~MainWindow();
+    ~QCpdWindow();
 
 public Q_SLOT:
     void closeEvent(QCloseEvent *event) override;
@@ -165,16 +167,17 @@ protected:
     }
 
 private:
-    QmlWidget* qmlWidget;
-    PrintPreviewWidget *previewWidget;
-    PreviewToolbarWidget *previewToolbarWidget;
+    QQmlWidget* qmlWidget;
+    QCpdPreviewWidget *previewWidget;
+    QPreviewToolbarWidget *previewToolbarWidget;
     QHBoxLayout *mainLayout;
     QVBoxLayout *previewLayout;
 };
 
-MainWindow::~MainWindow() = default;
+QCpdWindow::~QCpdWindow() = default;
 
-void MainWindow::closeEvent(QCloseEvent *event){
+void QCpdWindow::closeEvent(QCloseEvent *event)
+{
     disconnect_from_dbus(f);
     event->accept();
     exit(0);
@@ -183,7 +186,7 @@ void MainWindow::closeEvent(QCloseEvent *event){
 int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
-    MainWindow window;
+    QCpdWindow window;
     window.show();
     print_frontend_init(0, nullptr);
     return app.exec();

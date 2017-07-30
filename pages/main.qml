@@ -11,7 +11,7 @@ Rectangle {
     signal setJobsList(bool activeOnly)
     signal setAdvancedOptions(string printerName)
 
-    function emitSignal(pageRequested){
+    function emitSignal(pageRequested) {
         pageRequested = pageRequested.toString()
         if(pageRequested === "Jobs")
             setJobsList(0);
@@ -50,10 +50,6 @@ Rectangle {
                 name: "Advanced"
                 value: "advanced.qml"
             }
-            /*ListElement {
-                name: "Preview"
-                value: "preview.qml"
-            }*/
         }
 
         ListView {
@@ -71,7 +67,7 @@ Rectangle {
                     x: 10
                 }
 
-                MouseArea{
+                MouseArea {
                     anchors.fill: parent
                     hoverEnabled: true
                     onClicked: {
@@ -131,12 +127,12 @@ Rectangle {
 
     /* This Rectangle is for the main view */
 
-    Rectangle{
+    Rectangle {
         id:main_view
         x: 150; width: parent.width - 150
         height: parent.height
 
-        Loader{
+        Loader {
             id: page_loader
             source: "general.qml"
             width: parent.width

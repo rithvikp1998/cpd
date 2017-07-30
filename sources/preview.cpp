@@ -12,7 +12,7 @@
 
 /* This method implements the existing QPrintPreviewWidget class from Qt */
 
-PrintPreviewWidget::PrintPreviewWidget(QWidget* parent):
+QCpdPreviewWidget::QCpdPreviewWidget(QWidget* parent):
     QWidget(parent),
     printer(new QPrinter{}),
     previewWidget(new QPrintPreviewWidget(printer.get(), this))
@@ -24,9 +24,16 @@ PrintPreviewWidget::PrintPreviewWidget(QWidget* parent):
     connect(previewWidget, SIGNAL(paintRequested(QPrinter*)), this, SLOT(print(QPrinter*)));
 }
 
-PrintPreviewWidget::~PrintPreviewWidget() = default;
+QCpdPreviewWidget::~QCpdPreviewWidget() = default;
 
-void PrintPreviewWidget::print(QPrinter *printer){
+void QCpdPreviewWidget::resize(const QRect& rect)
+{
+    QWidget::resize(rect.width(), rect.height());
+    previewWidget->resize(rect.width(), rect.height());
+}
+
+void QCpdPreviewWidget::print(QPrinter *printer)
+{
     QPainter painter(printer);
     painter.setRenderHints(QPainter::Antialiasing |
                            QPainter::TextAntialiasing |
@@ -35,7 +42,7 @@ void PrintPreviewWidget::print(QPrinter *printer){
     QFile f;
     f.setFileName(":/test.pdf");
     f.open(QIODevice::ReadOnly);
-    QByteArray pdf=f.readAll();
+    QByteArray pdf = f.readAll();
 
     Poppler::Document *document = Poppler::Document::loadFromData(pdf);
     if (!document)
@@ -60,15 +67,27 @@ void PrintPreviewWidget::print(QPrinter *printer){
     painter.end();
 }
 
-
-void PrintPreviewWidget::resize(const QRect& rect)
+void QCpdPreviewWidget::showNextPage()
 {
-    QWidget::resize(rect.width(), rect.height());
-    previewWidget->resize(rect.width(), rect.height());
+    pageNumber = pageNumber < (pageCount-1) ? pageNumber+1 : pageNumber;
+    previewWidget->updatePreview();
 }
 
+void QCpdPreviewWidget::showPrevPage()
+{
+    pageNumber = pageNumber > 0 ? pageNumber-1 : pageNumber;
+    previewWidget->updatePreview();
+}
 
-PreviewToolbarWidget::PreviewToolbarWidget(QWidget* parent):
+void QCpdPreviewWidget::setZoom(qreal zoomFactor)
+{
+    if(previewPainted)
+        previewWidget->setZoomFactor(zoomFactor * 0.6 * (widgetHeight/paperHeight));
+    previewWidget->updatePreview();
+    currentZoomFactor = zoomFactor;
+}
+
+QPreviewToolbarWidget::QPreviewToolbarWidget(QWidget* parent):
         QWidget(parent),
         previewToolbarWidget(new QQuickWidget(QUrl("qrc:/pages/preview_toolbar.qml"), this))
 {
@@ -78,30 +97,10 @@ PreviewToolbarWidget::PreviewToolbarWidget(QWidget* parent):
     toolbarRootObject = previewToolbarWidget->rootObject();
 }
 
-void PreviewToolbarWidget::resize(const QRect& rect)
+QPreviewToolbarWidget::~QPreviewToolbarWidget() = default;
+
+void QPreviewToolbarWidget::resize(const QRect& rect)
 {
     QWidget::resize(rect.width(), rect.height());
     previewToolbarWidget->resize(rect.width(), rect.height());
-}
-
-PreviewToolbarWidget::~PreviewToolbarWidget() = default;
-
-void PrintPreviewWidget::showNextPage()
-{
-    pageNumber = pageNumber < (pageCount-1) ? pageNumber+1 : pageNumber;
-    previewWidget->updatePreview();
-}
-
-void PrintPreviewWidget::showPrevPage()
-{
-    pageNumber = pageNumber > 0 ? pageNumber-1 : pageNumber;
-    previewWidget->updatePreview();
-}
-
-void PrintPreviewWidget::setZoom(qreal zoomFactor) // To do: Simplify?
-{
-    if(previewPainted)
-        previewWidget->setZoomFactor(zoomFactor * 0.6 * (widgetHeight/paperHeight));
-    previewWidget->updatePreview();
-    currentZoomFactor = zoomFactor;
 }

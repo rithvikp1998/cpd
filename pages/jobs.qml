@@ -1,24 +1,10 @@
-/* TODO:
-
-  1. Better to create a visual separator like a vertical
-     straight line between columns for more comprehensive look
-
-  2. Move from listmodel to a context property
-     obtained from backend -- done
-
-  3. Add color to indicate right-clicked job
-
-  4. Check if one right click menu can be used for all jobs
-
-*/
-
 import QtQuick 2.7
 import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.0
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Dialogs 1.2
+import QtQuick.Layouts 1.0
 
-Rectangle{
+Rectangle {
     Rectangle {
         width: parent.width
         height: location_heading.contentHeight // Since "Location" is the biggest word in this row,
@@ -26,7 +12,7 @@ Rectangle{
         Text {
             x: 20
             y: 10
-            width: parent.width/3 - 20
+            width: parent.width / 3 - 20
             text: "Printer"
             font.bold: true
             wrapMode: Text.Wrap
@@ -34,43 +20,21 @@ Rectangle{
 
         Text {
             id: location_heading
-            x: parent.width/3 + 20
+            x: parent.width / 3 + 20
             y: 10
-            width: parent.width/3 - 20
+            width: parent.width / 3 - 20
             text: "Location"
             font.bold: true
             wrapMode: Text.Wrap
         }
 
         Text {
-            x: 2*parent.width/3 + 20
+            x: 2 * parent.width / 3 + 20
             y: 10
-            width: parent.width/3 - 20
+            width: parent.width / 3 - 20
             text: "Status"
             font.bold: true
             wrapMode: Text.Wrap
-        }
-    }
-
-    ListModel{
-        id: jobs_model
-
-        ListElement{
-            printer: "Canon Pixma"
-            location: "Office Desk"
-            status: "Completed"
-        }
-
-        ListElement{
-            printer: "HP Laser Jet"
-            location: "Home"
-            status: "Running"
-        }
-
-        ListElement{
-            printer: "Xerox"
-            location: "Office Reception"
-            status: "Pending"
         }
     }
 
@@ -83,17 +47,18 @@ Rectangle{
 
         delegate: Rectangle {
             width: parent.width
-            height: Math.max(printer_text.contentHeight, location_text.contentHeight, status_text.contentHeight) + 10
+            height: Math.max(printer_text.contentHeight, location_text.contentHeight,
+                             status_text.contentHeight) + 10
             color: (model.index % 2 == 0) ? "#EEEEEE" : "white"
             property variant stringList: jobsList[index].split('%')
 
             Menu {
                 id: menu
 
-                MenuItem{ text: "Pause" }
-                MenuItem{ text: "Stop" }
-                MenuItem{ text: "Cancel" }
-                MenuItem{ text: "Repeat" }
+                MenuItem { text: "Pause" }
+                MenuItem { text: "Stop" }
+                MenuItem { text: "Cancel" }
+                MenuItem { text: "Repeat" }
             }
 
             MouseArea {
@@ -101,8 +66,8 @@ Rectangle{
                 acceptedButtons: Qt.RightButton
                 hoverEnabled: true
 
-                onEntered: { parent.color = "#BDBDBD"}
-                onExited:  { parent.color = (model.index % 2 == 0) ? "#EEEEEE" : "white"}
+                onEntered: { parent.color = "#BDBDBD" }
+                onExited:  { parent.color = (model.index % 2 == 0) ? "#EEEEEE" : "white" }
                 onClicked: {
                     menu.x = mouseX
                     menu.y = mouseY
@@ -114,25 +79,25 @@ Rectangle{
                 id: printer_text
                 x: 20
                 anchors.verticalCenter: parent.verticalCenter
-                width: parent.width/3 - 20
+                width: parent.width / 3 - 20
                 text: stringList[0]
                 wrapMode: Text.Wrap
             }
 
             Text {
                 id: location_text
-                x: parent.width/3 + 20
+                x: parent.width / 3 + 20
                 anchors.verticalCenter: parent.verticalCenter
-                width: parent.width/3 - 20
+                width: parent.width / 3 - 20
                 text: stringList[1]
                 wrapMode: Text.Wrap
             }
 
             Text {
                 id: status_text
-                x: 2*parent.width/3 + 20
+                x: 2*parent.width / 3 + 20
                 anchors.verticalCenter: parent.verticalCenter
-                width: parent.width/3 - 20
+                width: parent.width / 3 - 20
                 text: stringList[2]
                 wrapMode: Text.Wrap
             }
@@ -149,7 +114,7 @@ Rectangle{
         id: start_job_combobox
         x: 120
         y: parent.height - 155
-        width: (start_job_combobox.currentIndex==1) ? parent.width - 280 : parent.width - 180
+        width: (start_job_combobox.currentIndex == 1) ? parent.width - 280 : parent.width - 180
         height: 40
         font.pixelSize: 12
         model: ["Immediately", "After a delay of", "Never"]
@@ -161,14 +126,14 @@ Rectangle{
         width: 60
         height: 30
         font.pointSize: 10
-        visible: (start_job_combobox.currentIndex==1) ? true :  false
+        visible: (start_job_combobox.currentIndex == 1) ? true :  false
     }
 
     Text {
         text: "Minutes"
         x: parent.width - 80
         y: parent.height - 145
-        visible: (start_job_combobox.currentIndex==1) ? true :  false
+        visible: (start_job_combobox.currentIndex == 1) ? true :  false
     }
 
     Text {
