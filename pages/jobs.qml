@@ -117,7 +117,7 @@ Rectangle {
         width: (start_job_combobox.currentIndex == 1) ? parent.width - 280 : parent.width - 180
         height: 40
         font.pixelSize: 12
-        model: ["Immediately", "After a delay of", "Never"]
+        model: jobHoldOptionsList
     }
 
     TextField {

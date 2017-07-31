@@ -29,6 +29,8 @@ public:
                 this, SLOT(cpdQuit()));
         connect(qmlWidget->rootObject(), SIGNAL(setJobsList(bool)),
                 this, SLOT(setJobsList(bool)));
+        connect(qmlWidget->rootObject(), SIGNAL(setJobsHoldOptions(QString)),
+                this, SLOT(setJobsHoldOptions(QString)));
         connect(qmlWidget->rootObject(), SIGNAL(setAdvancedOptions(QString)),
                 this, SLOT(setAdvancedOptions(QString)));
     }
@@ -41,6 +43,7 @@ public:
 
     QStringList jobsList;
     QStringList supportedResolutions;
+    QStringList jobHoldOptionsList;
 
 public Q_SLOTS:
     void printDocument(QString printerName)
@@ -91,17 +94,51 @@ public Q_SLOTS:
         qmlWidget->rootContext()->setContextProperty("jobsList", jobsList);
     }
 
-    void setAdvancedOptions(QString printerName)
-    {
+    void setJobsHoldOptions(QString printerName){
         QByteArray printer_name_ba = printerName.toLocal8Bit();
         char *printer_name = printer_name_ba.data();
-        PrinterObj *p = static_cast<PrinterObj*>(g_hash_table_lookup(f->printer, printer_name));
+
+        QString backendName = "CUPS";
+        QByteArray backend_name_ba = backendName.toLocal8Bit();
+        char *backend_name = backend_name_ba.data();
+
+        PrinterObj *p = find_PrinterObj(f, printer_name, backend_name);
         if(!p){
             qCritical("Printer %s not found", printer_name);
             return;
         }
 
-        Option *resolutionOption = get_Option(p, "resolution");
+        QString optionName = "job-hold-until";
+        QByteArray option_name_ba = optionName.toLocal8Bit();
+        char *option_name = option_name_ba.data();
+
+        Option *jobHoldOption = get_Option(p, option_name);
+        for(int i=0; i<jobHoldOption->num_supported; i++)
+            jobHoldOptionsList.append(jobHoldOption->supported_values[i]);
+
+        qmlWidget->rootContext()->setContextProperty("jobHoldOptionsList", jobHoldOptionsList);
+    }
+
+    void setAdvancedOptions(QString printerName)
+    {
+        QByteArray printer_name_ba = printerName.toLocal8Bit();
+        char *printer_name = printer_name_ba.data();
+
+        QString backendName = "CUPS";
+        QByteArray backend_name_ba = backendName.toLocal8Bit();
+        char *backend_name = backend_name_ba.data();
+
+        PrinterObj *p = find_PrinterObj(f, printer_name, backend_name);
+        if(!p){
+            qCritical("Printer %s not found", printer_name);
+            return;
+        }
+
+        QString optionName = "printer-resolution";
+        QByteArray option_name_ba = optionName.toLocal8Bit();
+        char *option_name = option_name_ba.data();
+
+        Option *resolutionOption = get_Option(p, option_name);
         for(int i=0; i<resolutionOption->num_supported; i++)
             supportedResolutions.append(resolutionOption->supported_values[i]);
 

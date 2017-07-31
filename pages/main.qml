@@ -9,12 +9,15 @@ Rectangle {
     signal printButtonClicked(string printerName)
     signal cancelButtonClicked()
     signal setJobsList(bool activeOnly)
+    signal setJobsHoldOptions(string printerName)
     signal setAdvancedOptions(string printerName)
 
     function emitSignal(pageRequested) {
         pageRequested = pageRequested.toString()
-        if(pageRequested === "Jobs")
+        if(pageRequested === "Jobs") {
             setJobsList(0);
+            setJobsHoldOptions("Xerox");
+        }
         if(pageRequested === "Advanced")
             setAdvancedOptions("Xerox");
         return;
