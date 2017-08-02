@@ -7,13 +7,16 @@ unix {
     PKGCONFIG += gio-unix-2.0 glib-2.0 gobject-2.0 poppler-qt5
 }
 
-SOURCES += sources/main.cpp \
+TEMPLATE = lib
+
+SOURCES += \
     sources/preview.cpp \
     backends/cups/SampleFrontend/print_frontend.c \
     backends/cups/src/frontend_interface.c \
     backends/cups/src/frontend_helper.c \
     backends/cups/src/common_helper.c \
-    backends/cups/src/backend_interface.c
+    backends/cups/src/backend_interface.c \
+    sources/cpd.cpp
 
 RESOURCES += qml.qrc
 
@@ -47,6 +50,7 @@ HEADERS += headers/preview.h \
     backends/cups/src/frontend_helper.h \
     backends/cups/src/common_helper.h \
     backends/cups/src/backend_interface.h \
-    backends/cups/CUPS_src/backend_helper.h
+    backends/cups/CUPS_src/backend_helper.h \
+    headers/cpd.h
 
 DISTFILES +=
