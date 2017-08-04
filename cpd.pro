@@ -55,5 +55,5 @@ HEADERS += headers/preview.h \
 
 DISTFILES +=
 
-INCLUDEPATH += $$PWD/backends/cups/src
-DEPENDPATH += $$PWD/backends/cups/src
+INCLUDEPATH += $$PWD/backends/cups/release/headers
+DEPENDPATH += $$PWD/backends/cups/release/libs
