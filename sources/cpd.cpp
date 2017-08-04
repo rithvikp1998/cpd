@@ -8,8 +8,7 @@
 #include "../headers/cpd.h"
 
 extern "C" {
-    #include "../backends/cups/src/print_frontend.h"
-    #include "../backends/cups/src/frontend_helper.h"
+    #include <CPDFrontend.h>
 }
 
 QQmlWidget::QQmlWidget(QWidget* parent):
@@ -30,6 +29,8 @@ QQmlWidget::QQmlWidget(QWidget* parent):
             this, SLOT(setJobsHoldOptions(QString)));
     connect(qmlWidget->rootObject(), SIGNAL(setAdvancedOptions(QString)),
             this, SLOT(setAdvancedOptions(QString)));
+
+    initBackend();
 }
 
 void QQmlWidget::resize(const QRect& rect)
@@ -137,6 +138,14 @@ void QQmlWidget::setAdvancedOptions(QString printerName)
     qmlWidget->rootContext()->setContextProperty("supportedResolutions", supportedResolutions);
 }
 
+void QQmlWidget::initBackend()
+{
+    event_callback add_cb = (event_callback)add_printer_callback;
+    event_callback rem_cb = (event_callback)remove_printer_callback;
+    f = get_new_FrontendObj(NULL, add_cb, rem_cb);
+    connect_to_dbus(f);
+}
+
 QCpdWindow::QCpdWindow():
         qmlWidget(new QQmlWidget(this)),
         previewToolbarWidget(new QPreviewToolbarWidget(this)),
@@ -171,7 +180,6 @@ QCpdWindow::QCpdWindow():
             previewWidget, SLOT(setZoom(qreal)));
 
     this->show();
-    print_frontend_init(0, nullptr);
 }
 
 void QCpdWindow::resizeEvent(QResizeEvent* event)
@@ -189,7 +197,7 @@ QCpdWindow::~QCpdWindow() = default;
 
 void QCpdWindow::closeEvent(QCloseEvent *event)
 {
-    disconnect_from_dbus(f);
+    disconnect_from_dbus(qmlWidget->f);
     event->accept();
     close();
 }

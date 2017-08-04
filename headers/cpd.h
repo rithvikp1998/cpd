@@ -6,6 +6,20 @@
 
 #include "../headers/preview.h"
 
+extern "C" {
+    #include <CPDFrontend.h>
+}
+
+static inline int add_printer_callback(PrinterObj *p)
+{
+    printf("print_frontend.c : Printer %s added!\n", p->name);
+}
+
+static inline int remove_printer_callback(PrinterObj *p)
+{
+    printf("print_frontend.c : Printer %s removed!\n", p->name);
+}
+
 class QQmlWidget : public QWidget
 {
     Q_OBJECT
@@ -13,6 +27,7 @@ public:
     QStringList jobsList;
     QStringList supportedResolutions;
     QStringList jobHoldOptionsList;
+    FrontendObj *f;
 
     QQmlWidget(QWidget* parent = Q_NULLPTR);
     void resize(const QRect& rect);
@@ -26,6 +41,8 @@ public Q_SLOTS:
 
 private:
     QQuickWidget *qmlWidget;
+
+    void initBackend();
 };
 
 class QCpdWindow : public QMainWindow

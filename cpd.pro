@@ -11,11 +11,6 @@ TEMPLATE = lib
 
 SOURCES += \
     sources/preview.cpp \
-    backends/cups/SampleFrontend/print_frontend.c \
-    backends/cups/src/frontend_interface.c \
-    backends/cups/src/frontend_helper.c \
-    backends/cups/src/common_helper.c \
-    backends/cups/src/backend_interface.c \
     sources/cpd.cpp
 
 RESOURCES += qml.qrc
@@ -44,16 +39,18 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-HEADERS += headers/preview.h \
-    backends/cups/src/print_frontend.h \
-    backends/cups/src/frontend_interface.h \
-    backends/cups/src/frontend_helper.h \
-    backends/cups/src/common_helper.h \
-    backends/cups/src/backend_interface.h \
-    backends/cups/CUPS_src/backend_helper.h \
+HEADERS += \
+    headers/preview.h \
     headers/cpd.h
 
 DISTFILES +=
 
+win32:CONFIG(release, debug|release): LIBS += -L$$PWD/backends/cups/src/release/ -lCPDFrontend
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/backends/cups/src/debug/ -lCPDFrontend
+else:unix: LIBS += -L$$PWD/backends/cups/src/ -lCPDFrontend
+
+INCLUDEPATH += $$PWD/backends/cups/src
+DEPENDPATH += $$PWD/backends/cups/src
+
 INCLUDEPATH += $$PWD/backends/cups/release/headers
-DEPENDPATH += $$PWD/backends/cups/release/libs
+DEPENDPATH += $$PWD/backends/cups/release/headers
