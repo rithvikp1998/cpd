@@ -191,5 +191,5 @@ void QCpdWindow::closeEvent(QCloseEvent *event)
 {
     disconnect_from_dbus(f);
     event->accept();
-    exit(0);
+    close();
 }
