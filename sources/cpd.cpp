@@ -77,7 +77,7 @@ void QQmlWidget::setJobsList(bool activeOnly)
     Job *j;
     int x = get_all_jobs(f, &j, activeOnly);
     for(int i=0; i<x; i++){
-        QString printerName = j[i].printer;
+        QString printerName = j[i].printer_id;
         QString location = j[i].user;
         QString status = j[i].state;
         jobsList.append(printerName + "%" + location + "%" + status);

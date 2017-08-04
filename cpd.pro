@@ -54,3 +54,6 @@ HEADERS += headers/preview.h \
     headers/cpd.h
 
 DISTFILES +=
+
+INCLUDEPATH += $$PWD/backends/cups/src
+DEPENDPATH += $$PWD/backends/cups/src
