@@ -1,3 +1,24 @@
+/****************************************************************************
+**
+**  $QT_BEGIN_LICENSE:GPL$
+**
+**  This program is free software: you can redistribute it and/or modify
+**  it under the terms of the GNU General Public License as published by
+**  the Free Software Foundation, either version 3 of the License, or
+**  (at your option) any later version.
+**
+**  This program is distributed in the hope that it will be useful,
+**  but WITHOUT ANY WARRANTY; without even the implied warranty of
+**  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+**  GNU General Public License for more details.
+**
+**  You should have received a copy of the GNU General Public License
+**  along with this program.  If not, see <http://www.gnu.org/licenses/>
+**
+**  $QT_END_LICENSE$
+**
+****************************************************************************/
+
 #include <QPainter>
 #include <QPrintPreviewWidget>
 #include <QMessageLogger>
@@ -12,8 +33,22 @@
 
 #define PREVIEW_SHRINK_FACTOR 0.6
 
-/* This method implements the existing QPrintPreviewWidget class from Qt */
+/*!
+ *  \class QCpdPreviewWidget
+ *
+ *  The dialog is comprised of three widgets - QQmlWidget, QCpdPreviewWidget and
+ *  QPreviewToolbarWidget. This class acts as the preview window to the dialog. This widget derives
+ *  from the QPrintPreviewWidget class by Qt. The class uses poppler to generate the image using
+ *  the document and QPrinter's settings.
+ */
 
+/*!
+ * \fn QCpdPreviewWidget::QCpdPreviewWidget
+ * \param parent
+ *
+ *  This is the default constructor for QCpdPreviewWidget. The paintRequested signal is emitted
+ *  when the QPrintPreviewWidget is constructed.
+ */
 QCpdPreviewWidget::QCpdPreviewWidget(QWidget* parent):
     QWidget(parent),
     printer(new QPrinter{}),
@@ -26,14 +61,33 @@ QCpdPreviewWidget::QCpdPreviewWidget(QWidget* parent):
     connect(previewWidget, SIGNAL(paintRequested(QPrinter*)), this, SLOT(print(QPrinter*)));
 }
 
+/*!
+ *  \fn QCpdPreviewWidget::~QCpdPreviewWidget()
+ *
+ *  The default destructor for the QCpdPreviewWidget class.
+ */
 QCpdPreviewWidget::~QCpdPreviewWidget() = default;
 
+/*!
+ * \fn void QCpdPreviewWidget::resize()
+ * \param rect
+ *
+ *  resize() takes a QRect& as a parameter and uses it to resize the QQmlWidget objects
+ *  to the same dimensions as the parameter rect
+ */
 void QCpdPreviewWidget::resize(const QRect& rect)
 {
     QWidget::resize(rect.width(), rect.height());
     previewWidget->resize(rect.width(), rect.height());
 }
 
+/*!
+ * \fn void QCpdPreviewWidget::print()
+ * \param printer
+ *
+ *  The function acts as a slot for the paintRequested signal emitted by QPrintPreviewWidget.
+ *  The function uses poppler and QPrinter's settings to generated and paint the image.
+ */
 void QCpdPreviewWidget::print(QPrinter *printer)
 {
     QPainter painter(printer);
@@ -69,18 +123,36 @@ void QCpdPreviewWidget::print(QPrinter *printer)
     painter.end();
 }
 
+/*!
+ * \fn void QCpdPreviewWidget::showNextPage
+ *
+ *  This function acts as a slot for the nextPageButtonClicked signal emitted from
+ *  pages/preview_toolbar.qml and shows the next page in the document in the preview window.
+ */
 void QCpdPreviewWidget::showNextPage()
 {
     pageNumber = pageNumber < (pageCount-1) ? pageNumber+1 : pageNumber;
     previewWidget->updatePreview();
 }
 
+/*!
+ * \fn void QCpdPreviewWidget::showNextPage
+ *
+ *  This function acts as a slot for the prevPageButtonClicked signal emitted from
+ *  pages/preview_toolbar.qml and shows the previous page in the document in the preview window.
+ */
 void QCpdPreviewWidget::showPrevPage()
 {
     pageNumber = pageNumber > 0 ? pageNumber-1 : pageNumber;
     previewWidget->updatePreview();
 }
 
+/*!
+ * \fn void QCpdPreviewWidget::showNextPage
+ *
+ *  This function acts as a slot for the zoomSliderValueChanged signal emitted from
+ *  pages/preview_toolbar.qml and sets the size of the page shown in the preview.
+ */
 void QCpdPreviewWidget::setZoom(qreal zoomFactor)
 {
     if(previewPainted)
@@ -89,6 +161,13 @@ void QCpdPreviewWidget::setZoom(qreal zoomFactor)
     currentZoomFactor = zoomFactor;
 }
 
+/*!
+ * \class QPreviewToolbarWidget
+ *
+ *  The dialog is comprised of three widgets - QQmlWidget, QCpdPreviewWidget and
+ *  QPreviewToolbarWidget. QPreviewToolbarWidget creates a QQuickWidget with
+ *  pages/preview_toolbar.qml as the root and handles all the signals from the qml file.
+ */
 QPreviewToolbarWidget::QPreviewToolbarWidget(QWidget* parent):
         QWidget(parent),
         previewToolbarWidget(new QQuickWidget(QUrl("qrc:/pages/preview_toolbar.qml"), this))
@@ -99,8 +178,20 @@ QPreviewToolbarWidget::QPreviewToolbarWidget(QWidget* parent):
     toolbarRootObject = previewToolbarWidget->rootObject();
 }
 
+/*!
+ *  \fn QPreviewToolbarWidget::~QPreviewToolbarWidget()
+ *
+ *  The default destructor for the QPreviewToolbarWidget class.
+ */
 QPreviewToolbarWidget::~QPreviewToolbarWidget() = default;
 
+/*!
+ * \fn void QPreviewToolbarWidget::resize()
+ * \param rect
+ *
+ *  resize() takes a QRect& as a parameter and uses it to resize the QQmlWidget objects
+ *  to the same dimensions as the parameter rect
+ */
 void QPreviewToolbarWidget::resize(const QRect& rect)
 {
     QWidget::resize(rect.width(), rect.height());
