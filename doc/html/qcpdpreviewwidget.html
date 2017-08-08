@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- preview.cpp -->
+  <title>QCpdPreviewWidget Class | CPD </title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    window.onload = function(){document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");};
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<li>QCpdPreviewWidget</li>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#public-slots">Public Slots</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">QCpdPreviewWidget Class</h1>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign"> <span class="preprocessor">#include &lt;QCpdPreviewWidget&gt;</span>
+</td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> </td></tr></table></div><ul>
+<li><a href="qcpdpreviewwidget-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="qcpdpreviewwidget.html#QCpdPreviewWidget">QCpdPreviewWidget</a></b>(QWidget *<i> parent</i> = Q_NULLPTR)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="qcpdpreviewwidget.html#dtor.QCpdPreviewWidget">~QCpdPreviewWidget</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qcpdpreviewwidget.html#resize">resize</a></b>(const QRect &amp;<i> rect</i>)</td></tr>
+</table></div>
+<a name="public-slots"></a>
+<h2 id="public-slots">Public Slots</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qcpdpreviewwidget.html#print">print</a></b>(QPrinter *<i> printer</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qcpdpreviewwidget.html#setZoom">setZoom</a></b>(qreal<i> zoomFactor</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qcpdpreviewwidget.html#showNextPage">showNextPage</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qcpdpreviewwidget.html#showPrevPage">showPrevPage</a></b>()</td></tr>
+</table></div>
+<a name="details"></a>
+<!-- $$$QCpdPreviewWidget-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>The dialog is comprised of three widgets - QQmlWidget, <a href="qcpdpreviewwidget.html">QCpdPreviewWidget</a> and <a href="qpreviewtoolbarwidget.html">QPreviewToolbarWidget</a>. This class acts as the preview window to the dialog. This widget derives from the QPrintPreviewWidget class by Qt. The class uses poppler to generate the image using the document and QPrinter's settings.</p>
+</div>
+<!-- @@@QCpdPreviewWidget -->
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$QCpdPreviewWidget[overload1]$$$QCpdPreviewWidgetQWidget* -->
+<h3 class="fn" id="QCpdPreviewWidget"><a name="QCpdPreviewWidget"></a>QCpdPreviewWidget::<span class="name">QCpdPreviewWidget</span>(<span class="type">QWidget</span> *<i> parent</i> = Q_NULLPTR)</h3>
+<p>Constructs <a href="qcpdpreviewwidget.html">QCpdPreviewWidget</a> with <i>parent</i>. The paintRequested signal is emitted when the QPrintPreviewWidget is constructed.</p>
+<!-- @@@QCpdPreviewWidget -->
+<!-- $$$~QCpdPreviewWidget[overload1]$$$~QCpdPreviewWidget -->
+<h3 class="fn" id="dtor.QCpdPreviewWidget"><a name="dtor.QCpdPreviewWidget"></a>QCpdPreviewWidget::<span class="name">~QCpdPreviewWidget</span>()</h3>
+<p>Destroys <a href="qcpdpreviewwidget.html">QCpdPreviewWidget</a> objects.</p>
+<!-- @@@~QCpdPreviewWidget -->
+<!-- $$$print[overload1]$$$printQPrinter* -->
+<h3 class="fn" id="print"><a name="print"></a><code>[slot] </code><span class="type">void</span> QCpdPreviewWidget::<span class="name">print</span>(<span class="type">QPrinter</span> *<i> printer</i>)</h3>
+<p>The function acts as a slot for the paintRequested signal emitted by QPrintPreviewWidget. The function uses poppler and <i>printer</i> settings to generated and paint the image.</p>
+<!-- @@@print -->
+<!-- $$$resize[overload1]$$$resizeconstQRect& -->
+<h3 class="fn" id="resize"><a name="resize"></a><span class="type">void</span> QCpdPreviewWidget::<span class="name">resize</span>(const <span class="type">QRect</span> &amp;<i> rect</i>)</h3>
+<p>resize() takes a QRect&amp; as a parameter and uses it to resize the QQmlWidget objects to the same dimensions as the parameter <i>rect</i></p>
+<!-- @@@resize -->
+<!-- $$$setZoom[overload1]$$$setZoomqreal -->
+<h3 class="fn" id="setZoom"><a name="setZoom"></a><code>[slot] </code><span class="type">void</span> QCpdPreviewWidget::<span class="name">setZoom</span>(<span class="type">qreal</span><i> zoomFactor</i>)</h3>
+<p>This function acts as a slot for the zoomSliderValueChanged signal emitted from pages/preview_toolbar.qml and sets the size of the page shown in the preview according to the <i>zoomFactor</i>.</p>
+<!-- @@@setZoom -->
+<!-- $$$showNextPage[overload1]$$$showNextPage -->
+<h3 class="fn" id="showNextPage"><a name="showNextPage"></a><code>[slot] </code><span class="type">void</span> QCpdPreviewWidget::<span class="name">showNextPage</span>()</h3>
+<p>This function acts as a slot for the nextPageButtonClicked signal emitted from pages/preview_toolbar.qml and shows the next page in the document in the preview window.</p>
+<!-- @@@showNextPage -->
+<!-- $$$showPrevPage[overload1]$$$showPrevPage -->
+<h3 class="fn" id="showPrevPage"><a name="showPrevPage"></a><code>[slot] </code><span class="type">void</span> QCpdPreviewWidget::<span class="name">showPrevPage</span>()</h3>
+<p>This function acts as a slot for the prevPageButtonClicked signal emitted from pages/preview_toolbar.qml and shows the previous page in the document in the preview window.</p>
+<!-- @@@showPrevPage -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2016 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>
