@@ -22,18 +22,25 @@ The project consists of two major parts:
 * poppler-qt5
     
     Ubuntu/Debian
+    
     ``` sudo apt-get install libpoppler-qt5-dev ```
 * CUPS
     
     Ubuntu/Debian
+    
     ``` sudo apt-get install cups libcups2-dev```
 * libglib
     
     Ubuntu/Debian
+    
     ``` sudo apt-get install libglib2.0-dev ```
-* Qt 5.8
+* Qt 5.7
     
     https://www.qt.io/download-open-source/
+    
+    or Ubuntu/Debian
+    
+    ``` sudo apt-get install qt5-default qtdeclarative5-dev ```
 
 ## Build
 
