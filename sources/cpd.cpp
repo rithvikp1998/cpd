@@ -115,7 +115,7 @@ void QQmlWidget::printDocument(QString printerName)
 
     add_setting(p->settings, resolution_setting, resolution_value);
 
-    print_file(f, file_path, printer_name, "CUPS");
+    print_file(p, file_path);
 }
 
 /*!
@@ -183,6 +183,7 @@ void QQmlWidget::setJobsHoldOptions(QString printerName){
     QByteArray option_name_ba = optionName.toLocal8Bit();
     char *option_name = option_name_ba.data();
 
+    jobHoldOptionsList.clear();
     Option *jobHoldOption = get_Option(p, option_name);
     for(int i=0; i<jobHoldOption->num_supported; i++)
         jobHoldOptionsList.append(jobHoldOption->supported_values[i]);
@@ -219,6 +220,7 @@ void QQmlWidget::setAdvancedOptions(QString printerName)
     QByteArray option_name_ba = optionName.toLocal8Bit();
     char *option_name = option_name_ba.data();
 
+    supportedResolutions.clear();
     Option *resolutionOption = get_Option(p, option_name);
     for(int i=0; i<resolutionOption->num_supported; i++)
         supportedResolutions.append(resolutionOption->supported_values[i]);
