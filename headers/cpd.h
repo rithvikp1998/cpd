@@ -41,6 +41,9 @@ static inline int remove_printer_callback(PrinterObj *p)
     printf("print_frontend.c : Printer %s removed!\n", p->name);
 }
 
+class QQmlWidget;
+class QCpdWindow;
+
 class QQmlWidget : public QWidget
 {
     Q_OBJECT
@@ -73,10 +76,8 @@ public:
     QCpdWindow();
     ~QCpdWindow();
 
-public Q_SLOT:
-    void closeEvent(QCloseEvent *event) override;
-
 protected:
+    void closeEvent(QCloseEvent *event) override;
     void resizeEvent(QResizeEvent* event) override;
 
 private:

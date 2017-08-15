@@ -34,6 +34,7 @@ extern "C" {
 
 /*!
  *  \class QQmlWidget
+ *  \inmodule CPD
  *
  *  \brief The QQmlWidget class creates a widget from the qml files
  *

@@ -432,18 +432,18 @@
             <parameter left="GCancellable *" right="" name="cancellable" default=""/>
             <parameter left="GError **" right="" name="error" default=""/>
         </function>
-        <function threadsafety="unspecified" name="print_backend_call_get_default_printer_finish" status="internal" access="private" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/cups/src/backend_interface.h" lineno="231" virtual="non" meta="plain" const="false" static="false" overload="true" overload-number="2" type="gboolean" signature="gboolean print_backend_call_get_default_printer_finish(PrintBackend *proxy, gchar **out_printer_id, GAsyncResult *res, GError **error)">
-            <parameter left="PrintBackend *" right="" name="proxy" default=""/>
-            <parameter left="gchar **" right="" name="out_printer_id" default=""/>
-            <parameter left="GAsyncResult *" right="" name="res" default=""/>
-            <parameter left="GError **" right="" name="error" default=""/>
-        </function>
         <class threadsafety="unspecified" name="_PrinterCUPS" href="printercups.html" status="internal" access="private" location="backend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/CUPS_src/backend_helper.h" lineno="21">
             <variable threadsafety="unspecified" name="dest" fullname="_PrinterCUPS::dest" href="printercups.html#dest-var" status="commendable" access="public" location="backend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/CUPS_src/backend_helper.h" lineno="23" type="cups_dest_t *" static="false"/>
             <variable threadsafety="unspecified" name="dinfo" fullname="_PrinterCUPS::dinfo" href="printercups.html#dinfo-var" status="commendable" access="public" location="backend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/CUPS_src/backend_helper.h" lineno="25" type="cups_dinfo_t *" static="false"/>
             <variable threadsafety="unspecified" name="http" fullname="_PrinterCUPS::http" href="printercups.html#http-var" status="commendable" access="public" location="backend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/CUPS_src/backend_helper.h" lineno="24" type="http_t *" static="false"/>
             <variable threadsafety="unspecified" name="name" fullname="_PrinterCUPS::name" href="printercups.html#name-var" status="commendable" access="public" location="backend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/CUPS_src/backend_helper.h" lineno="22" type="gchar *" static="false"/>
         </class>
+        <function threadsafety="unspecified" name="print_backend_call_get_default_printer" status="internal" access="private" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/cups/src/backend_interface.h" lineno="225" virtual="non" meta="plain" const="false" static="false" overload="true" overload-number="2" type="void" signature="void print_backend_call_get_default_printer(PrintBackend *proxy, GCancellable *cancellable, GAsyncReadyCallback callback, gpointer user_data)">
+            <parameter left="PrintBackend *" right="" name="proxy" default=""/>
+            <parameter left="GCancellable *" right="" name="cancellable" default=""/>
+            <parameter left="GAsyncReadyCallback" right="" name="callback" default=""/>
+            <parameter left="gpointer" right="" name="user_data" default=""/>
+        </function>
         <function threadsafety="unspecified" name="get_absolute_path" status="internal" access="private" location="common_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/src/common_helper.h" lineno="26" virtual="non" meta="plain" const="false" static="false" overload="true" overload-number="2" type="char *" signature="char * get_absolute_path(char *file_path)">
             <parameter left="char *" right="" name="file_path" default=""/>
         </function>
@@ -1079,11 +1079,11 @@
             <variable threadsafety="unspecified" name="parent_instance" fullname="_PrintBackendProxy::parent_instance" href="printbackendproxy.html#parent_instance-var" status="commendable" access="public" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/gcp/src/backend_interface.h" lineno="430" type="GDBusProxy" static="false"/>
             <variable threadsafety="unspecified" name="priv" fullname="_PrintBackendProxy::priv" href="printbackendproxy.html#priv-var" status="commendable" access="public" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/gcp/src/backend_interface.h" lineno="431" type="PrintBackendProxyPrivate *" static="false"/>
         </class>
-        <function threadsafety="unspecified" name="print_backend_call_get_default_printer" status="internal" access="private" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/cups/src/backend_interface.h" lineno="225" virtual="non" meta="plain" const="false" static="false" overload="true" overload-number="2" type="void" signature="void print_backend_call_get_default_printer(PrintBackend *proxy, GCancellable *cancellable, GAsyncReadyCallback callback, gpointer user_data)">
+        <function threadsafety="unspecified" name="print_backend_call_get_default_printer_finish" status="internal" access="private" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/cups/src/backend_interface.h" lineno="231" virtual="non" meta="plain" const="false" static="false" overload="true" overload-number="2" type="gboolean" signature="gboolean print_backend_call_get_default_printer_finish(PrintBackend *proxy, gchar **out_printer_id, GAsyncResult *res, GError **error)">
             <parameter left="PrintBackend *" right="" name="proxy" default=""/>
-            <parameter left="GCancellable *" right="" name="cancellable" default=""/>
-            <parameter left="GAsyncReadyCallback" right="" name="callback" default=""/>
-            <parameter left="gpointer" right="" name="user_data" default=""/>
+            <parameter left="gchar **" right="" name="out_printer_id" default=""/>
+            <parameter left="GAsyncResult *" right="" name="res" default=""/>
+            <parameter left="GError **" right="" name="error" default=""/>
         </function>
         <function threadsafety="unspecified" name="print_backend_call_ping_finish" status="internal" access="private" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/gcp/src/backend_interface.h" lineno="402" virtual="non" meta="plain" const="false" static="false" overload="true" overload-number="3" type="gboolean" signature="gboolean print_backend_call_ping_finish(PrintBackend *proxy, GAsyncResult *res, GError **error)">
             <parameter left="PrintBackend *" right="" name="proxy" default=""/>
@@ -1309,16 +1309,17 @@
             <parameter left="GAsyncReadyCallback" right="" name="callback" default=""/>
             <parameter left="gpointer" right="" name="user_data" default=""/>
         </function>
-        <function threadsafety="unspecified" name="print_backend_call_activate_backend_sync" status="internal" access="private" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/cups/src/backend_interface.h" lineno="220" virtual="non" meta="plain" const="false" static="false" overload="true" overload-number="2" type="gboolean" signature="gboolean print_backend_call_activate_backend_sync(PrintBackend *proxy, GCancellable *cancellable, GError **error)">
+        <function threadsafety="unspecified" name="print_backend_call_get_all_jobs_sync" status="internal" access="private" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/backend_interface.h" lineno="339" virtual="non" meta="plain" const="false" static="false" overload="false" type="gboolean" signature="gboolean print_backend_call_get_all_jobs_sync(PrintBackend *proxy, gboolean arg_active_only, gint *out_num_jobs, GVariant **out_jobs, GCancellable *cancellable, GError **error)">
             <parameter left="PrintBackend *" right="" name="proxy" default=""/>
+            <parameter left="gboolean" right="" name="arg_active_only" default=""/>
+            <parameter left="gint *" right="" name="out_num_jobs" default=""/>
+            <parameter left="GVariant **" right="" name="out_jobs" default=""/>
             <parameter left="GCancellable *" right="" name="cancellable" default=""/>
             <parameter left="GError **" right="" name="error" default=""/>
         </function>
-        <function threadsafety="unspecified" name="print_backend_call_get_all_jobs_finish" status="internal" access="private" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/backend_interface.h" lineno="332" virtual="non" meta="plain" const="false" static="false" overload="false" type="gboolean" signature="gboolean print_backend_call_get_all_jobs_finish(PrintBackend *proxy, gint *out_num_jobs, GVariant **out_jobs, GAsyncResult *res, GError **error)">
+        <function threadsafety="unspecified" name="print_backend_call_activate_backend_sync" status="internal" access="private" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/cups/src/backend_interface.h" lineno="220" virtual="non" meta="plain" const="false" static="false" overload="true" overload-number="2" type="gboolean" signature="gboolean print_backend_call_activate_backend_sync(PrintBackend *proxy, GCancellable *cancellable, GError **error)">
             <parameter left="PrintBackend *" right="" name="proxy" default=""/>
-            <parameter left="gint *" right="" name="out_num_jobs" default=""/>
-            <parameter left="GVariant **" right="" name="out_jobs" default=""/>
-            <parameter left="GAsyncResult *" right="" name="res" default=""/>
+            <parameter left="GCancellable *" right="" name="cancellable" default=""/>
             <parameter left="GError **" right="" name="error" default=""/>
         </function>
         <function threadsafety="unspecified" name="print_backend_call_get_all_jobs" status="internal" access="private" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/backend_interface.h" lineno="325" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="void print_backend_call_get_all_jobs(PrintBackend *proxy, gboolean arg_active_only, GCancellable *cancellable, GAsyncReadyCallback callback, gpointer user_data)">
@@ -1656,12 +1657,11 @@
             <parameter left="PrinterCUPS *" right="" name="p" default=""/>
             <parameter left="char ***" right="" name="supported_values" default=""/>
         </function>
-        <function threadsafety="unspecified" name="print_backend_call_get_all_jobs_sync" status="internal" access="private" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/backend_interface.h" lineno="339" virtual="non" meta="plain" const="false" static="false" overload="false" type="gboolean" signature="gboolean print_backend_call_get_all_jobs_sync(PrintBackend *proxy, gboolean arg_active_only, gint *out_num_jobs, GVariant **out_jobs, GCancellable *cancellable, GError **error)">
+        <function threadsafety="unspecified" name="print_backend_call_get_all_jobs_finish" status="internal" access="private" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/backend_interface.h" lineno="332" virtual="non" meta="plain" const="false" static="false" overload="false" type="gboolean" signature="gboolean print_backend_call_get_all_jobs_finish(PrintBackend *proxy, gint *out_num_jobs, GVariant **out_jobs, GAsyncResult *res, GError **error)">
             <parameter left="PrintBackend *" right="" name="proxy" default=""/>
-            <parameter left="gboolean" right="" name="arg_active_only" default=""/>
             <parameter left="gint *" right="" name="out_num_jobs" default=""/>
             <parameter left="GVariant **" right="" name="out_jobs" default=""/>
-            <parameter left="GCancellable *" right="" name="cancellable" default=""/>
+            <parameter left="GAsyncResult *" right="" name="res" default=""/>
             <parameter left="GError **" right="" name="error" default=""/>
         </function>
         <function threadsafety="unspecified" name="get_media_supported" status="internal" access="private" location="backend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/CUPS_src/backend_helper.h" lineno="105" virtual="non" meta="plain" const="false" static="false" overload="false" type="int" signature="int get_media_supported(PrinterCUPS *p, char ***supported_values)">
@@ -1833,11 +1833,6 @@
             <parameter left="Settings *" right="" name="" default=""/>
             <parameter left="char *" right="" name="name" default=""/>
         </function>
-        <function threadsafety="unspecified" name="add_setting" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="315" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="void add_setting(Settings *, char *name, char *val)">
-            <parameter left="Settings *" right="" name="" default=""/>
-            <parameter left="char *" right="" name="name" default=""/>
-            <parameter left="char *" right="" name="val" default=""/>
-        </function>
         <function threadsafety="unspecified" name="print_backend_call_cancel_job" status="internal" access="private" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/backend_interface.h" lineno="347" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="void print_backend_call_cancel_job(PrintBackend *proxy, const gchar *arg_job_id, const gchar *arg_printer_id, GCancellable *cancellable, GAsyncReadyCallback callback, gpointer user_data)">
             <parameter left="PrintBackend *" right="" name="proxy" default=""/>
             <parameter left="const gchar *" right="" name="arg_job_id" default=""/>
@@ -1846,6 +1841,7 @@
             <parameter left="GAsyncReadyCallback" right="" name="callback" default=""/>
             <parameter left="gpointer" right="" name="user_data" default=""/>
         </function>
+        <function threadsafety="unspecified" name="get_new_Settings" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="307" virtual="non" meta="plain" const="false" static="false" overload="false" type="Settings *" signature="Settings * get_new_Settings()"/>
         <function threadsafety="unspecified" name="print_backend_complete_get_printer_state" status="internal" access="private" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/cups/src/backend_interface.h" lineno="128" virtual="non" meta="plain" const="false" static="false" overload="true" overload-number="2" type="void" signature="void print_backend_complete_get_printer_state(PrintBackend *object, GDBusMethodInvocation *invocation, const gchar *state)">
             <parameter left="PrintBackend *" right="" name="object" default=""/>
             <parameter left="GDBusMethodInvocation *" right="" name="invocation" default=""/>
@@ -1932,7 +1928,11 @@
             <parameter left="GDBusMethodInvocation *" right="" name="invocation" default=""/>
             <parameter left="gboolean" right="" name="is_accepting" default=""/>
         </function>
-        <function threadsafety="unspecified" name="get_new_Settings" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="307" virtual="non" meta="plain" const="false" static="false" overload="false" type="Settings *" signature="Settings * get_new_Settings()"/>
+        <function threadsafety="unspecified" name="add_setting" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="315" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="void add_setting(Settings *, char *name, char *val)">
+            <parameter left="Settings *" right="" name="" default=""/>
+            <parameter left="char *" right="" name="name" default=""/>
+            <parameter left="char *" right="" name="val" default=""/>
+        </function>
         <function threadsafety="unspecified" name="print_backend_complete_get_default_printer" status="internal" access="private" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/cups/src/backend_interface.h" lineno="123" virtual="non" meta="plain" const="false" static="false" overload="true" overload-number="2" type="void" signature="void print_backend_complete_get_default_printer(PrintBackend *object, GDBusMethodInvocation *invocation, const gchar *printer_id)">
             <parameter left="PrintBackend *" right="" name="object" default=""/>
             <parameter left="GDBusMethodInvocation *" right="" name="invocation" default=""/>
@@ -2004,19 +2004,14 @@
             <parameter left="GAsyncReadyCallback" right="" name="callback" default=""/>
             <parameter left="gpointer" right="" name="user_data" default=""/>
         </function>
+        <function threadsafety="unspecified" name="get_new_FrontendObj" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="63" virtual="non" meta="plain" const="false" static="false" overload="false" type="FrontendObj *" signature="FrontendObj * get_new_FrontendObj(char *instance_name, event_callback add_cb, event_callback remove_cb)">
+            <parameter left="char *" right="" name="instance_name" default=""/>
+            <parameter left="event_callback" right="" name="add_cb" default=""/>
+            <parameter left="event_callback" right="" name="remove_cb" default=""/>
+        </function>
         <class threadsafety="unspecified" name="_Settings" href="settings.html" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="297">
             <variable threadsafety="unspecified" name="count" fullname="_Settings::count" href="settings.html#count-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="298" type="int" static="false"/>
             <variable threadsafety="unspecified" name="table" fullname="_Settings::table" href="settings.html#table-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="299" type="GHashTable *" static="false"/>
-        </class>
-        <class threadsafety="unspecified" name="_FrontendObj" href="frontendobj.html" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="38">
-            <variable threadsafety="unspecified" name="add_cb" fullname="_FrontendObj::add_cb" href="frontendobj.html#add_cb-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="41" type="event_callback" static="false"/>
-            <variable threadsafety="unspecified" name="backend" fullname="_FrontendObj::backend" href="frontendobj.html#backend-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="45" type="GHashTable *" static="false"/>
-            <variable threadsafety="unspecified" name="bus_name" fullname="_FrontendObj::bus_name" href="frontendobj.html#bus_name-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="40" type="char *" static="false"/>
-            <variable threadsafety="unspecified" name="num_backends" fullname="_FrontendObj::num_backends" href="frontendobj.html#num_backends-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="44" type="int" static="false"/>
-            <variable threadsafety="unspecified" name="num_printers" fullname="_FrontendObj::num_printers" href="frontendobj.html#num_printers-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="47" type="int" static="false"/>
-            <variable threadsafety="unspecified" name="printer" fullname="_FrontendObj::printer" href="frontendobj.html#printer-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="48" type="GHashTable *" static="false"/>
-            <variable threadsafety="unspecified" name="rem_cb" fullname="_FrontendObj::rem_cb" href="frontendobj.html#rem_cb-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="42" type="event_callback" static="false"/>
-            <variable threadsafety="unspecified" name="skeleton" fullname="_FrontendObj::skeleton" href="frontendobj.html#skeleton-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="39" type="PrintFrontend *" static="false"/>
         </class>
         <typedef threadsafety="unspecified" name="event_callback" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="37"/>
         <function threadsafety="unspecified" name="get_absolute_path" status="internal" access="private" location="common_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/common_helper.h" lineno="26" virtual="non" meta="plain" const="false" static="false" overload="false" type="char *" signature="char * get_absolute_path(char *file_path)">
@@ -2063,11 +2058,16 @@
             <parameter left="GAsyncResult *" right="" name="res" default=""/>
             <parameter left="GError **" right="" name="error" default=""/>
         </function>
-        <function threadsafety="unspecified" name="get_new_FrontendObj" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="63" virtual="non" meta="plain" const="false" static="false" overload="false" type="FrontendObj *" signature="FrontendObj * get_new_FrontendObj(char *instance_name, event_callback add_cb, event_callback remove_cb)">
-            <parameter left="char *" right="" name="instance_name" default=""/>
-            <parameter left="event_callback" right="" name="add_cb" default=""/>
-            <parameter left="event_callback" right="" name="remove_cb" default=""/>
-        </function>
+        <class threadsafety="unspecified" name="_FrontendObj" href="frontendobj.html" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="38">
+            <variable threadsafety="unspecified" name="add_cb" fullname="_FrontendObj::add_cb" href="frontendobj.html#add_cb-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="41" type="event_callback" static="false"/>
+            <variable threadsafety="unspecified" name="backend" fullname="_FrontendObj::backend" href="frontendobj.html#backend-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="45" type="GHashTable *" static="false"/>
+            <variable threadsafety="unspecified" name="bus_name" fullname="_FrontendObj::bus_name" href="frontendobj.html#bus_name-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="40" type="char *" static="false"/>
+            <variable threadsafety="unspecified" name="num_backends" fullname="_FrontendObj::num_backends" href="frontendobj.html#num_backends-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="44" type="int" static="false"/>
+            <variable threadsafety="unspecified" name="num_printers" fullname="_FrontendObj::num_printers" href="frontendobj.html#num_printers-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="47" type="int" static="false"/>
+            <variable threadsafety="unspecified" name="printer" fullname="_FrontendObj::printer" href="frontendobj.html#printer-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="48" type="GHashTable *" static="false"/>
+            <variable threadsafety="unspecified" name="rem_cb" fullname="_FrontendObj::rem_cb" href="frontendobj.html#rem_cb-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="42" type="event_callback" static="false"/>
+            <variable threadsafety="unspecified" name="skeleton" fullname="_FrontendObj::skeleton" href="frontendobj.html#skeleton-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="39" type="PrintFrontend *" static="false"/>
+        </class>
         <function threadsafety="unspecified" name="print_backend_proxy_new_sync" status="internal" access="private" location="backend_interface.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/backend_interface.h" lineno="457" virtual="non" meta="plain" const="false" static="false" overload="false" type="PrintBackend *" signature="PrintBackend * print_backend_proxy_new_sync(GDBusConnection *connection, GDBusProxyFlags flags, const gchar *name, const gchar *object_path, GCancellable *cancellable, GError **error)">
             <parameter left="GDBusConnection *" right="" name="connection" default=""/>
             <parameter left="GDBusProxyFlags" right="" name="flags" default=""/>
@@ -2152,9 +2152,8 @@
             <parameter left="GAsyncResult *" right="" name="res" default=""/>
             <parameter left="GError **" right="" name="error" default=""/>
         </function>
-        <function threadsafety="unspecified" name="fill_basic_options" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="184" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="void fill_basic_options(PrinterObj *, GVariant *)">
+        <function threadsafety="unspecified" name="print_basic_options" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="189" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="void print_basic_options(PrinterObj *)">
             <parameter left="PrinterObj *" right="" name="" default=""/>
-            <parameter left="GVariant *" right="" name="" default=""/>
         </function>
         <function threadsafety="unspecified" name="cancel_job" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="285" virtual="non" meta="plain" const="false" static="false" overload="true" overload-number="2" type="gboolean" signature="gboolean cancel_job(PrinterObj *p, char *job_id)">
             <parameter left="PrinterObj *" right="" name="p" default=""/>
@@ -2201,11 +2200,12 @@
         <function threadsafety="unspecified" name="is_accepting_jobs" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="190" virtual="non" meta="plain" const="false" static="false" overload="false" type="gboolean" signature="gboolean is_accepting_jobs(PrinterObj *)">
             <parameter left="PrinterObj *" right="" name="" default=""/>
         </function>
-        <function threadsafety="unspecified" name="print_basic_options" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="189" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="void print_basic_options(PrinterObj *)">
-            <parameter left="PrinterObj *" right="" name="" default=""/>
-        </function>
         <function threadsafety="unspecified" name="connect_to_dbus" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="68" virtual="non" meta="plain" const="false" static="false" overload="true" overload-number="2" type="void" signature="void connect_to_dbus(FrontendObj *)">
             <parameter left="FrontendObj *" right="" name="" default=""/>
+        </function>
+        <function threadsafety="unspecified" name="fill_basic_options" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="184" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="void fill_basic_options(PrinterObj *, GVariant *)">
+            <parameter left="PrinterObj *" right="" name="" default=""/>
+            <parameter left="GVariant *" right="" name="" default=""/>
         </function>
         <class threadsafety="unspecified" name="_PrinterObj" href="printerobj.html" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="159">
             <variable threadsafety="unspecified" name="backend_name" fullname="_PrinterObj::backend_name" href="printerobj.html#backend_name-var" status="commendable" access="public" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="161" type="char *" static="false"/>
@@ -2268,11 +2268,41 @@
             <parameter left="gboolean" right="" name="active_only" default=""/>
         </function>
         <function threadsafety="unspecified" name="get_new_PrinterObj" status="internal" access="private" location="frontend_helper.h" filepath="/home/rithvikp/qt/cpd/backends/cups/release/headers/frontend_helper.h" lineno="179" virtual="non" meta="plain" const="false" static="false" overload="false" type="PrinterObj *" signature="PrinterObj * get_new_PrinterObj()"/>
-        <class threadsafety="unspecified" name="QCpdWindow" href="qcpdwindow.html" status="commendable" access="public" location="cpd.h" filepath="/home/rithvikp/qt/cpd/headers/cpd.h" lineno="70" module="CPD">
-            <function threadsafety="unspecified" name="~QCpdWindow" fullname="QCpdWindow::~QCpdWindow" href="qcpdwindow.html#dtor.QCpdWindow" status="commendable" access="public" location="cpd.h" filepath="/home/rithvikp/qt/cpd/headers/cpd.h" lineno="74" virtual="non" meta="destructor" const="false" static="false" overload="false" type="" signature="~QCpdWindow()"/>
-            <function threadsafety="unspecified" name="QCpdWindow" fullname="QCpdWindow::QCpdWindow" href="qcpdwindow.html#QCpdWindow" status="commendable" access="public" location="cpd.cpp" filepath="/home/rithvikp/qt/cpd/sources/cpd.cpp" lineno="283" virtual="non" meta="constructor" const="false" static="false" overload="false" type="" signature="QCpdWindow()"/>
-            <function threadsafety="unspecified" name="resizeEvent" fullname="QCpdWindow::resizeEvent" href="qcpdwindow.html#resizeEvent" status="commendable" access="protected" location="cpd.cpp" filepath="/home/rithvikp/qt/cpd/sources/cpd.cpp" lineno="325" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="void resizeEvent(QResizeEvent *event)">
+        <class threadsafety="unspecified" name="QCpdWindow" href="qcpdwindow.html" status="commendable" access="public" location="cpd.h" filepath="/home/rithvikp/qt/cpd/headers/cpd.h" lineno="73" module="CPD">
+            <function threadsafety="unspecified" name="~QCpdWindow" fullname="QCpdWindow::~QCpdWindow" href="qcpdwindow.html#dtor.QCpdWindow" status="commendable" access="public" location="cpd.h" filepath="/home/rithvikp/qt/cpd/headers/cpd.h" lineno="77" virtual="non" meta="destructor" const="false" static="false" overload="false" type="" signature="~QCpdWindow()"/>
+            <function threadsafety="unspecified" name="QCpdWindow" fullname="QCpdWindow::QCpdWindow" href="qcpdwindow.html#QCpdWindow" status="commendable" access="public" location="cpd.cpp" filepath="/home/rithvikp/qt/cpd/sources/cpd.cpp" lineno="284" virtual="non" meta="constructor" const="false" static="false" overload="false" type="" signature="QCpdWindow()"/>
+            <function threadsafety="unspecified" name="closeEvent" fullname="QCpdWindow::closeEvent" href="qcpdwindow.html#closeEvent" status="commendable" access="protected" location="cpd.cpp" filepath="/home/rithvikp/qt/cpd/sources/cpd.cpp" lineno="350" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="void closeEvent(QCloseEvent *event)">
+                <parameter left="QCloseEvent *" right="" name="event" default=""/>
+            </function>
+            <function threadsafety="unspecified" name="resizeEvent" fullname="QCpdWindow::resizeEvent" href="qcpdwindow.html#resizeEvent" status="commendable" access="protected" location="cpd.cpp" filepath="/home/rithvikp/qt/cpd/sources/cpd.cpp" lineno="326" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="void resizeEvent(QResizeEvent *event)">
                 <parameter left="QResizeEvent *" right="" name="event" default=""/>
+            </function>
+        </class>
+        <class threadsafety="unspecified" name="QQmlWidget" href="qqmlwidget.html" status="commendable" access="public" location="cpd.h" filepath="/home/rithvikp/qt/cpd/headers/cpd.h" lineno="47" module="CPD" brief="Creates a widget from the qml files">
+            <function threadsafety="unspecified" name="~QQmlWidget" fullname="QQmlWidget::~QQmlWidget" href="qqmlwidget.html#dtor.QQmlWidget" status="commendable" access="public" location="cpd.h" filepath="/home/rithvikp/qt/cpd/headers/cpd.h" lineno="57" virtual="non" meta="destructor" const="false" static="false" overload="false" type="" signature="~QQmlWidget()"/>
+            <variable threadsafety="unspecified" name="f" fullname="QQmlWidget::f" href="qqmlwidget.html#f-var" status="commendable" access="public" location="cpd.h" filepath="/home/rithvikp/qt/cpd/headers/cpd.h" lineno="54" type="FrontendObj *" static="false"/>
+            <variable threadsafety="unspecified" name="jobHoldOptionsList" fullname="QQmlWidget::jobHoldOptionsList" href="qqmlwidget.html#jobHoldOptionsList-var" status="commendable" access="public" location="cpd.h" filepath="/home/rithvikp/qt/cpd/headers/cpd.h" lineno="53" type="QStringList" static="false"/>
+            <variable threadsafety="unspecified" name="jobsList" fullname="QQmlWidget::jobsList" href="qqmlwidget.html#jobsList-var" status="commendable" access="public" location="cpd.h" filepath="/home/rithvikp/qt/cpd/headers/cpd.h" lineno="51" type="QStringList" static="false"/>
+            <variable threadsafety="unspecified" name="supportedResolutions" fullname="QQmlWidget::supportedResolutions" href="qqmlwidget.html#supportedResolutions-var" status="commendable" access="public" location="cpd.h" filepath="/home/rithvikp/qt/cpd/headers/cpd.h" lineno="52" type="QStringList" static="false"/>
+            <function threadsafety="unspecified" name="QQmlWidget" fullname="QQmlWidget::QQmlWidget" href="qqmlwidget.html#QQmlWidget" status="commendable" access="public" location="cpd.cpp" filepath="/home/rithvikp/qt/cpd/sources/cpd.cpp" lineno="52" virtual="non" meta="constructor" const="false" static="false" overload="false" type="" signature="QQmlWidget(QWidget *parent)">
+                <parameter left="QWidget *" right="" name="parent" default="Q_NULLPTR"/>
+            </function>
+            <function threadsafety="unspecified" name="cpdQuit" fullname="QQmlWidget::cpdQuit" href="qqmlwidget.html#cpdQuit" status="commendable" access="public" location="cpd.cpp" filepath="/home/rithvikp/qt/cpd/sources/cpd.cpp" lineno="134" virtual="non" meta="slot" const="false" static="false" overload="false" type="void" signature="void cpdQuit()"/>
+            <function threadsafety="unspecified" name="initBackend" fullname="QQmlWidget::initBackend" href="qqmlwidget.html#initBackend" status="commendable" access="private" location="cpd.cpp" filepath="/home/rithvikp/qt/cpd/sources/cpd.cpp" lineno="245" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="void initBackend()"/>
+            <function threadsafety="unspecified" name="printDocument" fullname="QQmlWidget::printDocument" href="qqmlwidget.html#printDocument" status="commendable" access="public" location="cpd.cpp" filepath="/home/rithvikp/qt/cpd/sources/cpd.cpp" lineno="100" virtual="non" meta="slot" const="false" static="false" overload="false" type="void" signature="void printDocument(QString printerName)">
+                <parameter left="QString" right="" name="printerName" default=""/>
+            </function>
+            <function threadsafety="unspecified" name="resize" fullname="QQmlWidget::resize" href="qqmlwidget.html#resize" status="commendable" access="public" location="cpd.cpp" filepath="/home/rithvikp/qt/cpd/sources/cpd.cpp" lineno="87" virtual="non" meta="plain" const="false" static="false" overload="false" type="void" signature="void resize(const QRect &amp;rect)">
+                <parameter left="const QRect &amp;" right="" name="rect" default=""/>
+            </function>
+            <function threadsafety="unspecified" name="setAdvancedOptions" fullname="QQmlWidget::setAdvancedOptions" href="qqmlwidget.html#setAdvancedOptions" status="commendable" access="public" location="cpd.cpp" filepath="/home/rithvikp/qt/cpd/sources/cpd.cpp" lineno="211" virtual="non" meta="slot" const="false" static="false" overload="false" type="void" signature="void setAdvancedOptions(QString printerName)">
+                <parameter left="QString" right="" name="printerName" default=""/>
+            </function>
+            <function threadsafety="unspecified" name="setJobsHoldOptions" fullname="QQmlWidget::setJobsHoldOptions" href="qqmlwidget.html#setJobsHoldOptions" status="commendable" access="public" location="cpd.cpp" filepath="/home/rithvikp/qt/cpd/sources/cpd.cpp" lineno="175" virtual="non" meta="slot" const="false" static="false" overload="false" type="void" signature="void setJobsHoldOptions(QString printerName)">
+                <parameter left="QString" right="" name="printerName" default=""/>
+            </function>
+            <function threadsafety="unspecified" name="setJobsList" fullname="QQmlWidget::setJobsList" href="qqmlwidget.html#setJobsList" status="commendable" access="public" location="cpd.cpp" filepath="/home/rithvikp/qt/cpd/sources/cpd.cpp" lineno="153" virtual="non" meta="slot" const="false" static="false" overload="false" type="void" signature="void setJobsList(bool activeOnly)">
+                <parameter left="bool" right="" name="activeOnly" default=""/>
             </function>
         </class>
         <class threadsafety="unspecified" name="QCpdPreviewWidget" href="qcpdpreviewwidget.html" status="commendable" access="public" location="preview.h" filepath="/home/rithvikp/qt/cpd/headers/preview.h" lineno="34" module="CPD">
@@ -2302,6 +2332,6 @@
                 <parameter left="const QRect &amp;" right="" name="rect" default=""/>
             </function>
         </class>
-        <module name="CPD" href="cpd-module.html" status="internal" seen="false" title="" members="QCpdWindow,QCpdPreviewWidget,QPreviewToolbarWidget"/>
+        <module name="CPD" href="cpd-module.html" status="internal" seen="false" title="" members="QQmlWidget,QCpdWindow,QCpdPreviewWidget,QPreviewToolbarWidget"/>
     </namespace>
 </INDEX>

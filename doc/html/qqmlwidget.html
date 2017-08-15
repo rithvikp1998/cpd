@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- cpd.cpp -->
+  <title>QQmlWidget Class | CPD </title>
+  <link rel="stylesheet" type="text/css" href="style/offline-simple.css" />
+  <script type="text/javascript">
+    window.onload = function(){document.getElementsByTagName("link").item(0).setAttribute("href", "style/offline.css");};
+  </script>
+</head>
+<body>
+<div class="header" id="qtdocheader">
+  <div class="main">
+    <div class="main-rounded">
+      <div class="navigationbar">
+        <table><tr>
+<li>QQmlWidget</li>
+        </tr></table>
+      </div>
+    </div>
+<div class="content">
+<div class="line">
+<div class="content mainContent">
+<div class="sidebar">
+<div class="toc">
+<h3><a name="toc">Contents</a></h3>
+<ul>
+<li class="level1"><a href="#public-functions">Public Functions</a></li>
+<li class="level1"><a href="#public-slots">Public Slots</a></li>
+<li class="level1"><a href="#details">Detailed Description</a></li>
+</ul>
+</div>
+<div class="sidebar-content" id="sidebar-content"></div></div>
+<h1 class="title">QQmlWidget Class</h1>
+<!-- $$$QQmlWidget-brief -->
+<p>The <a href="qqmlwidget.html">QQmlWidget</a> class creates a widget from the qml files <a href="#details">More...</a></p>
+<!-- @@@QQmlWidget -->
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> Header:</td><td class="memItemRight bottomAlign"> <span class="preprocessor">#include &lt;QQmlWidget&gt;</span>
+</td></tr><tr><td class="memItemLeft rightAlign topAlign"> Inherits:</td><td class="memItemRight bottomAlign"> </td></tr></table></div><ul>
+<li><a href="qqmlwidget-members.html">List of all members, including inherited members</a></li>
+</ul>
+<a name="public-functions"></a>
+<h2 id="public-functions">Public Functions</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="qqmlwidget.html#QQmlWidget">QQmlWidget</a></b>(QWidget *<i> parent</i> = Q_NULLPTR)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> </td><td class="memItemRight bottomAlign"><b><a href="qqmlwidget.html#dtor.QQmlWidget">~QQmlWidget</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qqmlwidget.html#resize">resize</a></b>(const QRect &amp;<i> rect</i>)</td></tr>
+</table></div>
+<a name="public-slots"></a>
+<h2 id="public-slots">Public Slots</h2>
+<div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qqmlwidget.html#cpdQuit">cpdQuit</a></b>()</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qqmlwidget.html#printDocument">printDocument</a></b>(QString<i> printerName</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qqmlwidget.html#setAdvancedOptions">setAdvancedOptions</a></b>(QString<i> printerName</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qqmlwidget.html#setJobsHoldOptions">setJobsHoldOptions</a></b>(QString<i> printerName</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qqmlwidget.html#setJobsList">setJobsList</a></b>(bool<i> activeOnly</i>)</td></tr>
+</table></div>
+<a name="details"></a>
+<!-- $$$QQmlWidget-description -->
+<div class="descr">
+<h2 id="details">Detailed Description</h2>
+<p>The <a href="qqmlwidget.html">QQmlWidget</a> class creates a widget from the qml files</p>
+<p>The dialog is comprised of three widgets - <a href="qqmlwidget.html">QQmlWidget</a>, <a href="qcpdpreviewwidget.html">QCpdPreviewWidget</a> and <a href="qpreviewtoolbarwidget.html">QPreviewToolbarWidget</a>. <a href="qqmlwidget.html">QQmlWidget</a> creates a QQuickWidget with pages/main.qml as the root and it handles the signals that are emitted from the pages/main.qml</p>
+</div>
+<!-- @@@QQmlWidget -->
+<div class="func">
+<h2>Member Function Documentation</h2>
+<!-- $$$QQmlWidget[overload1]$$$QQmlWidgetQWidget* -->
+<h3 class="fn" id="QQmlWidget"><a name="QQmlWidget"></a>QQmlWidget::<span class="name">QQmlWidget</span>(<span class="type">QWidget</span> *<i> parent</i> = Q_NULLPTR)</h3>
+<p>Constructs <a href="qqmlwidget.html">QQmlWidget</a> objects with <i>parent</i>. Connects signals from pages/main.qml with slots in <a href="qqmlwidget.html">QQmlWidget</a>.</p>
+<!-- @@@QQmlWidget -->
+<!-- $$$~QQmlWidget[overload1]$$$~QQmlWidget -->
+<h3 class="fn" id="dtor.QQmlWidget"><a name="dtor.QQmlWidget"></a>QQmlWidget::<span class="name">~QQmlWidget</span>()</h3>
+<p>Destroys <a href="qqmlwidget.html">QQmlWidget</a> objects</p>
+<!-- @@@~QQmlWidget -->
+<!-- $$$cpdQuit[overload1]$$$cpdQuit -->
+<h3 class="fn" id="cpdQuit"><a name="cpdQuit"></a><code>[slot] </code><span class="type">void</span> QQmlWidget::<span class="name">cpdQuit</span>()</h3>
+<p>This function acts as a slot for the signal cancelButtonClicked emitted from the pages/main.qml file. The signal is emitted when the user clicks on the &quot;Cancel&quot; Button in the sidebar.</p>
+<!-- @@@cpdQuit -->
+<!-- $$$printDocument[overload1]$$$printDocumentQString -->
+<h3 class="fn" id="printDocument"><a name="printDocument"></a><code>[slot] </code><span class="type">void</span> QQmlWidget::<span class="name">printDocument</span>(<span class="type">QString</span><i> printerName</i>)</h3>
+<p>printDocument takes the name of the printer as a parameter <i>printerName</i>, looks up the PrinterObj whose name matches the parameter, sets printer settings to those chosen by the user and sends the file to printing.</p>
+<!-- @@@printDocument -->
+<!-- $$$resize[overload1]$$$resizeconstQRect& -->
+<h3 class="fn" id="resize"><a name="resize"></a><span class="type">void</span> QQmlWidget::<span class="name">resize</span>(const <span class="type">QRect</span> &amp;<i> rect</i>)</h3>
+<p>resize() takes a QRect&amp; <i>rect</i> as a parameter and uses it to resize the <a href="qqmlwidget.html">QQmlWidget</a> objects to the same dimensions as the parameter <i>rect</i></p>
+<!-- @@@resize -->
+<!-- $$$setAdvancedOptions[overload1]$$$setAdvancedOptionsQString -->
+<h3 class="fn" id="setAdvancedOptions"><a name="setAdvancedOptions"></a><code>[slot] </code><span class="type">void</span> QQmlWidget::<span class="name">setAdvancedOptions</span>(<span class="type">QString</span><i> printerName</i>)</h3>
+<p>This function finds the more advanced options like &quot;Resolution&quot;, &quot;Contrast&quot;, &quot;Brightness&quot; etc. for a given printer with name <i>printerName</i> and puts them in their corresponding QStringLists.</p>
+<p>Note: Due to some limitations with the CUPS API, only &quot;Resolution&quot; options are being set. This function will be updated as soon as we find a way to overcome the limitations in the API</p>
+<!-- @@@setAdvancedOptions -->
+<!-- $$$setJobsHoldOptions[overload1]$$$setJobsHoldOptionsQString -->
+<h3 class="fn" id="setJobsHoldOptions"><a name="setJobsHoldOptions"></a><code>[slot] </code><span class="type">void</span> QQmlWidget::<span class="name">setJobsHoldOptions</span>(<span class="type">QString</span><i> printerName</i>)</h3>
+<p>Many printers come with a hold option which specifies when the job should start after a user clicked the &quot;Print&quot; button in the UI. This function gets all the available options for a printer with the given name <i>printerName</i> and puts them in a QStringList called jobHoldOptionList.</p>
+<!-- @@@setJobsHoldOptions -->
+<!-- $$$setJobsList[overload1]$$$setJobsListbool -->
+<h3 class="fn" id="setJobsList"><a name="setJobsList"></a><code>[slot] </code><span class="type">void</span> QQmlWidget::<span class="name">setJobsList</span>(<span class="type">bool</span><i> activeOnly</i>)</h3>
+<p>The function gets the a list of all the jobs from all the backends. It then iterates over each job and concatenates the printer's name, job's user who started the job and the current state of the job and appends the string to a QStringList called <a href="qqmlwidget.html#jobsList-var">jobsList</a>.</p>
+<p>When <i>activeOnly</i> is set to 1, only jobs are that are currently running are shown whereas when it is set to 0, all jobs are shown.</p>
+<p>The &quot;%&quot; parameter is used a separator to split the three strings: printer's name, job's user, job's state.</p>
+<!-- @@@setJobsList -->
+</div>
+        </div>
+       </div>
+   </div>
+   </div>
+</div>
+<div class="footer">
+   <p>
+   <acronym title="Copyright">&copy;</acronym> 2016 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.<br>    The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.<br>    Qt and respective logos are trademarks of The Qt Company Ltd.     in Finland and/or other countries worldwide. All other trademarks are property
+   of their respective owners. </p>
+</div>
+</body>
+</html>
