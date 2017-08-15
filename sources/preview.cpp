@@ -35,6 +35,7 @@
 
 /*!
  *  \class QCpdPreviewWidget
+ *  \inmodule CPD
  *
  *  The dialog is comprised of three widgets - QQmlWidget, QCpdPreviewWidget and
  *  QPreviewToolbarWidget. This class acts as the preview window to the dialog. This widget derives
@@ -43,10 +44,9 @@
  */
 
 /*!
- * \fn QCpdPreviewWidget::QCpdPreviewWidget
- * \param parent
+ *  \fn QCpdPreviewWidget::QCpdPreviewWidget(QWidget* parent)
  *
- *  This is the default constructor for QCpdPreviewWidget. The paintRequested signal is emitted
+ *  Constructs QCpdPreviewWidget objects with \a parent. The paintRequested signal is emitted
  *  when the QPrintPreviewWidget is constructed.
  */
 QCpdPreviewWidget::QCpdPreviewWidget(QWidget* parent):
@@ -64,15 +64,14 @@ QCpdPreviewWidget::QCpdPreviewWidget(QWidget* parent):
 /*!
  *  \fn QCpdPreviewWidget::~QCpdPreviewWidget()
  *
- *  The default destructor for the QCpdPreviewWidget class.
+ *  Destroys QCpdPreviewWidget objects
  */
 QCpdPreviewWidget::~QCpdPreviewWidget() = default;
 
 /*!
- * \fn void QCpdPreviewWidget::resize()
- * \param rect
+ *  \fn void QCpdPreviewWidget::resize(const QRect& rect)
  *
- *  resize() takes a QRect& as a parameter and uses it to resize the QQmlWidget objects
+ *  resize() takes a QRect& \a rect as a parameter and uses it to resize the QQmlWidget objects
  *  to the same dimensions as the parameter rect
  */
 void QCpdPreviewWidget::resize(const QRect& rect)
@@ -82,11 +81,10 @@ void QCpdPreviewWidget::resize(const QRect& rect)
 }
 
 /*!
- * \fn void QCpdPreviewWidget::print()
- * \param printer
+ *  \fn void QCpdPreviewWidget::print(QPrinter *printer)
  *
  *  The function acts as a slot for the paintRequested signal emitted by QPrintPreviewWidget.
- *  The function uses poppler and QPrinter's settings to generated and paint the image.
+ *  The function uses poppler and QPrinter \a printer settings to generated and paint the image.
  */
 void QCpdPreviewWidget::print(QPrinter *printer)
 {
@@ -124,7 +122,7 @@ void QCpdPreviewWidget::print(QPrinter *printer)
 }
 
 /*!
- * \fn void QCpdPreviewWidget::showNextPage
+ *  \fn void QCpdPreviewWidget::showNextPage()
  *
  *  This function acts as a slot for the nextPageButtonClicked signal emitted from
  *  pages/preview_toolbar.qml and shows the next page in the document in the preview window.
@@ -136,7 +134,7 @@ void QCpdPreviewWidget::showNextPage()
 }
 
 /*!
- * \fn void QCpdPreviewWidget::showNextPage
+ *  \fn void QCpdPreviewWidget::showPrevPage()
  *
  *  This function acts as a slot for the prevPageButtonClicked signal emitted from
  *  pages/preview_toolbar.qml and shows the previous page in the document in the preview window.
@@ -148,10 +146,11 @@ void QCpdPreviewWidget::showPrevPage()
 }
 
 /*!
- * \fn void QCpdPreviewWidget::showNextPage
+ *  \fn void QCpdPreviewWidget::setZoom(qreal zoomFactor)
  *
  *  This function acts as a slot for the zoomSliderValueChanged signal emitted from
- *  pages/preview_toolbar.qml and sets the size of the page shown in the preview.
+ *  pages/preview_toolbar.qml and sets the size of the page shown in the preview according to
+ *  \a zoomFactor
  */
 void QCpdPreviewWidget::setZoom(qreal zoomFactor)
 {
@@ -162,11 +161,18 @@ void QCpdPreviewWidget::setZoom(qreal zoomFactor)
 }
 
 /*!
- * \class QPreviewToolbarWidget
+ *  \class QPreviewToolbarWidget
+ *  \inmodule CPD
  *
  *  The dialog is comprised of three widgets - QQmlWidget, QCpdPreviewWidget and
  *  QPreviewToolbarWidget. QPreviewToolbarWidget creates a QQuickWidget with
  *  pages/preview_toolbar.qml as the root and handles all the signals from the qml file.
+ */
+
+/*!
+ *  \fn QPreviewToolbarWidget::QPreviewToolbarWidget(QWidget* parent)
+ *
+ *  Constructs QPreviewToolbarWidget objects with \a parent
  */
 QPreviewToolbarWidget::QPreviewToolbarWidget(QWidget* parent):
         QWidget(parent),
@@ -181,15 +187,14 @@ QPreviewToolbarWidget::QPreviewToolbarWidget(QWidget* parent):
 /*!
  *  \fn QPreviewToolbarWidget::~QPreviewToolbarWidget()
  *
- *  The default destructor for the QPreviewToolbarWidget class.
+ *  Destroys QPreviewToolbarWidget objects
  */
 QPreviewToolbarWidget::~QPreviewToolbarWidget() = default;
 
 /*!
- * \fn void QPreviewToolbarWidget::resize()
- * \param rect
+ *  \fn void QPreviewToolbarWidget::resize(const QRect& rect)
  *
- *  resize() takes a QRect& as a parameter and uses it to resize the QQmlWidget objects
+ *  resize() takes a QRect& \a rect as a parameter and uses it to resize the QQmlWidget objects
  *  to the same dimensions as the parameter rect
  */
 void QPreviewToolbarWidget::resize(const QRect& rect)

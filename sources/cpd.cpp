@@ -45,7 +45,7 @@ extern "C" {
 /*!
  *  \fn QQmlWidget::QQmlWidget(QWidget *parent)
  *
- *  This is the default constructor for QQmlWidget. Connects signals from pages/main.qml with
+ *  Constructs QQmlWidget objects with \a parent. Connects signals from pages/main.qml with
  *  slots in QQmlWidget.
  */
 QQmlWidget::QQmlWidget(QWidget* parent):
@@ -71,11 +71,17 @@ QQmlWidget::QQmlWidget(QWidget* parent):
 }
 
 /*!
- * \fn void QQmlWidget::resize()
- * \param rect
+ *  \fn QQmlWidget::~QQmlWidget()
  *
- *  resize() takes a QRect& as a parameter and uses it to resize the QQmlWidget objects
- *  to the same dimensions as the parameter rect
+ *  Destroys QQmlWidget objects
+ */
+QQmlWidget::~QQmlWidget() = default;
+
+/*!
+ *  \fn void QQmlWidget::resize(const QRect& rect)
+ *
+ *  resize() takes a QRect& \a rect as a parameter and uses it to resize the QQmlWidget objects
+ *  to the same dimensions as the parameter \a rect
  */
 void QQmlWidget::resize(const QRect& rect)
 {
@@ -84,12 +90,11 @@ void QQmlWidget::resize(const QRect& rect)
 }
 
 /*!
- *  \fn void QQmlWidget::printDocument()
- *  \param printerName
+ *  \fn void QQmlWidget::printDocument(QString printerName)
  *
- *  printDocument takes the name of the printer as a parameter, looks up the PrinterObj whose name
- *  matches the parameter, sets printer settings to those chosen by the user and sends the file
- *  to printing.
+ *  printDocument takes the name of the printer as a parameter \a printerName, looks up the
+ *  PrinterObj whose name matches the parameter, sets printer settings to those chosen by the user
+ *  and sends the file to printing.
  */
 void QQmlWidget::printDocument(QString printerName)
 {
@@ -119,7 +124,7 @@ void QQmlWidget::printDocument(QString printerName)
 }
 
 /*!
- * \fn void QQmlWidget::cpdQuit()
+ *  \fn void QQmlWidget::cpdQuit()
  *
  *  This function acts as a slot for the signal cancelButtonClicked emitted from the
  *  pages/main.qml file. The signal is emitted when the user clicks on the "Cancel" Button
@@ -132,12 +137,14 @@ void QQmlWidget::cpdQuit()
 }
 
 /*!
- * \fn void QQmlWidget::setJobsList()
- * \param activeOnly
+ *  \fn void QQmlWidget::setJobsList(bool activeOnly)
  *
  *  The function gets the a list of all the jobs from all the backends. It then iterates over each
  *  job and concatenates the printer's name, job's user who started the job and the current state
- *  of the job and appends the string to a QStringList called jobsList
+ *  of the job and appends the string to a QStringList called jobsList.
+ *
+ *  When \a activeOnly is set to 1, only jobs are that are currently running are shown whereas
+ *  when it is set to 0, all jobs are shown.
  *
  *  The "%" parameter is used a separator to split the three strings: printer's name, job's user,
  *  job's state.
@@ -158,14 +165,14 @@ void QQmlWidget::setJobsList(bool activeOnly)
 }
 
 /*!
- * \fn void QQmlWidget::setJobsHoldOptions()
- * \param printerName
+ *  \fn void QQmlWidget::setJobsHoldOptions(QString printerName)
  *
  *  Many printers come with a hold option which specifies when the job should start after a user
  *  clicked the "Print" button in the UI. This function gets all the available options for a printer
- *  with the given name and puts them in a QStringList called jobHoldOptionList
+ *  with the given name \a printerName and puts them in a QStringList called jobHoldOptionList.
  */
-void QQmlWidget::setJobsHoldOptions(QString printerName){
+void QQmlWidget::setJobsHoldOptions(QString printerName)
+{
     QByteArray printer_name_ba = printerName.toLocal8Bit();
     char *printer_name = printer_name_ba.data();
 
@@ -192,11 +199,10 @@ void QQmlWidget::setJobsHoldOptions(QString printerName){
 }
 
 /*!
- * \fn void QQmlWidget::setAdvancedOptions()
- * \param printerName
+ *  \fn void QQmlWidget::setAdvancedOptions(QString printerName)
  *
  *  This function finds the more advanced options like "Resolution", "Contrast", "Brightness" etc.
- *  and puts them in their corresponding QStringLists.
+ *  for a given printer with name \a printerName and puts them in their corresponding QStringLists.
  *
  *  Note: Due to some limitations with the CUPS API, only "Resolution" options are being set. This
  *  function will be updated as soon as we find a way to overcome the limitations in the API
@@ -229,7 +235,7 @@ void QQmlWidget::setAdvancedOptions(QString printerName)
 }
 
 /*!
- * \fn void QQmlWidget::initBackend
+ *  \fn void QQmlWidget::initBackend()
  *
  *  This function is called whenever a new instance of the dialog is created. This function helps
  *  create a new FrontendObj for a new instance of the dialog and connects the FrontendObj to the
@@ -245,6 +251,7 @@ void QQmlWidget::initBackend()
 
 /*!
  *  \class QCpdWindow
+ *  \inmodule CPD
  *
  *  This class acts as the main window for the print dialog.
  *
@@ -259,6 +266,19 @@ void QQmlWidget::initBackend()
  *              |
  *              |--- previewWidget
  *              |--- previewToolbarWidget
+ *
+ *  \code
+ *
+ *      printDialog = new QCpdWindow();
+ *      // print...
+ *
+ *  \endcode
+ */
+
+/*!
+ *  \fn QCpdWindow::QCpdWindow()
+ *
+ *  Constructs QCpdWindow objects
  */
 QCpdWindow::QCpdWindow():
         qmlWidget(new QQmlWidget(this)),
@@ -297,11 +317,10 @@ QCpdWindow::QCpdWindow():
 }
 
 /*!
- * \fn void QCpdWindow::resizeEvent()
- * \param event
+ *  \fn void QCpdWindow::resizeEvent(QResizeEvent* event)
  *
  *  This function overrides the resizeEvent function from QMainWindow and resizes all the child
- *  widgets to match the size of the resized layout items.
+ *  widgets to match the size of the resized layout items when \a event occurs.
  */
 void QCpdWindow::resizeEvent(QResizeEvent* event)
 {
@@ -315,18 +334,17 @@ void QCpdWindow::resizeEvent(QResizeEvent* event)
 }
 
 /*!
- *  \fn void QCpdWindow::~QCpdWindow()
+ *  \fn QCpdWindow::~QCpdWindow()
  *
- *  Default destructor for the QCpdWindow class
+ *  Destroys QCpdWindow objects
  */
 QCpdWindow::~QCpdWindow() = default;
 
 /*!
- * \fn void QCpdWindow::closeEvent()
- * \param event
+ *  \fn void QCpdWindow::closeEvent(QCloseEvent *event)
  *
- *  This function overrides the closeEvent function from QMainWindow and is called when the user
- *  clicks on the window close (cross) icon in the window.
+ *  This function overrides the closeEvent function from QMainWindow and is called when \a event
+ *  occurs i.e. the user clicks on the window close (cross) icon in the window.
  */
 void QCpdWindow::closeEvent(QCloseEvent *event)
 {

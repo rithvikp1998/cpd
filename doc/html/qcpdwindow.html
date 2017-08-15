@@ -56,13 +56,14 @@
 <h2 id="details">Detailed Description</h2>
 <p>This class acts as the main window for the print dialog.</p>
 <p><a href="qcpdwindow.html">QCpdWindow</a> | | mainLayout | |--- qmlWidget | |--- previewLayout | |--- previewWidget |--- previewToolbarWidget</p>
+<pre class="cpp">printDialog <span class="operator">=</span> <span class="keyword">new</span> <span class="type"><a href="qcpdwindow.html#QCpdWindow">QCpdWindow</a></span>();
+<span class="comment">// print...</span></pre>
 </div>
 <!-- @@@QCpdWindow -->
 <div class="func">
 <h2>Member Function Documentation</h2>
 <!-- $$$QCpdWindow[overload1]$$$QCpdWindow -->
 <h3 class="fn" id="QCpdWindow"><a name="QCpdWindow"></a>QCpdWindow::<span class="name">QCpdWindow</span>()</h3>
-<p><a href="qcpdwindow.html">QCpdWindow::QCpdWindow</a></p>
 <p>Constructs <a href="qcpdwindow.html">QCpdWindow</a> objects</p>
 <!-- @@@QCpdWindow -->
 <!-- $$$~QCpdWindow[overload1]$$$~QCpdWindow -->
@@ -71,7 +72,7 @@
 <!-- @@@~QCpdWindow -->
 <!-- $$$resizeEvent[overload1]$$$resizeEventQResizeEvent* -->
 <h3 class="fn" id="resizeEvent"><a name="resizeEvent"></a><code>[protected] </code><span class="type">void</span> QCpdWindow::<span class="name">resizeEvent</span>(<span class="type">QResizeEvent</span> *<i> event</i>)</h3>
-<p>This function overrides the resizeEvent function from QMainWindow and resizes all the child widgets to match the size of the resized layout items when <i>event</i> is created.</p>
+<p>This function overrides the resizeEvent function from QMainWindow and resizes all the child widgets to match the size of the resized layout items when <i>event</i> occurs.</p>
 <!-- @@@resizeEvent -->
 </div>
         </div>

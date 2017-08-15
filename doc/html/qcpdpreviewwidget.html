@@ -65,23 +65,23 @@
 <h2>Member Function Documentation</h2>
 <!-- $$$QCpdPreviewWidget[overload1]$$$QCpdPreviewWidgetQWidget* -->
 <h3 class="fn" id="QCpdPreviewWidget"><a name="QCpdPreviewWidget"></a>QCpdPreviewWidget::<span class="name">QCpdPreviewWidget</span>(<span class="type">QWidget</span> *<i> parent</i> = Q_NULLPTR)</h3>
-<p>Constructs <a href="qcpdpreviewwidget.html">QCpdPreviewWidget</a> with <i>parent</i>. The paintRequested signal is emitted when the QPrintPreviewWidget is constructed.</p>
+<p>Constructs <a href="qcpdpreviewwidget.html">QCpdPreviewWidget</a> objects with <i>parent</i>. The paintRequested signal is emitted when the QPrintPreviewWidget is constructed.</p>
 <!-- @@@QCpdPreviewWidget -->
 <!-- $$$~QCpdPreviewWidget[overload1]$$$~QCpdPreviewWidget -->
 <h3 class="fn" id="dtor.QCpdPreviewWidget"><a name="dtor.QCpdPreviewWidget"></a>QCpdPreviewWidget::<span class="name">~QCpdPreviewWidget</span>()</h3>
-<p>Destroys <a href="qcpdpreviewwidget.html">QCpdPreviewWidget</a> objects.</p>
+<p>Destroys <a href="qcpdpreviewwidget.html">QCpdPreviewWidget</a> objects</p>
 <!-- @@@~QCpdPreviewWidget -->
 <!-- $$$print[overload1]$$$printQPrinter* -->
 <h3 class="fn" id="print"><a name="print"></a><code>[slot] </code><span class="type">void</span> QCpdPreviewWidget::<span class="name">print</span>(<span class="type">QPrinter</span> *<i> printer</i>)</h3>
-<p>The function acts as a slot for the paintRequested signal emitted by QPrintPreviewWidget. The function uses poppler and <i>printer</i> settings to generated and paint the image.</p>
+<p>The function acts as a slot for the paintRequested signal emitted by QPrintPreviewWidget. The function uses poppler and QPrinter <i>printer</i> settings to generated and paint the image.</p>
 <!-- @@@print -->
 <!-- $$$resize[overload1]$$$resizeconstQRect& -->
 <h3 class="fn" id="resize"><a name="resize"></a><span class="type">void</span> QCpdPreviewWidget::<span class="name">resize</span>(const <span class="type">QRect</span> &amp;<i> rect</i>)</h3>
-<p>resize() takes a QRect&amp; as a parameter and uses it to resize the QQmlWidget objects to the same dimensions as the parameter <i>rect</i></p>
+<p>resize() takes a QRect&amp; <i>rect</i> as a parameter and uses it to resize the QQmlWidget objects to the same dimensions as the parameter rect</p>
 <!-- @@@resize -->
 <!-- $$$setZoom[overload1]$$$setZoomqreal -->
 <h3 class="fn" id="setZoom"><a name="setZoom"></a><code>[slot] </code><span class="type">void</span> QCpdPreviewWidget::<span class="name">setZoom</span>(<span class="type">qreal</span><i> zoomFactor</i>)</h3>
-<p>This function acts as a slot for the zoomSliderValueChanged signal emitted from pages/preview_toolbar.qml and sets the size of the page shown in the preview according to the <i>zoomFactor</i>.</p>
+<p>This function acts as a slot for the zoomSliderValueChanged signal emitted from pages/preview_toolbar.qml and sets the size of the page shown in the preview according to <i>zoomFactor</i></p>
 <!-- @@@setZoom -->
 <!-- $$$showNextPage[overload1]$$$showNextPage -->
 <h3 class="fn" id="showNextPage"><a name="showNextPage"></a><code>[slot] </code><span class="type">void</span> QCpdPreviewWidget::<span class="name">showNextPage</span>()</h3>

@@ -51,6 +51,7 @@ public:
     FrontendObj *f;
 
     QQmlWidget(QWidget* parent = Q_NULLPTR);
+    ~QQmlWidget();
     void resize(const QRect& rect);
 
 public Q_SLOTS:
