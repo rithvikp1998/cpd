@@ -101,7 +101,12 @@ void QQmlWidget::printDocument(QString printerName)
 {
     QByteArray printer_name_ba = printerName.toLocal8Bit();
     char *printer_name = printer_name_ba.data();
-    PrinterObj *p = static_cast<PrinterObj*>(g_hash_table_lookup(f->printer, printer_name));
+
+    QString backendName = "CUPS";
+    QByteArray backend_name_ba = backendName.toLocal8Bit();
+    char *backend_name = backend_name_ba.data();
+
+    PrinterObj *p = find_PrinterObj(f, printer_name, backend_name);
     if(!p){
         qCritical("Printer %s not found", printer_name);
         return;
