@@ -22,23 +22,25 @@
 #ifndef CPD_H
 #define CPD_H
 
+extern "C" {
+    #include <CPDFrontend.h>
+}
+
 #include <QtWidgets>
 #include <QQuickWidget>
 
 #include "../headers/preview.h"
 
-extern "C" {
-    #include <CPDFrontend.h>
-}
-
 static inline int add_printer_callback(PrinterObj *p)
 {
     printf("print_frontend.c : Printer %s added!\n", p->name);
+    return 0;
 }
 
 static inline int remove_printer_callback(PrinterObj *p)
 {
     printf("print_frontend.c : Printer %s removed!\n", p->name);
+    return 0;
 }
 
 class QQmlWidget;
