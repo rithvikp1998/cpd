@@ -1,5 +1,5 @@
 TEMPLATE = lib
-DESTDIR = $$PWD/build
+DESTDIR = $$PWD/libs
 
 QT += qml quick widgets quickwidgets printsupport
 
