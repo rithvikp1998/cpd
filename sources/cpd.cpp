@@ -139,7 +139,7 @@ void QQmlWidget::printDocument(QString printerName)
 void QQmlWidget::cpdQuit()
 {
     disconnect_from_dbus(f);
-    close();
+    this->window()->close();
 }
 
 /*!
