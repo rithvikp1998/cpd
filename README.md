@@ -40,7 +40,7 @@ The project consists of two major parts:
     
     or Ubuntu/Debian
     
-    ``` sudo apt-get install qt5-default qtdeclarative5-dev ```
+    ``` sudo apt-get install qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-templates2 qml-module-qtquick-dialogs```
 
 ## Build
 
@@ -49,23 +49,29 @@ The project consists of two major parts:
 
 ```
 # Get the code
-git clone https://github.com/rithvikp1998/cpd.git
-cd cpd
-git submodule init
-git submodule update
+
+someDirectory$ git clone https://github.com/rithvikp1998/cpd.git
+someDirectory$ cd cpd
+someDirectory/cpd$ git submodule init; git submodule update
+
+#Build backend library
+
+someDirectory/cpd$ cd backends/cups
+someDirectory/cpd/backends/cups$ git submodule init; git submodule update
+someDirectory/cpd/backends/cups$ make lib; make release
 
 # Build project
-mkdir build; cd build
-qmake ../cpd.pro
-make
 
-# Install CUPS Backend
-cd ../backends/cups/
-make gen
-make
-sudo ./install.sh
+someDirectory/cpd/backends/cups$ cd ../..
+someDirectory/cpd$ mkdir build; cd build
+someDirectory/cpd/build$ qmake ../cpd.pro; make
+someDirectory/cpd/build$ sudo cp ../libs/libcpd.so.1 /usr/lib/
 
-# Run the dialog
-./cpd
+# Get the test application
+someDirectory/cpd/build$ cd ../..
+someDirectory$ git clone https://github.com/rithvikp1998/printTest; cd printTest
+someDirectory/printTest$ mkdir build; cd build
+someDirectory/printTest/build$ qmake ../printTest.pro; make
 
-```
+# Run the test application which uses the CPD library
+someDirectory/printTest/build$ ./printTest
