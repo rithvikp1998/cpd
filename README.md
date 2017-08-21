@@ -36,9 +36,9 @@ The project consists of two major parts:
     ``` sudo apt-get install libglib2.0-dev ```
 * Qt 5.7
     
-    https://www.qt.io/download-open-source/
+    https://www.qt.io/download-open-source/ or
     
-    or Ubuntu/Debian
+    Ubuntu/Debian
     
     ``` sudo apt-get install qt5-default qtdeclarative5-dev qml-module-qtquick-controls qml-module-qtquick-controls2 qml-module-qtquick-templates2 qml-module-qtquick-dialogs```
 
@@ -75,3 +75,11 @@ someDirectory/printTest/build$ qmake ../printTest.pro; make
 
 # Run the test application which uses the CPD library
 someDirectory/printTest/build$ ./printTest
+
+```
+
+## TODO
+
+1. The CUPS API doesn't get the more advanced options like Contrast, Brightness, Color Balance etc. The dialog has a tab name "Advanced" which has static dropdowns to indicate these options but only the "Resolution" dropdown has backend support while the rest don't. These dropdowns will get the backend support as soon as it is provided by the CUPS API
+
+2. Qt uses a QPrinter class for all the printing operations. To integrate this dialog with the Qt library itself, it is preferable that the dialog use a similar approach too, so that the existing developers and applications need not modify much of their code.
