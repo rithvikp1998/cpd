@@ -32,6 +32,7 @@ Rectangle {
     signal setJobsList(bool activeOnly)
     signal setJobsHoldOptions(string printerName)
     signal setAdvancedOptions(string printerName)
+    signal resolutionValueChanged(string resolutionValue, string printerName)
 
     function emitSignal(pageRequested) {
         pageRequested = pageRequested.toString()
@@ -161,6 +162,11 @@ Rectangle {
             source: "general.qml"
             width: parent.width
             height: parent.height
+        }
+
+        Connections {
+            target: page_loader.item
+            onResolutionValueChanged: resolutionValueChanged(resolutionValue, printerName)
         }
     }
 }

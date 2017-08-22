@@ -27,6 +27,8 @@ import QtQuick.Layouts 1.0
 Rectangle {
     anchors.fill: parent
 
+    signal resolutionValueChanged(string resolutionValue, string printerName)
+
     ScrollBar {
         id: scroll_bar
         hoverEnabled: true
@@ -80,6 +82,8 @@ Rectangle {
                 Layout.preferredHeight: 35
                 Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                 model: supportedResolutions
+                onCurrentIndexChanged: resolutionValueChanged(supportedResolutions[currentIndex],
+                                                              "Xerox")
             }
 
             Label {

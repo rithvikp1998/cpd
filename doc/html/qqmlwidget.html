@@ -57,6 +57,7 @@
 <tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qqmlwidget.html#setAdvancedOptions">setAdvancedOptions</a></b>(QString<i> printerName</i>)</td></tr>
 <tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qqmlwidget.html#setJobsHoldOptions">setJobsHoldOptions</a></b>(QString<i> printerName</i>)</td></tr>
 <tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qqmlwidget.html#setJobsList">setJobsList</a></b>(bool<i> activeOnly</i>)</td></tr>
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qqmlwidget.html#setResolutionSetting">setResolutionSetting</a></b>(QString<i> resolutionValue</i>, QString<i> printerName</i>)</td></tr>
 </table></div>
 <a name="details"></a>
 <!-- $$$QQmlWidget-description -->
@@ -103,6 +104,10 @@
 <p>When <i>activeOnly</i> is set to 1, only jobs are that are currently running are shown whereas when it is set to 0, all jobs are shown.</p>
 <p>The &quot;%&quot; parameter is used a separator to split the three strings: printer's name, job's user, job's state.</p>
 <!-- @@@setJobsList -->
+<!-- $$$setResolutionSetting[overload1]$$$setResolutionSettingQStringQString -->
+<h3 class="fn" id="setResolutionSetting"><a name="setResolutionSetting"></a><code>[slot] </code><span class="type">void</span> QQmlWidget::<span class="name">setResolutionSetting</span>(<span class="type">QString</span><i> resolutionValue</i>, <span class="type">QString</span><i> printerName</i>)</h3>
+<p>This function acts a slot for the resolutionValueChanged signal emitted from the main.qml. It takes the name of the printer <i>printerName</i> and the resolution value selected by the user as <i>resolutionValue</i> and add it to the printerObj's settings struct.</p>
+<!-- @@@setResolutionSetting -->
 </div>
         </div>
        </div>

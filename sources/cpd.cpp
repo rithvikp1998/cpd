@@ -67,6 +67,8 @@ QQmlWidget::QQmlWidget(QWidget* parent):
             this, SLOT(setJobsHoldOptions(QString)));
     connect(qmlWidget->rootObject(), SIGNAL(setAdvancedOptions(QString)),
             this, SLOT(setAdvancedOptions(QString)));
+    connect(qmlWidget->rootObject(), SIGNAL(resolutionValueChanged(QString, QString)),
+            this, SLOT(setResolutionSetting(QString, QString)));
 
     initBackend();
 }
@@ -115,16 +117,6 @@ void QQmlWidget::printDocument(QString printerName)
     QString filePath = ":/test.pdf";
     QByteArray file_path_ba = filePath.toLocal8Bit();
     char *file_path = file_path_ba.data();
-
-    QString resolutionSetting = "resolution";
-    QByteArray resolution_setting_ba = resolutionSetting.toLocal8Bit();
-    char *resolution_setting = resolution_setting_ba.data();
-
-    QString resolutionValue = "150dpi";
-    QByteArray resolution_value_ba = resolutionValue.toLocal8Bit();
-    char *resolution_value = resolution_value_ba.data();
-
-    add_setting(p->settings, resolution_setting, resolution_value);
 
     print_file(p, file_path);
 }
@@ -238,6 +230,38 @@ void QQmlWidget::setAdvancedOptions(QString printerName)
         supportedResolutions.append(resolutionOption->supported_values[i]);
 
     qmlWidget->rootContext()->setContextProperty("supportedResolutions", supportedResolutions);
+}
+
+/*!
+ *  \fn void QQmlWidget::setResolutionSetting(QString resolutionValue, QString printerName)
+ *
+ *  This function acts a slot for the resolutionValueChanged signal emitted from the main.qml.
+ *  It takes the name of the printer \a printerName and the resolution value selected by the user
+ *  as \a resolutionValue and add it to the printerObj's settings struct.
+ */
+void QQmlWidget::setResolutionSetting(QString resolutionValue, QString printerName)
+{
+    QByteArray printer_name_ba = printerName.toLocal8Bit();
+    char *printer_name = printer_name_ba.data();
+
+    QString backendName = "CUPS";
+    QByteArray backend_name_ba = backendName.toLocal8Bit();
+    char *backend_name = backend_name_ba.data();
+
+    PrinterObj *p = find_PrinterObj(f, printer_name, backend_name);
+    if(!p){
+        qCritical("Printer %s not found", printer_name);
+        return;
+    }
+
+    QString resolutionSetting = "printer-resolution";
+    QByteArray resolution_setting_ba = resolutionSetting.toLocal8Bit();
+    char *resolution_setting = resolution_setting_ba.data();
+
+    QByteArray resolution_value_ba = resolutionValue.toLocal8Bit();
+    char *resolution_value = resolution_value_ba.data();
+
+    add_setting(p->settings, resolution_setting, resolution_value);
 }
 
 /*!
