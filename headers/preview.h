@@ -43,10 +43,12 @@ public:
     void resize(const QRect& rect);
 
 public Q_SLOTS:
+    void setZoom(qreal zoomFactor);
+
+private Q_SLOTS:
     void print(QPrinter *printer);
     void showNextPage();
     void showPrevPage();
-    void setZoom(qreal zoomFactor);
 
 private:
     std::unique_ptr<QPrinter> printer;

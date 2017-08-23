@@ -159,7 +159,6 @@ void QQmlWidget::setJobsList(bool activeOnly)
         QString user = j[i].user;
         QString status = j[i].state;
         jobsList.append(printerName + "%" + user + "%" + status);
-        qCritical("%s", j[i].job_id);
     }
 
     jobStructArray = j;

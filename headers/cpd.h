@@ -59,7 +59,7 @@ public:
     ~QQmlWidget();
     void resize(const QRect& rect);
 
-public Q_SLOTS:
+private Q_SLOTS:
     void printDocument(QString printerName);
     void cpdQuit();
     void setJobsList(bool activeOnly);
