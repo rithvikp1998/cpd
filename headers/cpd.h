@@ -71,6 +71,7 @@ private Q_SLOTS:
 private:
     QQuickWidget *qmlWidget;
     Job *jobStructArray;
+    int numJobs;
 
     void initBackend();
 };

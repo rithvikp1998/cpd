@@ -146,17 +146,17 @@ void QQmlWidget::cpdQuit()
  *  when it is set to 0, all jobs are shown.
  *
  *  The "%" parameter is used a separator to split the three strings: printer's name, job's user,
- *  job's state.
+ *  job's state. The list shows jobs in the newest-first order.
  */
 void QQmlWidget::setJobsList(bool activeOnly)
 {
     jobsList.clear();
     Job *j;
-    int x = get_all_jobs(f, &j, activeOnly);
-    for(int i=0; i<x; i++){
-        QString printerName = j[i].printer_id;
-        QString user = j[i].user;
-        QString status = j[i].state;
+    numJobs = get_all_jobs(f, &j, activeOnly);
+    for(int i=0; i<numJobs; i++){
+        QString printerName = j[numJobs-i-1].printer_id;
+        QString user = j[numJobs-i-1].user;
+        QString status = j[numJobs-i-1].state;
         jobsList.append(printerName + "%" + user + "%" + status);
     }
 
@@ -273,10 +273,13 @@ void QQmlWidget::setResolutionSetting(QString resolutionValue, QString printerNa
  *  This function acts as a slot for the cancelJob signal emitted when the user selects "Cancel"
  *  menu item in the right click menu of the Jobs tab. The signal comes with \a jobIndex which is
  *  used to cancel the chosen job. The parameter \a activeOnly is used to refresh the jobsList
- *  after the job is cancelled.
+ *  after the job is cancelled. The jobs list shows jobs in newest-first order whereas the
+ *  jobStructArray stores them in oldest-first order, hence the jobIndex is modified before further
+ *  use.
  */
 void QQmlWidget::cancelJob(int jobIndex, bool activeOnly)
 {
+    jobIndex = numJobs - jobIndex - 1;
     PrinterObj *p = find_PrinterObj(f, jobStructArray[jobIndex].printer_id,
                                     jobStructArray[jobIndex].backend_name);
     if(!p){
