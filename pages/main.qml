@@ -27,13 +27,13 @@ import QtQuick.Controls.Styles 1.4
 Rectangle {
     visible: true
 
-    signal printButtonClicked(string printerName)
+    signal printButtonClicked(string printerName, string backendName)
     signal cancelButtonClicked()
     signal setJobsList(bool activeOnly)
     signal setJobsHoldOptions(string printerName)
     signal setAdvancedOptions(string printerName)
     signal resolutionValueChanged(string resolutionValue, string printerName)
-    signal cancelJob(int jobIndex)
+    signal cancelJob(int jobIndex, bool activeOnly)
 
     function emitSignal(pageRequested) {
         pageRequested = pageRequested.toString()
@@ -124,7 +124,7 @@ Rectangle {
                 hoverEnabled: true
                 onEntered: { parent.color = "#D81B60" }
                 onExited:  { parent.color = "#E91E63" }
-                onClicked: printButtonClicked("Xerox")
+                onClicked: printButtonClicked("Xerox", "CUPS")
             }
         }
 
@@ -168,7 +168,7 @@ Rectangle {
         Connections {
             target: page_loader.item
             onResolutionValueChanged: resolutionValueChanged(resolutionValue, printerName)
-            onCancelJob: cancelJob(jobIndex)
+            onCancelJob: cancelJob(jobIndex, 0)
         }
     }
 }

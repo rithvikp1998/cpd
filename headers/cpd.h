@@ -60,13 +60,13 @@ public:
     void resize(const QRect& rect);
 
 private Q_SLOTS:
-    void printDocument(QString printerName);
+    void printDocument(QString printerName, QString backendName);
     void cpdQuit();
     void setJobsList(bool activeOnly);
     void setJobsHoldOptions(QString printerName);
     void setAdvancedOptions(QString printerName);
     void setResolutionSetting(QString resolutionValue, QString printerName);
-    void cancelJob(int jobIndex);
+    void cancelJob(int jobIndex, bool activeOnly);
 
 private:
     QQuickWidget *qmlWidget;

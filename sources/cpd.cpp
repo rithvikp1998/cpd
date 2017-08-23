@@ -57,8 +57,8 @@ QQmlWidget::QQmlWidget(QWidget* parent):
     qmlWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     qmlWidget->rootContext()->setContextProperty("jobsList", jobsList);
 
-    connect(qmlWidget->rootObject(), SIGNAL(printButtonClicked(QString)),
-            this, SLOT(printDocument(QString)));
+    connect(qmlWidget->rootObject(), SIGNAL(printButtonClicked(QString, QString)),
+            this, SLOT(printDocument(QString, QString)));
     connect(qmlWidget->rootObject(), SIGNAL(cancelButtonClicked()),
             this, SLOT(cpdQuit()));
     connect(qmlWidget->rootObject(), SIGNAL(setJobsList(bool)),
@@ -69,8 +69,8 @@ QQmlWidget::QQmlWidget(QWidget* parent):
             this, SLOT(setAdvancedOptions(QString)));
     connect(qmlWidget->rootObject(), SIGNAL(resolutionValueChanged(QString, QString)),
             this, SLOT(setResolutionSetting(QString, QString)));
-    connect(qmlWidget->rootObject(), SIGNAL(cancelJob(int)),
-            this, SLOT(cancelJob(int)));
+    connect(qmlWidget->rootObject(), SIGNAL(cancelJob(int, bool)),
+            this, SLOT(cancelJob(int, bool)));
 
     initBackend();
 }
@@ -95,18 +95,17 @@ void QQmlWidget::resize(const QRect& rect)
 }
 
 /*!
- *  \fn void QQmlWidget::printDocument(QString printerName)
+ *  \fn void QQmlWidget::printDocument(QString printerName, QString backendName)
  *
- *  printDocument takes the name of the printer as a parameter \a printerName, looks up the
- *  PrinterObj whose name matches the parameter, sets printer settings to those chosen by the user
- *  and sends the file to printing.
+ *  printDocument takes the name of the printer as a parameter \a printerName and \a backendName,
+ *  looks up the PrinterObj whose name matches the parameter, sets printer settings to those chosen
+ *  by the user and sends the file to printing.
  */
-void QQmlWidget::printDocument(QString printerName)
+void QQmlWidget::printDocument(QString printerName, QString backendName)
 {
     QByteArray printer_name_ba = printerName.toLocal8Bit();
     char *printer_name = printer_name_ba.data();
 
-    QString backendName = "CUPS";
     QByteArray backend_name_ba = backendName.toLocal8Bit();
     char *backend_name = backend_name_ba.data();
 
@@ -269,13 +268,14 @@ void QQmlWidget::setResolutionSetting(QString resolutionValue, QString printerNa
 }
 
 /*!
- *  \fn void QQmlWidget::cancelJob(int jobIndex)
+ *  \fn void QQmlWidget::cancelJob(int jobIndex, bool activeOnly)
  *
  *  This function acts as a slot for the cancelJob signal emitted when the user selects "Cancel"
  *  menu item in the right click menu of the Jobs tab. The signal comes with \a jobIndex which is
- *  used to cancel the chosen job.
+ *  used to cancel the chosen job. The parameter \a activeOnly is used to refresh the jobsList
+ *  after the job is cancelled.
  */
-void QQmlWidget::cancelJob(int jobIndex)
+void QQmlWidget::cancelJob(int jobIndex, bool activeOnly)
 {
     PrinterObj *p = find_PrinterObj(f, jobStructArray[jobIndex].printer_id,
                                     jobStructArray[jobIndex].backend_name);
@@ -285,7 +285,7 @@ void QQmlWidget::cancelJob(int jobIndex)
     }
 
     cancel_job(p, jobStructArray[jobIndex].job_id);
-    setJobsList(0);
+    setJobsList(activeOnly);
 }
 
 /*!
