@@ -52,6 +52,7 @@
 <a name="public-slots"></a>
 <h2 id="public-slots">Public Slots</h2>
 <div class="table"><table class="alignedsummary">
+<tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qqmlwidget.html#cancelJob">cancelJob</a></b>(int<i> jobIndex</i>)</td></tr>
 <tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qqmlwidget.html#cpdQuit">cpdQuit</a></b>()</td></tr>
 <tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qqmlwidget.html#printDocument">printDocument</a></b>(QString<i> printerName</i>)</td></tr>
 <tr><td class="memItemLeft rightAlign topAlign"> void </td><td class="memItemRight bottomAlign"><b><a href="qqmlwidget.html#setAdvancedOptions">setAdvancedOptions</a></b>(QString<i> printerName</i>)</td></tr>
@@ -77,6 +78,10 @@
 <h3 class="fn" id="dtor.QQmlWidget"><a name="dtor.QQmlWidget"></a>QQmlWidget::<span class="name">~QQmlWidget</span>()</h3>
 <p>Destroys <a href="qqmlwidget.html">QQmlWidget</a> objects</p>
 <!-- @@@~QQmlWidget -->
+<!-- $$$cancelJob[overload1]$$$cancelJobint -->
+<h3 class="fn" id="cancelJob"><a name="cancelJob"></a><code>[slot] </code><span class="type">void</span> QQmlWidget::<span class="name">cancelJob</span>(<span class="type">int</span><i> jobIndex</i>)</h3>
+<p>This function acts as a slot for the cancelJob signal emitted when the user selects &quot;Cancel&quot; menu item in the right click menu of the Jobs tab. The signal comes with <i>jobIndex</i> which is used to cancel the chosen job.</p>
+<!-- @@@cancelJob -->
 <!-- $$$cpdQuit[overload1]$$$cpdQuit -->
 <h3 class="fn" id="cpdQuit"><a name="cpdQuit"></a><code>[slot] </code><span class="type">void</span> QQmlWidget::<span class="name">cpdQuit</span>()</h3>
 <p>This function acts as a slot for the signal cancelButtonClicked emitted from the pages/main.qml file. The signal is emitted when the user clicks on the &quot;Cancel&quot; Button in the sidebar.</p>

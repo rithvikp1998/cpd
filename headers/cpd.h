@@ -66,9 +66,11 @@ public Q_SLOTS:
     void setJobsHoldOptions(QString printerName);
     void setAdvancedOptions(QString printerName);
     void setResolutionSetting(QString resolutionValue, QString printerName);
+    void cancelJob(int jobIndex);
 
 private:
     QQuickWidget *qmlWidget;
+    Job *jobStructArray;
 
     void initBackend();
 };

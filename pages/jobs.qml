@@ -26,6 +26,9 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.0
 
 Rectangle {
+
+    signal cancelJob(int jobIndex)
+
     Rectangle {
         width: parent.width
         height: location_heading.contentHeight // Since "Location" is the biggest word in this row,
@@ -44,7 +47,7 @@ Rectangle {
             x: parent.width / 3 + 20
             y: 10
             width: parent.width / 3 - 20
-            text: "Location"
+            text: "User"
             font.bold: true
             wrapMode: Text.Wrap
         }
@@ -76,10 +79,10 @@ Rectangle {
             Menu {
                 id: menu
 
-                MenuItem { text: "Pause" }
-                MenuItem { text: "Stop" }
-                MenuItem { text: "Cancel" }
-                MenuItem { text: "Repeat" }
+                MenuItem {
+                    text: "Cancel"
+                    onTriggered: cancelJob(index)
+                }
             }
 
             MouseArea {

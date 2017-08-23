@@ -69,6 +69,8 @@ QQmlWidget::QQmlWidget(QWidget* parent):
             this, SLOT(setAdvancedOptions(QString)));
     connect(qmlWidget->rootObject(), SIGNAL(resolutionValueChanged(QString, QString)),
             this, SLOT(setResolutionSetting(QString, QString)));
+    connect(qmlWidget->rootObject(), SIGNAL(cancelJob(int)),
+            this, SLOT(cancelJob(int)));
 
     initBackend();
 }
@@ -154,10 +156,13 @@ void QQmlWidget::setJobsList(bool activeOnly)
     int x = get_all_jobs(f, &j, activeOnly);
     for(int i=0; i<x; i++){
         QString printerName = j[i].printer_id;
-        QString location = j[i].user;
+        QString user = j[i].user;
         QString status = j[i].state;
-        jobsList.append(printerName + "%" + location + "%" + status);
+        jobsList.append(printerName + "%" + user + "%" + status);
+        qCritical("%s", j[i].job_id);
     }
+
+    jobStructArray = j;
 
     qmlWidget->rootContext()->setContextProperty("jobsList", jobsList);
 }
@@ -262,6 +267,26 @@ void QQmlWidget::setResolutionSetting(QString resolutionValue, QString printerNa
     char *resolution_value = resolution_value_ba.data();
 
     add_setting(p->settings, resolution_setting, resolution_value);
+}
+
+/*!
+ *  \fn void QQmlWidget::cancelJob(int jobIndex)
+ *
+ *  This function acts as a slot for the cancelJob signal emitted when the user selects "Cancel"
+ *  menu item in the right click menu of the Jobs tab. The signal comes with \a jobIndex which is
+ *  used to cancel the chosen job.
+ */
+void QQmlWidget::cancelJob(int jobIndex)
+{
+    PrinterObj *p = find_PrinterObj(f, jobStructArray[jobIndex].printer_id,
+                                    jobStructArray[jobIndex].backend_name);
+    if(!p){
+        qCritical("Printer %s not found", jobStructArray[jobIndex].printer_id);
+        return;
+    }
+
+    cancel_job(p, jobStructArray[jobIndex].job_id);
+    setJobsList(0);
 }
 
 /*!
