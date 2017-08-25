@@ -35,14 +35,17 @@ Rectangle {
     signal resolutionValueChanged(string resolutionValue, string printerName)
     signal cancelJob(int jobIndex, bool activeOnly)
 
+    property var printer_name: "Xerox_Placeholder"
+    property var backend_name: "CUPS"
+
     function emitSignal(pageRequested) {
         pageRequested = pageRequested.toString()
         if(pageRequested === "Jobs") {
             setJobsList(0);
-            setJobsHoldOptions("Xerox");
+            setJobsHoldOptions(printer_name);
         }
         if(pageRequested === "Advanced")
-            setAdvancedOptions("Xerox");
+            setAdvancedOptions(printer_name);
         return;
     }
 
@@ -124,7 +127,7 @@ Rectangle {
                 hoverEnabled: true
                 onEntered: { parent.color = "#D81B60" }
                 onExited:  { parent.color = "#E91E63" }
-                onClicked: printButtonClicked("Xerox", "CUPS")
+                onClicked: printButtonClicked(printer_name, backend_name)
             }
         }
 

@@ -29,6 +29,8 @@ Rectangle {
 
     signal resolutionValueChanged(string resolutionValue, string printerName)
 
+    property var printer_name: "Xerox_Placeholder"
+
     ScrollBar {
         id: scroll_bar
         hoverEnabled: true
@@ -83,7 +85,7 @@ Rectangle {
                 Layout.alignment: Qt.AlignLeft | Qt.AlignVCenter
                 model: supportedResolutions
                 onCurrentIndexChanged: resolutionValueChanged(supportedResolutions[currentIndex],
-                                                              "Xerox")
+                                                              printer_name)
             }
 
             Label {
