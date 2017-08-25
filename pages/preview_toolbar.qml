@@ -26,22 +26,24 @@ import QtQuick.Controls.Styles 1.4
 
 Rectangle {
 
-    signal nextPageButtonClicked()
-    signal prevPageButtonClicked()
-    signal zoomSliderValueChanged(real value)
+    signal nextPageButtonClicked()              // Connects to showNextPage in QCpdPreviewWidget
+    signal prevPageButtonClicked()              // Connects to showPrevPage in QCpdPreviewWidget
+    signal zoomSliderValueChanged(real value)   // Connects to setZoom in QCpdPreviewWidget
 
-    Button { // Displays the previous page in the doument
+    /* Show the previous page in the document */
+    Button {
         id: preview_previous_page_button
         x: 20
         anchors.verticalCenter: parent.verticalCenter
         height: 40
         width: 40
-        text: "\u25C0"
+        text: "\u25C0" // Denotes "<" symbol
 
         onClicked: prevPageButtonClicked()
     }
 
-    Slider { // To set the zoom level of the preview image.
+    /* Set the zoom level of the preview image */
+    Slider {
         id: preview_zoom_slider
         x: 80
         anchors.verticalCenter: parent.verticalCenter
@@ -56,13 +58,14 @@ Rectangle {
         onValueChanged: zoomSliderValueChanged(preview_zoom_slider.value)
     }
 
-    Button {  // Displays the next page in the doument
+    /* Show the next page in the document */
+    Button {
         id: preview_next_page_button
         x: parent.width - 60
         anchors.verticalCenter: parent.verticalCenter
         height: 40
         width: 40
-        text: "\u25B6"
+        text: "\u25B6" // Denotes ">" symbol
 
         onClicked: nextPageButtonClicked()
     }

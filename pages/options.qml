@@ -9,3 +9,5 @@ Rectangle{
         text: qsTr("Options Tab")
     }
 }
+
+/* Intentionally left blank */

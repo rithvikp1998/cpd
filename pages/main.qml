@@ -27,21 +27,24 @@ import QtQuick.Controls.Styles 1.4
 Rectangle {
     visible: true
 
-    signal printButtonClicked(string printerName, string backendName)
-    signal cancelButtonClicked()
-    signal setJobsList(bool activeOnly)
-    signal setJobsHoldOptions(string printerName)
-    signal setAdvancedOptions(string printerName)
-    signal resolutionValueChanged(string resolutionValue, string printerName)
-    signal cancelJob(int jobIndex, bool activeOnly)
+    signal printButtonClicked(string printerName, string backendName) // Connects to printDocument(QString, QString) in QQmlWidget
+    signal cancelButtonClicked()                    // Connects to cpdQuit() in QQmlWidget
+    signal setJobsList(bool activeOnly)             // Connects to setJobsList(bool) in QQmlWidget
+    signal setJobsHoldOptions(string printerName)   // Connects to setJobsHoldOptions(QString) in QQmlWidget
+    signal setAdvancedOptions(string printerName)   // Connects to setAdvancedOptions(QString) in QQmlWidget
+    signal resolutionValueChanged(string resolutionValue, string printerName)   // Connects to setResolutionSetting(QString, QString) in QQmlWidget
+    signal cancelJob(int jobIndex, bool activeOnly) // Connects to cancelJob(int, bool) in QQmlWidget
 
-    property var printer_name: "Xerox_Placeholder"
-    property var backend_name: "CUPS"
+    /* Change the following properties to match the test printer you are using */
+    property string printer_name: "Xerox_Placeholder"
+    property string backend_name: "CUPS"
+    property bool active_only: false
 
+    /* This function calls the appropriate signal corresponding the item loaded in page_loader */
     function emitSignal(pageRequested) {
         pageRequested = pageRequested.toString()
         if(pageRequested === "Jobs") {
-            setJobsList(0);
+            setJobsList(active_only);
             setJobsHoldOptions(printer_name);
         }
         if(pageRequested === "Advanced")
@@ -49,7 +52,7 @@ Rectangle {
         return;
     }
 
-    /* This Rectangle is for the sidebar */
+    /* This Rectangle is for the sidebar. value points to the page it loads when clicked */
 
     Rectangle {
         height: parent.height
@@ -61,7 +64,7 @@ Rectangle {
 
             ListElement {
                 name: "General"
-                value: "general.qml"    // value points to the page it loads when clicked
+                value: "general.qml"
             }
             ListElement {
                 name: "Page Setup"
@@ -109,6 +112,7 @@ Rectangle {
             }
         }
 
+        /* Print button in the sidebar */
         Rectangle {
             x: 10
             y: parent.height - 120
@@ -131,6 +135,7 @@ Rectangle {
             }
         }
 
+        /* Cancel button in the sidebar */
         Rectangle {
             x: 10
             y: parent.height - 60
@@ -153,6 +158,7 @@ Rectangle {
             }
         }
     }
+    /* Sidebar ends here */
 
     /* This Rectangle is for the main view */
 
@@ -168,10 +174,14 @@ Rectangle {
             height: parent.height
         }
 
+        /* Acts as a slot for the signals coming from jobs.qml and advanced.qml and forwards them
+           to cpd.cpp */
         Connections {
             target: page_loader.item
             onResolutionValueChanged: resolutionValueChanged(resolutionValue, printerName)
             onCancelJob: cancelJob(jobIndex, 0)
         }
     }
+
+    /* Main view ends here */
 }
