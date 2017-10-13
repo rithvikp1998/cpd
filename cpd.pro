@@ -29,3 +29,6 @@ SOURCES += \
     sources/cpd.cpp
 
 RESOURCES += qml.qrc
+
+DISTFILES += \
+    qmldir
