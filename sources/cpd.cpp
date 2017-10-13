@@ -29,7 +29,7 @@
 #include "../headers/cpd.h"
 
 extern "C" {
-    #include <CPDFrontend.h>
+    #include <cpdb-libs-frontend.h>
 }
 
 /*!

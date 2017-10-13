@@ -29,7 +29,7 @@ Rectangle {
 
     signal resolutionValueChanged(string resolutionValue, string printerName)
 
-    property var printer_name: "Xerox_Placeholder"
+    property string printer_name: "Xerox_Placeholder"
 
     ScrollBar {
         id: scroll_bar
@@ -41,9 +41,11 @@ Rectangle {
         anchors.bottom: parent.bottom
     }
 
+    /* Covers the entire main view except scrollbar's width. Subtracting scroll_bar.width retains
+       the scrollbar's drag function */
     MouseArea {
         height: parent.height
-        width: parent.width - scroll_bar.width //Subtracting scroll_bar.width retains the scrollbar's drag function
+        width: parent.width - scroll_bar.width
         onWheel: {
             scroll_bar.position -= (wheel.angleDelta.y / 500)
             if (scroll_bar.position < 0)
@@ -53,6 +55,8 @@ Rectangle {
         }
     }
 
+    /* Acts as the main view. Only Resolution combobox works with the backend, rest are static due
+       to limitations in the CUPS API. */
     Rectangle {
         x: 20
         y: 10

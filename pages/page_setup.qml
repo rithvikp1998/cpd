@@ -9,3 +9,5 @@ Rectangle{
         text: qsTr("Page Setup Tab")
     }
 }
+
+/* Intentionally left blank */

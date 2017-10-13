@@ -9,3 +9,5 @@ Rectangle{
         text: qsTr("General Tab")
     }
 }
+
+/* Intentionally left blank */

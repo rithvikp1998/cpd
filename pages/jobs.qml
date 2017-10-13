@@ -29,6 +29,7 @@ Rectangle {
 
     signal cancelJob(int jobIndex)
 
+    /* Acts as the header row to indicate the column values */
     Rectangle {
         width: parent.width
         height: location_heading.contentHeight // Since "Location" is the biggest word in this row,
@@ -62,6 +63,7 @@ Rectangle {
         }
     }
 
+    /* Fills the rows in the table */
     ListView {
         id: jobs_view
         width: parent.width
@@ -128,6 +130,7 @@ Rectangle {
         }
     }
 
+    /* Select the delay between clicking on the print button and starting the job on the printer */
     Text {
         x: 20
         y: parent.height - 147
@@ -144,22 +147,7 @@ Rectangle {
         model: jobHoldOptionsList
     }
 
-    TextField {
-        x: parent.width - 150
-        y: parent.height - 145
-        width: 60
-        height: 30
-        font.pointSize: 10
-        visible: (start_job_combobox.currentIndex == 1) ? true :  false
-    }
-
-    Text {
-        text: "Minutes"
-        x: parent.width - 80
-        y: parent.height - 145
-        visible: (start_job_combobox.currentIndex == 1) ? true :  false
-    }
-
+    /* Save the job details in a file inorder to review or reuse them later */
     Text {
         x: 20
         y: parent.height - 97
