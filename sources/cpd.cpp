@@ -57,6 +57,7 @@ QQmlWidget::QQmlWidget(QWidget* parent):
     qmlWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     qmlWidget->rootContext()->setContextProperty("jobsList", jobsList);
 
+    /* Signals from main.qml are connected to slots here */
     connect(qmlWidget->rootObject(), SIGNAL(printButtonClicked(QString, QString)),
             this, SLOT(printDocument(QString, QString)));
     connect(qmlWidget->rootObject(), SIGNAL(cancelButtonClicked()),
@@ -67,10 +68,32 @@ QQmlWidget::QQmlWidget(QWidget* parent):
             this, SLOT(setJobsHoldOptions(QString)));
     connect(qmlWidget->rootObject(), SIGNAL(setAdvancedOptions(QString)),
             this, SLOT(setAdvancedOptions(QString)));
-    connect(qmlWidget->rootObject(), SIGNAL(resolutionValueChanged(QString, QString)),
-            this, SLOT(setResolutionSetting(QString, QString)));
+
+    /* Signals from general.qml, first forwarded to main.qml and then connected to slots here */
+    connect(qmlWidget->rootObject(), SIGNAL(newPrinterSelected(QString)),
+            this, SLOT(newPrinterSelected(QString)));
+    connect(qmlWidget->rootObject(), SIGNAL(remotePrintersToggled(QString)),
+            this, SLOT(remotePrintersToggled(QString)));
+    connect(qmlWidget->rootObject(), SIGNAL(orientationChanged(QString)),
+            this, SLOT(orientationChanged(QString)));
+    connect(qmlWidget->rootObject(), SIGNAL(newPageSizeSelected(QString)),
+            this, SLOT(newPageSizeSelected(QString)));
+    connect(qmlWidget->rootObject(), SIGNAL(collateToggled(QString)),
+            this, SLOT(collateToggled(QString)));
+    connect(qmlWidget->rootObject(), SIGNAL(newPageRangeSet(QString)),
+            this, SLOT(newPageRangeSet(QString)));
+    
+    /* Signals from page_setup.qml, first forwarded to main.qml and then connected to slots here */
+    connect(qmlWidget->rootObject(), SIGNAL(setDuplexOption(QString)),
+            this, SLOT(setDuplexOption(QString)));
+    
+    /* Signals from jobs.qml, first forwarded to main.qml and then connected to slots here */
     connect(qmlWidget->rootObject(), SIGNAL(cancelJob(int, bool)),
             this, SLOT(cancelJob(int, bool)));
+
+    /* Signals from advanced.qml, first forwarded to main.qml and then connected to slots here */
+    connect(qmlWidget->rootObject(), SIGNAL(resolutionValueChanged(QString, QString)),
+            this, SLOT(setResolutionSetting(QString, QString)));
 
     initBackend();
 }

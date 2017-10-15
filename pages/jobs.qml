@@ -27,7 +27,9 @@ import QtQuick.Layouts 1.0
 
 Rectangle {
 
-    signal cancelJob(int jobIndex)
+    property bool active_only: false
+    
+    signal cancelJob(int jobIndex, bool activeOnly)
 
     /* Acts as the header row to indicate the column values */
     Rectangle {
@@ -83,7 +85,7 @@ Rectangle {
 
                 MenuItem {
                     text: "Cancel"
-                    onTriggered: cancelJob(index)
+                    onTriggered: cancelJob(index, active_only)
                 }
             }
 

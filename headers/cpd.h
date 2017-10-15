@@ -67,11 +67,24 @@ private Q_SLOTS:
     void setAdvancedOptions(QString printerName);
     void setResolutionSetting(QString resolutionValue, QString printerName);
     void cancelJob(int jobIndex, bool activeOnly);
+    void addPrinter(char *printer_name, char *printer_id, char *backend_name);
+    void removePrinter(char *printer_name);
+    void cancelButtonClicked();
+    void printButtonClicked();
+    void newPrinterSelected(const QString &printer);
+    void remotePrintersToggled(const QString &enabled);
+    void orientationChanged(const QString &orientation);
+    void newPageSizeSelected(const QString &pageSize);
+    void numCopiesChanged(const int copies);
+    void collateToggled(const QString &enabled);
+    void newPageRangeSet(const QString &pageRange);
+    void setDuplexOption(const QString &duplexOption);
 
 private:
     QQuickWidget *qmlWidget;
     Job *jobStructArray;
     int numJobs;
+    PrinterObj* p;
 
     void initBackend();
 };

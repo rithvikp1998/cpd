@@ -27,13 +27,36 @@ import QtQuick.Controls.Styles 1.4
 Rectangle {
     visible: true
 
+    /* Signals used in main.qml */
     signal printButtonClicked(string printerName, string backendName) // Connects to printDocument(QString, QString) in QQmlWidget
     signal cancelButtonClicked()                    // Connects to cpdQuit() in QQmlWidget
     signal setJobsList(bool activeOnly)             // Connects to setJobsList(bool) in QQmlWidget
     signal setJobsHoldOptions(string printerName)   // Connects to setJobsHoldOptions(QString) in QQmlWidget
     signal setAdvancedOptions(string printerName)   // Connects to setAdvancedOptions(QString) in QQmlWidget
+
+    /* Forwarded signals from advanced.qml */
     signal resolutionValueChanged(string resolutionValue, string printerName)   // Connects to setResolutionSetting(QString, QString) in QQmlWidget
+
+    /* Forwarded signals from general.qml */
+    signal newPrinterSelected(string printer)
+    signal remotePrintersToggled(string enabled)
+    signal orientationChanged(string orientation)
+    signal newPageSizeSelected(string pageSize)
+    signal numCopiesChanged(int copies)
+    signal collateToggled(string enabled)
+    signal newPageRangeSet(string pageRange)
+
+    /* Forwarded signals from page_setup.qml */
+    signal setDuplexOption(string option)
+
+    /* Forwarded signals from options.qml */
+    /* None */
+
+    /* Forwarded signals from jobs.qml */
     signal cancelJob(int jobIndex, bool activeOnly) // Connects to cancelJob(int, bool) in QQmlWidget
+
+    /* Forwarded signals from advanced.qml */
+    signal resolutionValueChanged(string resolutionValue, string printerName)   // Connects to setResolutionSetting(QString, QString) in QQmlWidget
 
     /* Change the following properties to match the test printer you are using */
     property string printer_name: "Xerox_Placeholder"
@@ -178,8 +201,27 @@ Rectangle {
            to cpd.cpp */
         Connections {
             target: page_loader.item
+
+            /* Signals coming from general.qml */
+            onNewPrinterSelected: newPrinterSelected(printer)
+            onRemotePrintersToggled: remotePrintersToggled(enabled)
+            onOrientationChanged: orientationChanged(orientation)
+            onNewPageSizeSelected: newPageSizeSelected(pageSize)
+            onNumCopiesChanged: numCopiesChanged(copies)
+            onCollateToggled: collateToggled(enabled)
+            onNewPageRangeSet: newPageRangeSet(pageRange)
+
+            /* Signals coming from page_setup.qml */
+            onSetDuplexOption: setDuplexOption(option)
+
+            /* Signals coming from options.qml */
+            /* None */
+
+            /* Signals coming from jobs.qml */
+            onCancelJob: cancelJob(jobIndex, activeOnly)
+
+            /* Signals coming from advanced.qml */
             onResolutionValueChanged: resolutionValueChanged(resolutionValue, printerName)
-            onCancelJob: cancelJob(jobIndex, 0)
         }
     }
 
