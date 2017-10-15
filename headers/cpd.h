@@ -58,6 +58,16 @@ public:
     QQmlWidget(QWidget* parent = Q_NULLPTR);
     ~QQmlWidget();
     void resize(const QRect& rect);
+    void clearPrinters();
+    void addMaximumPrintCopies(char *_copies);
+    void clearStartJobsModel();
+    void clearPaperSizeModel();
+    void clearPagesPerSideModel();
+    void updatePagesPerSideModel(char *pages, int isDefault);
+    void enableTwoSided(char *option);
+    void clearTwoSidedSwitch();
+    void updateStartJobsModel(char *startJobOption);
+    void updatePaperSizeModel(const char *name, char *pwg_name, int isDefault);
 
 private Q_SLOTS:
     void printDocument(QString printerName, QString backendName);
@@ -69,8 +79,6 @@ private Q_SLOTS:
     void cancelJob(int jobIndex, bool activeOnly);
     void addPrinter(char *printer_name, char *printer_id, char *backend_name);
     void removePrinter(char *printer_name);
-    void cancelButtonClicked();
-    void printButtonClicked();
     void newPrinterSelected(const QString &printer);
     void remotePrintersToggled(const QString &enabled);
     void orientationChanged(const QString &orientation);

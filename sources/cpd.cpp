@@ -24,6 +24,7 @@
 #include <qlogging.h>
 #include <QQuickItem>
 #include <QQmlContext>
+#include <QObject>
 
 #include "../headers/preview.h"
 #include "../headers/cpd.h"
@@ -315,6 +316,202 @@ void QQmlWidget::cancelJob(int jobIndex, bool activeOnly)
 }
 
 /*!
+ *  \fn void QQmlWidget::addPrinter(char *printer_name, char *printer_id, char *backend_name)
+ *
+ *  Whenever a new printer with name \a printer_name, id \a printer_id and backend \a backend_name
+ *  is discovered in the backends, this function is called which adds that printer to the UI.
+ */
+void QQmlWidget::addPrinter(char *printer_name, char *printer_id, char *backend_name)
+{
+    QObject *obj = qvariant_cast<QObject *>(qmlWidget->rootObject()->findChild<QObject*>("pageLoader")->property("item"));
+    if (obj)
+        QMetaObject::invokeMethod(obj,
+                                  "addToDestinationModel",
+                                  Q_ARG(QVariant, printer_name),
+                                  Q_ARG(QVariant, printer_id),
+                                  Q_ARG(QVariant, backend_name));
+    else
+        qDebug() << "generalObject Not Found";
+}
+
+/*!
+ *  \fn void QQmlWidget::removePrinter(char *printer_name)
+ *
+ *  Whenever a printer with name \a printer_name is removed,
+ *  this function is called which removes that printer to the UI.
+ */
+void QQmlWidget::removePrinter(char *printer_name)
+{
+    QObject *obj = qvariant_cast<QObject *>(qmlWidget->rootObject()->findChild<QObject*>("pageLoader")->property("item"));
+    if (obj)
+        QMetaObject::invokeMethod(obj,
+                                  "removeFromDestinationModel",
+                                  Q_ARG(QVariant, printer_name));
+    else
+        qDebug() << "generalObject Not Found";
+}
+
+/*!
+ *  \fn void QQmlWidget::clearPrinters()
+ *
+ *  This function clears the list of printers shown in the UI.
+ */
+void QQmlWidget::clearPrinters()
+{
+    QObject *obj = qvariant_cast<QObject *>(qmlWidget->rootObject()->findChild<QObject*>("pageLoader")->property("item"));
+    if (obj)
+        QMetaObject::invokeMethod(obj, "clearDestinationModel");
+    else
+        qDebug() << "generalObject Not Found";
+}
+
+/*!
+ *  \fn void QQmlWidget::newPrinterSelected(const QString &printer)
+ *
+ *  Whenever a new printer with name \a printer is selected by the User, this function updates all
+ *  the options shown in the dialog with the options and values supported by the selected printer.
+ */
+void QQmlWidget::newPrinterSelected(const QString &printer)
+{
+    QStringList list = printer.split('#');  // printer is in the format: <printer_id>#<backend_name>
+    p = find_PrinterObj(f, list[0].toLatin1().data(), list[1].toLatin1().data());
+
+    Options *options = get_all_options(p);
+
+    GHashTableIter iter;
+    g_hash_table_iter_init(&iter, options->table);
+    gpointer _key, _value;
+
+    while (g_hash_table_iter_next(&iter, &_key, &_value)) {
+        char *key = static_cast<char *>(_key);
+        Option *value = static_cast<Option *>(_value);
+        if (strncmp(key, "copies", 6) == 0) {
+            for (int i = 0; i < value->num_supported; i++)
+                addMaximumPrintCopies(value->supported_values[i]);
+        } else if (strncmp(key, "finishings", 10) == 0) {
+
+        } else if (strncmp(key, "ipp-attribute-fidelity", 22) == 0) {
+
+        } else if (strncmp(key, "job-hold-until", 14) == 0) {
+            clearStartJobsModel();
+            for (int i = 0; i < value->num_supported; i++)
+                updateStartJobsModel(value->supported_values[i]);
+        } else if (strncmp(key, "job-name", 8) == 0) {
+
+        } else if (strncmp(key, "job-priority", 12) == 0) {
+
+        } else if (strncmp(key, "job-sheets", 10) == 0) {
+
+        } else if (strncmp(key, "media-col", 9) == 0) {
+
+        } else if (strncmp(key, "media", 5) == 0) {
+            clearPaperSizeModel();
+            for (int i = 0; i < value->num_supported; i++)
+                updatePaperSizeModel(pwg_to_readable(value->supported_values[i]),
+                                     value->supported_values[i],
+                                     strcmp(value->supported_values[i], value->default_value));
+        } else if (strncmp(key, "multiple-document-handling", 26) == 0) {
+
+        } else if (strncmp(key, "number-up", 9) == 0) {
+            clearPagesPerSideModel();
+            for (int i = 0; i < value->num_supported; i++)
+                updatePagesPerSideModel(value->supported_values[i],
+                                        strcmp(value->supported_values[i], value->default_value));
+
+        } else if (strncmp(key, "output-bin", 10) == 0) {
+
+        } else if (strncmp(key, "orientation-requested", 21) == 0) {
+
+        } else if (strncmp(key, "page-ranges", 11) == 0) {
+
+        } else if (strncmp(key, "print-color-mode", 16) == 0) {
+
+        } else if (strncmp(key, "print-quality", 13) == 0) {
+
+        } else if (strncmp(key, "printer-resolution", 18) == 0) {
+            /*clearResolutionModel();
+            for (int i = 0; i < value->num_supported; i++)
+                updateResolutionModel(value->supported_values[i],
+                                      strcmp(value->supported_values[i], value->default_value));*/
+        } else if (strncmp(key, "sides", 5) == 0) {
+            clearTwoSidedSwitch();
+            for (int i = 0; i < value->num_supported; i++)
+                enableTwoSided(value->supported_values[i]);
+        } else {
+            qDebug() << "Unhandled Option:" << key;
+        }
+    }
+}
+
+/*!
+ *  \fn void QQmlWidget::remotePrintersToggled(const QString &enabled)
+ *
+ *  When \a enabled is set to "true", the dialog shows all printers including remote printers
+ *  whereas when it is not set to "true", the dialog hides all the remote printers and shows
+ *  only the local printers.
+ */
+void QQmlWidget::remotePrintersToggled(const QString &enabled)
+{
+    enabled.compare("true") == 0 ? unhide_remote_cups_printers(f) : hide_remote_cups_printers(f);
+}
+
+void QQmlWidget::orientationChanged(const QString &orientation)
+{
+    //preview->setOrientation(orientation);
+    add_setting_to_printer(p,
+                           QString("orientation-requested").toLatin1().data(),
+                           orientation.toLatin1().data());
+}
+
+void QQmlWidget::newPageSizeSelected(const QString &pageSize)
+{
+    QStringList pageSizeSplitList = pageSize.split("_");
+    QString size = pageSizeSplitList[2];
+    QStringList sizeSplitList = size.split("x");
+
+    qreal width = sizeSplitList[0].toDouble();
+
+    QString unit = sizeSplitList[1].right(2);
+    sizeSplitList[1].remove(unit);
+
+    qreal height = sizeSplitList[1].toDouble();
+
+    //preview->setPageSize(pageSizeSplitList[1], width, height, unit);
+    add_setting_to_printer(p,
+                           QString("media").toLatin1().data(),
+                           pageSize.toLatin1().data());
+}
+
+void QQmlWidget::numCopiesChanged(const int copies)
+{
+    //preview->setNumCopies(copies);
+    add_setting_to_printer(p,
+                           QString("copies").toLatin1().data(),
+                           QString::number(copies).toLatin1().data());
+}
+
+void QQmlWidget::collateToggled(const QString &enabled)
+{
+    //preview->setCollateCopies(enabled.compare("true") == 0);
+}
+
+void QQmlWidget::newPageRangeSet(const QString &pageRange)
+{
+    QString page(pageRange);
+    add_setting_to_printer(p,
+                           QString("page-ranges").toLatin1().data(),
+                           page.remove('[').remove(']').toLatin1().data());
+}
+
+void QQmlWidget::setDuplexOption(const QString &duplexOption)
+{
+    add_setting_to_printer(p,
+                           QString("sides").toLatin1().data(),
+                           duplexOption.toLatin1().data());
+}
+
+
+/*!
  *  \fn void QQmlWidget::initBackend()
  *
  *  This function is called whenever a new instance of the dialog is created. This function helps
@@ -327,6 +524,130 @@ void QQmlWidget::initBackend()
     event_callback rem_cb = static_cast<event_callback>(remove_printer_callback);
     f = get_new_FrontendObj(NULL, add_cb, rem_cb);
     connect_to_dbus(f);
+}
+
+/*!
+ *  \fn void QQmlWidget::addMaximumPrintCopies(char *_copies)
+ *
+ *  This function takes the range \a _copies for the number of copies and sets the maximum value
+ *  allowed in the dialog.
+ */
+void QQmlWidget::addMaximumPrintCopies(char *_copies)
+{
+    QString copies(_copies);
+    QStringList list = copies.split('-'); // copies is in this format: 1-9999
+
+    QObject *obj = qvariant_cast<QObject *>(qmlWidget->rootObject()->findChild<QObject *>("pageLoader")->property("item"));
+    if (obj)
+        obj->setProperty("maximumCopies", list[1].toInt());
+    else
+        qDebug() << "generalObject Not Found";
+}
+
+/*!
+ *  \fn void QQmlWidget::updateStartJobsModel(char *startJobOption)
+ *
+ *  Many printers come with a hold option which specifies when the job should start after a user
+ *  clicked the "Print" button in the UI. This function adds a new \a startJobOption to the
+ *  existing model.
+ */
+void QQmlWidget::updateStartJobsModel(char *startJobOption)
+{
+    QObject *obj = qvariant_cast<QObject *>(qmlWidget->rootObject()->findChild<QObject *>("pageLoader")->property("item"));
+    if (obj)
+        QMetaObject::invokeMethod(obj, "updateStartJobsModel", Q_ARG(QVariant, startJobOption));
+    else
+        qDebug() << "jobsObject Not Found";
+}
+
+/*!
+ *  \fn void QQmlWidget::clearStartJobsModel()
+ *
+ *  This function clears the model startJobModel which holds a list of printer-supported job hold
+ *  options.
+ */
+void QQmlWidget::clearStartJobsModel()
+{
+    QObject *obj = qvariant_cast<QObject *>(qmlWidget->rootObject()->findChild<QObject *>("pageLoader")->property("item"));
+    if (obj)
+        QMetaObject::invokeMethod(obj, "clearStartJobsModel");
+    else
+        qDebug() << "jobsObject Not Found";
+}
+
+/*!
+ *  \fn void QQmlWidget::updatePaperSizeModel(char *media, int isDefault)
+ *
+ *  Adds a new paper defined by \a media to the existing model paperSizeModel. The \a isDefault
+ *  parameter checks if the given media is to be set as the default for the printer.
+ */
+void QQmlWidget::updatePaperSizeModel(const char *name, char *pwg_name, int isDefault)
+{
+    QObject *obj = qvariant_cast<QObject *>(qmlWidget->rootObject()->findChild<QObject *>("pageLoader")->property("item"));
+    if (obj)
+        QMetaObject::invokeMethod(obj,
+                                  "updatePaperSizeModel",
+                                  Q_ARG(QVariant, name),
+                                  Q_ARG(QVariant, pwg_name),
+                                  Q_ARG(QVariant, isDefault));
+    else
+        qDebug() << "generalObject Not Found";
+}
+
+/*!
+ *  \fn void QQmlWidget::clearPaperSizeModel()
+ *
+ *  This function clears the model paperSizeModel which holds a list of printer-supported media
+ *  options.
+ */
+void QQmlWidget::clearPaperSizeModel()
+{
+    QObject *obj = qvariant_cast<QObject *>(qmlWidget->rootObject()->findChild<QObject *>("pageLoader")->property("item"));
+    if (obj)
+        QMetaObject::invokeMethod(obj, "clearPaperSizeModel");
+    else
+        qDebug() << "generalObject Not Found";
+}
+
+void QQmlWidget::updatePagesPerSideModel(char *pages, int isDefault)
+{
+    QObject *obj = qvariant_cast<QObject *>(qmlWidget->rootObject()->findChild<QObject *>("pageLoader")->property("item"));
+    if (obj)
+        QMetaObject::invokeMethod(obj,
+                                  "updatePagesPerSideModel",
+                                  Q_ARG(QVariant, pages),
+                                  Q_ARG(QVariant, isDefault));
+    else
+        qDebug() << "pageSetupObject Not Found";
+}
+
+void QQmlWidget::clearPagesPerSideModel()
+{
+    QObject *obj = qvariant_cast<QObject *>(qmlWidget->rootObject()->findChild<QObject *>("pageLoader")->property("item"));
+    if (obj)
+        QMetaObject::invokeMethod(obj, "clearPagesPerSideModel");
+    else
+        qDebug() << "pageSetupObject Not Found";
+}
+
+void QQmlWidget::enableTwoSided(char *option)
+{
+    QObject *obj = qvariant_cast<QObject *>(qmlWidget->rootObject()->findChild<QObject *>("pageLoader")->property("item"));
+    if (obj)
+        QMetaObject::invokeMethod(obj,
+                                  "enableTwoSided",
+                                  Q_ARG(QVariant, option));
+    else
+        qDebug() << "pageSetupObject Not Found";
+}
+
+void QQmlWidget::clearTwoSidedSwitch()
+{
+    QObject *obj = qvariant_cast<QObject *>(qmlWidget->rootObject()->findChild<QObject *>("pageLoader")->property("item"));
+    if (obj)
+        QMetaObject::invokeMethod(obj, "clearTwoSidedSwitch");
+    else
+        qDebug() << "pageSetupObject Not Found";
 }
 
 /*!

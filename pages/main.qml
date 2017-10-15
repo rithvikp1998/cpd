@@ -34,9 +34,6 @@ Rectangle {
     signal setJobsHoldOptions(string printerName)   // Connects to setJobsHoldOptions(QString) in QQmlWidget
     signal setAdvancedOptions(string printerName)   // Connects to setAdvancedOptions(QString) in QQmlWidget
 
-    /* Forwarded signals from advanced.qml */
-    signal resolutionValueChanged(string resolutionValue, string printerName)   // Connects to setResolutionSetting(QString, QString) in QQmlWidget
-
     /* Forwarded signals from general.qml */
     signal newPrinterSelected(string printer)
     signal remotePrintersToggled(string enabled)
@@ -192,6 +189,7 @@ Rectangle {
 
         Loader {
             id: page_loader
+            objectName: "pageLoader"
             source: "general.qml"
             width: parent.width
             height: parent.height
