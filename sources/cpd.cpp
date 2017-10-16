@@ -96,6 +96,12 @@ QQmlWidget::QQmlWidget(QWidget* parent):
     connect(qmlWidget->rootObject(), SIGNAL(resolutionValueChanged(QString, QString)),
             this, SLOT(setResolutionSetting(QString, QString)));
 
+    /* Callback function signals */
+    connect(cbf::Instance(), SIGNAL(addPrinterSignal(char *, char *, char *)),
+            this, SLOT(addPrinter(char *, char *, char *)));
+    connect(cbf::Instance(), SIGNAL(removePrinterSignal(char *)),
+            this, SLOT(removePrinter(char *)));
+
     initBackend();
 }
 
@@ -520,8 +526,8 @@ void QQmlWidget::setDuplexOption(const QString &duplexOption)
  */
 void QQmlWidget::initBackend()
 {
-    event_callback add_cb = static_cast<event_callback>(add_printer_callback);
-    event_callback rem_cb = static_cast<event_callback>(remove_printer_callback);
+    event_callback add_cb = (event_callback)(CallbackFunctions::add_printer_callback);
+    event_callback rem_cb = (event_callback)(CallbackFunctions::remove_printer_callback);
     f = get_new_FrontendObj(NULL, add_cb, rem_cb);
     connect_to_dbus(f);
 }
@@ -650,6 +656,36 @@ void QQmlWidget::clearTwoSidedSwitch()
         qDebug() << "pageSetupObject Not Found";
 }
 
+/*!
+ *  \fn static void CallbackFunctions::CallbackFunctions(QObject *parent)
+ *
+ *  A singleton class which acts as a mediator between a static callback
+ *  function and QCPDialog class
+ */
+CallbackFunctions::CallbackFunctions(QObject *parent):
+    QObject (parent)
+{
+}
+
+/*!
+ *  \fn static void CallbackFunctions::add_printer_callback(PrinterObj *p)
+ *
+ *  Acts as a callback function whenever a new PrinterObj \a p is added.
+ */
+void CallbackFunctions::add_printer_callback(PrinterObj *p)
+{
+    cbf::Instance()->addPrinterSignal(p->name, p->id, p->backend_name);
+}
+
+/*!
+ *  \fn static void CallbackFunctions::remove_printer_callback(PrinterObj *p)
+ *
+ *  Acts as a callback function whenever a PrinterObj \a p is removed.
+ */
+void CallbackFunctions::remove_printer_callback(PrinterObj *p)
+{
+    cbf::Instance()->removePrinterSignal(p->name);
+}
 /*!
  *  \class QCpdWindow
  *  \inmodule CPD

@@ -30,6 +30,7 @@ extern "C" {
 #include <QQuickWidget>
 
 #include "../headers/preview.h"
+#include "../headers/singleton.h"
 
 static inline int add_printer_callback(PrinterObj *p)
 {
@@ -114,5 +115,21 @@ private:
     QHBoxLayout *mainLayout;
     QVBoxLayout *previewLayout;
 };
+
+class CallbackFunctions : public QObject
+{
+    Q_OBJECT
+public:
+    explicit CallbackFunctions(QObject *parent = 0);
+    static void add_printer_callback(PrinterObj *p);
+    static void remove_printer_callback(PrinterObj *p);
+
+Q_SIGNALS:
+    void addPrinterSignal(char *printer_name, char *printer_id, char *backend_name);
+    void removePrinterSignal(char *printer_name);
+
+};
+
+typedef Singleton<CallbackFunctions> cbf;
 
 #endif // CPD_H

@@ -22,7 +22,8 @@ INCLUDEPATH += /usr/local/include/
 
 HEADERS += \
     headers/preview.h \
-    headers/cpd.h
+    headers/cpd.h \
+    headers/singleton.h
 
 SOURCES += \
     sources/preview.cpp \
