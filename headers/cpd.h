@@ -23,7 +23,7 @@
 #define CPD_H
 
 extern "C" {
-    #include <CPDFrontend.h>
+    #include <cpdb-libs-frontend.h>
 }
 
 #include <QtWidgets>
