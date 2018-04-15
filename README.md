@@ -47,8 +47,6 @@ The project consists of two major parts:
 1. Download and install the APIs mentioned above
 2. If you have Qt Creator installed, you can open the project from Qt Creator and run it. If you want to build the code manually, follow these instructions:
 
-*Note:* The name of the printer comes from the other part of the dialog(built by Anshul), so in my part, the value is hardcoded in main.qml and advanced.qml files as a property printer_name. To test my part of the dialog, please change the value "Xerox_Placeholder" to one that matches the printer you want to test with.
-
 ```
 # Get the code
 
