@@ -54,17 +54,10 @@ The project consists of two major parts:
 
 someDirectory$ git clone https://github.com/rithvikp1998/cpd.git
 someDirectory$ cd cpd
-someDirectory/cpd$ git submodule init; git submodule update
-
-#Build backend library
-
-someDirectory/cpd$ cd backends/cups
-someDirectory/cpd/backends/cups$ git submodule init; git submodule update
-someDirectory/cpd/backends/cups$ make lib; make release
+someDirectory/cpd$ git checkout postGSoC
 
 # Build project
 
-someDirectory/cpd/backends/cups$ cd ../..
 someDirectory/cpd$ mkdir build; cd build
 someDirectory/cpd/build$ qmake ../cpd.pro; make
 someDirectory/cpd/build$ sudo cp ../libs/libcpd.so.1 /usr/lib/
