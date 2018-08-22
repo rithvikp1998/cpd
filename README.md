@@ -1,4 +1,9 @@
 # Common Print Dialog
+
+***IMPORTANT: This repo is now just a proof-of-work for my participation in Google
+Summer of Code 2017. For all other purposes this repo can be thought of as 
+deprecated in favor of a new version CPDv2 which can be found [here](https://github.com/rithvikp1998/cpdv2)***
+
 This repository was created as a part of my participation in the Google Summer of Code 2017 for the OpenPrinting division of The Linux Foundation.
 
 ## Goal
